@@ -36,5 +36,24 @@
     border-radius: 24px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
     padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 25px;
+}
+
+.widget-card {
+    background-color: grey;
+    border: 1px solid black;
+    border-radius: 16px;
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
 }
+
+.widget-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+
+
