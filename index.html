@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>htwg dashboard</title>
+    <title>htwg-dashboard/index</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,16 +16,21 @@
         </div>
     </header>
 
-    <div class="welcome-section">
-        <h1 class="greeting">Hallo, Luca</h1>
-        <span class="date">Samstag, 28. März</span>
-    </div>
+    <main class="setup-main">
+        <form action="dashboard.html" method="GET">
+            <div class="form-elem">
+                <label for="user-name">Wie ist dein Name?</label>
+                <input type="text" id="user-name" name="username" placeholder="z.B Max Mustermann" required>
+            </div>
 
-    <main class="dashboard-grid">
-        <div class="widget-card">Studenplan Widget</div>
-        <div class="widget-card">Mensa Widget</div>
-        <div class="widget-card">Noten Widget</div>
-        <div class="widget-card">Bib Widget</div>
+            <div class="form-elem">
+                <label for="user-course">Was studierst du in welchem Semester?</label>
+                <input type="text" id="user-course" name="course" placeholder="z.B AIN3" required>
+            </div>
+        </form>
+
+        <button>Bestätigen</button>
+
     </main>
 </body>
 </html>
