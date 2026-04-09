@@ -6,7 +6,7 @@
     <title>htwg-dashboard/index</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="login-main">
     <header class="main-header">
         <div class="logo">
             <a href="index.html" class="logo-link">
@@ -19,19 +19,23 @@
     <main class="setup-main">
         <form action="dashboard.html" method="GET">
             <div class="form-elem">
-                <label for="user-name">Wie ist dein Name?</label>
+                <label for="user-name">Username</label>
                 <input type="text" id="user-name" name="username" placeholder="z.B Max Mustermann" required>
             </div>
 
             <div class="form-elem">
-                <label for="user-course">Was studierst du in welchem Semester?</label>
-                <input type="text" id="user-course" name="course" placeholder="z.B AIN3" required>
+                <label for="user-course">Passwort</label>
+                <input type="text" id="user-course" name="course" placeholder="z.B 123" required>
             </div>
         </form>
+        
+        <button class="button-index">Bestätigen</button>
 
-        <button>Bestätigen</button>
-
+        <footer>
+            <button> register </button>
+            <button> passwort vergessen </button>
+            
+        </footer>
     </main>
 </body>
-<footer></footer>
 </html>
