@@ -71,6 +71,11 @@
     grid-column: span 4;
 }
 
+.box-tall {
+    grid-column: span 4;
+    grid-row: span 4;
+}
+
 .timetable {
     display: flex;
     flex-direction: column;
