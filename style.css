@@ -61,6 +61,11 @@
     background-color: aqua;
 }
 
+.box-tall {
+    grid-column: span 4;
+    grid-row: span 4;
+}
+
 .box-small {
     grid-row: span 1;
     grid-column: span 2;
@@ -136,6 +141,31 @@
     border-radius: 6px;
     transition: width 0.5s ease-in-out;
 }
+
+.mensa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:  small;
+}
+
+.mensa-item {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid grey;
+    border-radius : 10px;
+}
+
+.mensa-item-title {
+    background-color: lightgray;
+    padding: 0;
+    margin: 0;
+}
+
 
 
 /* index.html */
