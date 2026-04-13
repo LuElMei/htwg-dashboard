@@ -4,30 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>htwg dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="logo">
-            <a href="index.html" class="logo-link">
-                <img src="assets/images/htwg-logo-no-bg.png" alt="HTWG Logo" class="logo-image">
-                <span class="page-title">Dashboard</span>
-            </a>
-        </div>
+    <header class="header">
+        <img src="assets/images/htwg-logo-no-bg.png" alt="HTWG Logo" class="header-logo">
+        <p class="header-text">Dashboard</p>
     </header>
-
-    <div class="welcome-section">
-        <h1 class="greeting">Hallo, Luca</h1>
-        <span class="date">Samstag, 28. März</span>
-    </div>
-
-    <main class="dashboard-grid">
-        <div class="widget-card">Studenplan Widget</div>
-        <div class="widget-card">Mensa Widget</div>
-        <div class="widget-card">Noten Widget</div>
-        <div class="widget-card">Bib Widget</div>
-    </main>
-
-    <footer>HTWG Konstanz</footer>
+    <section class="content-wrapper">
+        <aside class="sidebar">
+            <h2>Menü</h2>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Stundenplan</a></li>
+                <li><a href="#">Mensa</a></li>
+                <li><a href="#">Bibliothek</a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <h1>Guten Morgen, Luca</h1>
+            <h3>4. April 2026, KW 20</h3>
+            <section class="bento-box-grid">
+                <div class="widget box-large timetable">
+                    <div class="timetable-item current">
+                        <section class="item-time">11:15</section>
+                        <section class="divider"></section>
+                        <section class="item-subject">
+                            <h3 class="subject-name">Programmiertechnik 2</h3>
+                            <span class="subject-room">O-301</span>
+                        </section>
+                    </div>
+                    <div class="timetable-item later">
+                        <section class="item-time">14:00</section>
+                        <section class="divider"></section>
+                        <section class="item-subject">
+                            <h3 class="subject-name">Algebra</h3>
+                            <span class="subject-room">F-031</span>
+                        </section>
+                    </div>
+                </div>
+                <div class="widget box-small bib">
+                    <h3 class="bib-text">Bibliothek</h3>
+                    <span class="bib-status-text"> 65% voll</span>
+                    <div class="bib-status-container">
+                        <div class="bib-status-bar"></div>
+                    </div>
+                </div>
+                <div class="widget box-small">Mensa Widget</div>
+                <div class="widget box-medium">News Widget</div>
+            </section>
+        </main>
+    </section>
+    <footer>HTWG Dashboard 2026</footer>
 </body>
 </html>
