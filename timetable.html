@@ -3,9 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>timetable</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <header class="header">
+        <img src="assets/images/htwg-logo-no-bg.png" alt="HTWG Logo" class="header-logo">
+        <p class="header-text">Dashboard</p>
+    </header>
+    <div class="menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav class="nav-menu">
+        <div class="close-btn" onclick="toggleMenu()">&times;
+        </div>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="timetable.html">Stundenplan</a></li>
+            <li><a href="grades.html">Noten</a></li>
+            <li><a href="mensa.html">Mensa</a></li>
+            <li><a href="settings.html">Einstellungen</a></li>
+        </ul>
+    </nav>
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        }
+    </script>   
+    <main class="content">
+        <h1>Stundenplan</h1>
+        <h3>KW 20, 4. April 2026</h3>
+        <div class="timetable-grid">
+            <div class="timetable-item current">
+                <section class="item-time">11:15</section>
+                <section class="divider"></section>
+                <section class="item-subject">
+                    <h3 class="subject-name">Programmiertechnik 2</h3>
+                    <span class="subject-room">O-301</span>
+                </section>
+            </div>
+            <div class="timetable-item later">
+                <section class="item-time">14:00</section>
+                <section class="divider"></section>
+                <section class="item-subject">
+                    <h3 class="subject-name">Algebra</h3>
+                    <span class="subject-room">F-031</span>
+                </section>
+            </div>
+        </div>
 </body>
 </html>
