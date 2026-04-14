@@ -415,10 +415,6 @@ input {
 
 /* timetable.html*/
 
-* {
-    outline: 1px solid red !important;
-}
-
 .timetable-content-wrapper {
     display: flex;
     min-height: 100vh;
