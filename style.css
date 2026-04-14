@@ -284,6 +284,101 @@ i {
     margin: 0 10px;
 }
 
+/* Globale Einstellung, um horizontales Scrollen zu verhindern */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+    /* 1. Sidebar wird zur fixierten Bottom-Nav */
+    .sidebar {
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        background-color: var(--color-secondary);
+        border-right: none;
+        border-top: 1px solid black;
+        z-index: 1000;
+        margin: 0;
+        padding: 0;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    /* Titel und Texte in der Sidebar ausblenden */
+    .sidebar-title, .sidebar-item-text {
+        display: none !important;
+    }
+
+    /* Liste und Items horizontal ausrichten */
+    .sidebar ul {
+        display: flex;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        justify-content: space-around;
+        list-style: none;
+    }
+
+    .sidebar-item {
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+    }
+
+    .sidebar i {
+        margin: 0 !important;
+        width: 30px;
+        height: auto;
+    }
+
+    /* 2. Content-Bereich fixen (Verhindert das Scrollen nach rechts) */
+    .content-wrapper {
+        display: block; /* Entfernt Flexbox-Layout vom Desktop */
+        width: 100vw;
+    }
+
+    .content {
+        padding: 15px !important;
+        width: 100% !important;
+        box-sizing: border-box; /* WICHTIG: Padding wird in die Breite eingerechnet */
+        margin: 0 !important;
+        padding-bottom: 80px !important; /* Platz für die Nav unten */
+    }
+
+    /* 3. Grid-Korrektur */
+    .bento-box-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .widget {
+        width: 100% !important;
+        box-sizing: border-box;
+        min-height: 120px;
+    }
+
+    /* 4. Header-Korrektur */
+    .header {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+
+    .header :last-child {
+        margin-left: 0;
+    }
+}
+
+
 
 
 /* index.html */
