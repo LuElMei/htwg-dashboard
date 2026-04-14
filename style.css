@@ -7,6 +7,11 @@
     --border-radius: 5px; 
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .header {
     position: sticky;
     display: flex; 
@@ -410,6 +415,10 @@ input {
 
 /* timetable.html*/
 
+* {
+    outline: 1px solid red !important;
+}
+
 .timetable-content-wrapper {
     display: flex;
     min-height: 100vh;
@@ -421,8 +430,8 @@ input {
 .timetable-content {
     min-width: 0;
     flex: 1;
-    padding: 20px;
     background-color: var(--color-neutral-light);
+    overflow-x: hidden;
 }
 
 .timetable-wrapper {
