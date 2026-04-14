@@ -1,6 +1,10 @@
 :root {
-    --color-primary: aliceblue;
-    --border-radius: 5px;
+    --color-primary: #005364;
+    --color-secondary: #D9E5EC;
+    --color-tetrary: #002F39;
+    --color-neutral: #2B2B2B;
+    --color-neutral-light: rgb(244, 242, 242);
+    --border-radius: 5px; 
 }
 
 .header {
@@ -35,7 +39,8 @@
 }
 
 .sidebar {
-    width: 150px;
+    width: 200px;
+    background-color: var(--color-secondary);
     color: black;
     margin-right: 40px;
     border-right: 1px solid black;
@@ -84,7 +89,7 @@ i {
     flex: 1;
     padding-left: 10px;
     padding-right: 20%;
-    background-color: aliceblue;
+    background-color: var(--color-neutral-light);
 }
 
 .bento-box-grid {
@@ -107,7 +112,7 @@ i {
 .box-large {
     grid-column: span 4;
     grid-row: span 2;
-    background-color: grey;
+    background-color: white;
 }
 
 .box-small {
@@ -128,6 +133,17 @@ i {
     padding: 10px 0;
 }
 
+.timetable-text {
+    color: var(--color-primary);
+    text-align: left;
+    margin: 5px 0;
+    margin-left: 40px;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+}
 .timetable-item {
     display: flex;
     width: 80%;
@@ -197,21 +213,39 @@ i {
     flex-direction: column;
     align-items: center;
     font-size:  small;
+    background-color: white;
+}
+
+.mensa-text {
+    color: var(--color-primary);
+    text-align: left;
+    margin: 5px 0;
+    margin-left: 40px;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    width: 100%;
 }
 
 .mensa-item {
-    width: 90%;
     display: flex;
-    flex-direction: column;
+    width: 80%;
     align-items: center;
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid grey;
-    border-radius : 10px;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: hidden;
+}
+
+.mensa-item li {
+    list-style-type: "- ";
 }
 
 .mensa-item-title {
-    background-color: lightgray;
     padding: 0;
     margin: 0;
 }
@@ -309,7 +343,7 @@ i {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     gap: 3%;
     width: 50%;
     max-width: 300px;
@@ -336,7 +370,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     padding: 0px;
     gap: 3%;
     width: 100%;
