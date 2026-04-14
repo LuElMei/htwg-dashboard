@@ -10,15 +10,30 @@
     <header class="header">
         <img src="assets/images/htwg-logo-no-bg.png" alt="HTWG Logo" class="header-logo">
         <p class="header-text">Dashboard</p>
+        <a href="index.html"  class="dashboard-profile">
+            <i data-lucide="circle-user-round" class="dashboard-profile-icon"></i>
+        </a>
     </header>
     <section class="content-wrapper">
         <aside class="sidebar">
-            <h2>Menü</h2>
+            <h2 class="sidebar-title">Menü</h2>
             <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Stundenplan</a></li>
-                <li><a href="#">Mensa</a></li>
-                <li><a href="#">Bibliothek</a></li>
+                <li class="sidebar-item active">
+                    <i data-lucide="layout-dashboard"></i>
+                    <a href="dashboard.html">Dashboard</a>
+                </li>
+                <li class="sidebar-item">
+                    <i data-lucide="calendar-days"></i>
+                    <a href="timetable.hmtl" class="sidebar-item-text">Stundenplan</a>
+                </li>
+                <li class="sidebar-item">
+                    <i data-lucide="utensils"></i>
+                    <a href="mensa.html" class="sidebar-item-text">Mensa</a>
+                </li>
+                <li class="sidebar-item">
+                    <i data-lucide="book-open"></i>
+                    <a href="bibliothek.html" class="sidebar-item-text">Bibliothek</a>
+                </li>
             </ul>
         </aside>
         <main class="content">
@@ -99,6 +114,9 @@
             </section>
         </main>
     </section>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script> lucide.createIcons(); </script>
     <footer>HTWG Dashboard 2026</footer>
 </body>
 </html>

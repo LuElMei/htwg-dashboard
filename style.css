@@ -1,6 +1,6 @@
 :root {
     --color-primary: aliceblue;
-    --border-radius: 5px; 
+    --border-radius: 5px;
 }
 
 .header {
@@ -9,21 +9,40 @@
     border-bottom: 1px solid black;
 }
 
+.header :last-child {
+    margin-left: auto;
+    height: 70px;
+}
+
 .header-logo {
-    height: 50px;
+    height: 70px;
     width: auto;
+}
+
+.dashboard-profile-icon {
+    text-decoration: none;
+    color: black;
+}
+
+.dashboard-profile-icon:visited {
+    color: black;
 }
 
 .content-wrapper {
     display: flex;
     min-height: 100vh;
+    background-color: aliceblue;
 }
 
 .sidebar {
-    width: 200px;
-    background-color: aliceblue;
+    width: 150px;
     color: black;
-    padding: 10px;
+    margin-right: 40px;
+    border-right: 1px solid black;
+}
+
+.sidebar-title {
+    margin-left: 40px;
 }
 
 .sidebar ul {
@@ -32,9 +51,29 @@
 }
 
 .sidebar a {
+    display: block;
+    color: black;
     text-decoration: none;
     display: block;
-    padding: 10px 0;
+    padding: 20px 0;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 20px;
+    gap: 10px;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-item.active {
+    background-color: grey;
+    border-left-color: black;
+}
+
+i {
+    margin-left: 10px;
 }
 
 .content {

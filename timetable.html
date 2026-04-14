@@ -11,24 +11,27 @@
         <img src="assets/images/htwg-logo-no-bg.png" alt="HTWG Logo" class="header-logo">
         <p class="header-text">Dashboard</p>
     </header>
-    <!--
-    <div class="menu-btn" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    -->
-    <nav class="nav-menu">
-        <div class="close-btn" onclick="toggleMenu()">&times;
-        </div>
-        <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="timetable.html">Stundenplan</a></li>
-            <li><a href="grades.html">Noten</a></li>
-            <li><a href="mensa.html">Mensa</a></li>
-            <li><a href="settings.html">Einstellungen</a></li>
-        </ul>
-    </nav>
+    <aside class="sidebar">
+            <h2 class="sidebar-title">Menü</h2>
+            <ul>
+                <li class="sidebar-item">
+                    <i data-lucide="layout-dashboard"></i>
+                    <a href="dashboard.html">Dashboard</a>
+                </li>
+                <li class="sidebar-item">
+                    <i data-lucide="calendar-days active"></i>
+                    <a href="timetable.hmtl" class="sidebar-item-text">Stundenplan</a>
+                </li>
+                <li class="sidebar-item">
+                    <i data-lucide="utensils"></i>
+                    <a href="mensa.html" class="sidebar-item-text">Mensa</a>
+                </li>
+                <li class="sidebar-item">
+                    <i data-lucide="book-open"></i>
+                    <a href="bibliothek.html" class="sidebar-item-text">Bibliothek</a>
+                </li>
+            </ul>
+        </aside>
     <script>
         function toggleMenu() {
             document.querySelector('.nav-menu').classList.toggle('active');
