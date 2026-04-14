@@ -35,7 +35,7 @@
 .content-wrapper {
     display: flex;
     min-height: 100vh;
-    background-color: aliceblue;
+    background-color: var(--color-neutral-light);
 }
 
 .sidebar {
