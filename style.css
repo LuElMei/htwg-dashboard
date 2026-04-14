@@ -284,14 +284,12 @@ i {
     margin: 0 10px;
 }
 
-/* Globale Einstellung, um horizontales Scrollen zu verhindern */
 html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
-    /* 1. Sidebar wird zur fixierten Bottom-Nav */
     .sidebar {
         display: flex !important;
         position: fixed;
@@ -310,12 +308,10 @@ html, body {
         align-items: center;
     }
 
-    /* Titel und Texte in der Sidebar ausblenden */
     .sidebar-title, .sidebar-item-text {
         display: none !important;
     }
 
-    /* Liste und Items horizontal ausrichten */
     .sidebar ul {
         display: flex;
         width: 100%;
@@ -337,21 +333,19 @@ html, body {
         height: auto;
     }
 
-    /* 2. Content-Bereich fixen (Verhindert das Scrollen nach rechts) */
     .content-wrapper {
-        display: block; /* Entfernt Flexbox-Layout vom Desktop */
+        display: block;
         width: 100vw;
     }
 
     .content {
         padding: 15px !important;
         width: 100% !important;
-        box-sizing: border-box; /* WICHTIG: Padding wird in die Breite eingerechnet */
+        box-sizing: border-box;
         margin: 0 !important;
-        padding-bottom: 80px !important; /* Platz für die Nav unten */
+        padding-bottom: 80px !important;
     }
 
-    /* 3. Grid-Korrektur */
     .bento-box-grid {
         display: flex;
         flex-direction: column;
@@ -365,7 +359,6 @@ html, body {
         min-height: 120px;
     }
 
-    /* 4. Header-Korrektur */
     .header {
         width: 100%;
         box-sizing: border-box;
