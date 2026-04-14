@@ -397,6 +397,35 @@ input {
     border-bottom: 1px solid #444;
 }
 
-.timetable-grid {
+.timetable-table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
 
+.timetable-table th, .timetable-table td {
+    border: 1px solid black;
+    padding: 15px;
+    text-align: center;
+}
+
+.timetable-table th {
+    background-color: #43ade7;
+    color: white;
+}
+
+.subject {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.subject span {
+    font-weight: normal;
+    font-size: 0.85rem;
+    color: #666;
 }
