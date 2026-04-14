@@ -10,8 +10,12 @@
     <header class="header">
         <img src="assets/images/htwg-logo-no-bg.png" alt="HTWG Logo" class="header-logo">
         <p class="header-text">Dashboard</p>
+        <a href="index.html"  class="dashboard-profile">
+            <i data-lucide="circle-user-round" class="dashboard-profile-icon"></i>
+        </a>
     </header>
-    <aside class="sidebar">
+    <div class="timetable-content-wrapper">
+        <aside class="sidebar">
             <h2 class="sidebar-title">Menü</h2>
             <ul>
                 <li class="sidebar-item">
@@ -32,75 +36,81 @@
                 </li>
             </ul>
         </aside>
-    <script>
-        function toggleMenu() {
+        <script>
+            function toggleMenu() {
             document.querySelector('.nav-menu').classList.toggle('active');
-        }
-    </script>   
-    <main class="content">
-        <h1>Stundenplan</h1>
-        <h3>KW 20, 4. April 2026</h3>
-        <table class="timetable-table">
-            <thead>
-                <tr>
-                    <th>Zeit</th>
-                    <th>Montag</th>
-                    <th>Dienstag</th>
-                    <th>Mittwoch</th>
-                    <th>Donnerstag</th>
-                    <th>Freitag</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>8:00 - 9:30</td>
-                    <td></td>
-                    <td class="subject">Programmiertechnik 2 <br><span>Raum 101</span></td>
-                    <td></td>
-                    <td class="subject">Algebra <br><span>Raum 202</span></td>
-                </tr>
-                <tr>
-                    <td>9:45 - 11:15</td>
-                    <td></td>
-                    <td class="subject">Datenbanken <br><span>Raum 303</span></td>
-                    <td></td>
-                    <td class="subject">Betriebssysteme <br><span>Raum 404</span></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>11:30 - 13:00</td>
-                    <td class="subject">Software Engineering <br><span>Raum 505</span></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>13:00 - 14:00</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>14:00 - 15:30</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>15:45 - 17:15</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>   
-        <script src="https://unpkg.com/lucide@latest"></script>
+            }
+        </script>   
+        <main class="timetable-content">
+            <h1>Stundenplan</h1>
+            <h3>KW 20, 4. April 2026</h3>
+            <div class="timetable-wrapper">
+                <table class="timetable-table">
+                    <thead>
+                        <tr>
+                            <th>Zeit</th>
+                            <th>Montag</th>
+                            <th>Dienstag</th>
+                            <th>Mittwoch</th>
+                            <th>Donnerstag</th>
+                            <th>Freitag</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>8:00 - 9:30</td>
+                            <td></td>
+                            <td class="subject">Programmiertechnik 2 <br><span>Raum 101</span></td>
+                            <td></td>
+                            <td class="subject">Algebra <br><span>Raum 202</span></td>
+                        </tr>
+                        <tr>
+                            <td>9:45 - 11:15</td>
+                            <td></td>
+                            <td class="subject">Datenbanken <br><span>Raum 303</span></td>
+                            <td></td>
+                            <td class="subject">Betriebssysteme <br><span>Raum 404</span></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>11:30 - 13:00</td>
+                            <td class="subject">Software Engineering <br><span>Raum 505</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>13:00 - 14:00</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>14:00 - 15:30</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>15:45 - 17:15</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </main>
+    </div>
+       
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script> lucide.createIcons(); </script> 
 </body>
 </html>

@@ -8,6 +8,7 @@
 }
 
 .header {
+    position: sticky;
     display: flex; 
     align-items: center;
     border-bottom: 1px solid black;
@@ -409,14 +410,33 @@ input {
 
 /* timetable.html*/
 
+.timetable-content-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+    background-color: var(--color-neutral-light);
+    overflow-x: hidden;
+}
+
+.timetable-content {
+    min-width: 0;
+    flex: 1;
+    padding: 20px;
+    background-color: var(--color-neutral-light);
+}
+
+.timetable-wrapper {
+    display: block;
+    overflow-x: auto;
+    max-width: 100vw;
+}
+
 .timetable-table {
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
+    min-width: 1000px;
+    width: 100%;
     border-collapse: collapse;
     background-color: white;
     border-radius: var(--border-radius);
-    overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
