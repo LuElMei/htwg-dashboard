@@ -302,7 +302,7 @@ input {
     margin-bottom: 20px;
 }
 
-.button-index {
+.button-confirm-index {
     margin-top: auto;
     background-color: #43ade7;
     color: white;
@@ -313,7 +313,7 @@ input {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.button-index:hover {
+.button-confirm-index:hover {
     background-color: #45a049;
 }
 
