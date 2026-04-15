@@ -568,3 +568,68 @@ input {
     font-size: 0.85rem;
     color: #666;
 }
+
+/* mensa.html */
+
+.mensa-page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.mensa-page-card {
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.mensa-page-title {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--color-primary);
+    font-size: 1.2rem;
+}
+
+.mensa-page-description {
+    margin-bottom: 16px;
+    line-height: 1.5;
+    color: var(--color-neutral);
+}
+
+.mensa-page-price {
+    margin: 0;
+    font-weight: bold;
+}
+
+.mensa-page-list {
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.6;
+}
+
+
+/* bibliothek.html */
+
+.bib-page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.bib-page-card {
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.bib-page-card h2 {
+    margin-top: 0;
+    color: var(--color-primary);
+}

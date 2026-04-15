@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>bibliothek</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <aside class="sidebar">
+
+    <header class="header">
+        <img src="assets/images/htwg-logo-no-bg.png" alt="HTWG Logo" class="header-logo">
+        <p class="header-text">Dashboard</p>
+        <a href="index.html" class="dashboard-profile">
+            <i data-lucide="circle-user-round" class="dashboard-profile-icon"></i>
+        </a>
+    </header>
+
+    <section class="content-wrapper">
+        <aside class="sidebar">
             <h2 class="sidebar-title">Menü</h2>
             <ul>
                 <li class="sidebar-item">
@@ -36,7 +46,62 @@
                 </li>
             </ul>
         </aside>
-        <script src="https://unpkg.com/lucide@latest"></script>
-    <script> lucide.createIcons(); </script>
+
+        <main class="content">
+            <h1>Bibliothek</h1>
+            <h3>Informationen & Auslastung</h3>
+
+            <section class="bib-page-grid">
+
+                <!-- Auslastung -->
+                <article class="bib-page-card">
+                    <h2>Aktuelle Auslastung</h2>
+                    <p class="bib-status-text">65% belegt</p>
+                    <div class="bib-status-container">
+                        <div class="bib-status-bar"></div>
+                    </div>
+                </article>
+
+                <!-- Öffnungszeiten -->
+                <article class="bib-page-card">
+                    <h2>Öffnungszeiten</h2>
+                    <ul>
+                        <li>Mo - Fr: 08:00 - 20:00</li>
+                        <li>Sa: 09:00 - 16:00</li>
+                        <li>So: geschlossen</li>
+                    </ul>
+                </article>
+
+                <!-- Lernplätze -->
+                <article class="bib-page-card">
+                    <h2>Lernplätze</h2>
+                    <p>Freie Plätze: 42</p>
+                    <p>Gesamt: 120</p>
+                </article>
+
+                <!-- Services -->
+                <article class="bib-page-card">
+                    <h2>Services</h2>
+                    <ul>
+                        <li>WLAN verfügbar</li>
+                        <li>Drucker & Scanner</li>
+                        <li>Gruppenräume</li>
+                        <li>Buchausleihe</li>
+                    </ul>
+                </article>
+
+                <!-- Tipp -->
+                <article class="bib-page-card">
+                    <h2>💡 Tipp</h2>
+                    <p>Die Bibliothek ist morgens am leersten. Perfekt zum Lernen!</p>
+                </article>
+
+            </section>
+        </main>
+    </section>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
+
 </body>
 </html>
