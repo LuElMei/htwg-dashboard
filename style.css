@@ -289,7 +289,6 @@ body {
     margin: 0 10px;
 }
 
-/* Globale Einstellung, um horizontales Scrollen zu verhindern */
 html, body {
     max-width: 100%;
     overflow-x: hidden;
@@ -374,7 +373,6 @@ html, body {
         min-height: 120px;
     }
 
-    /* 4. Header-Korrektur */
     .header {
         width: 100%;
         box-sizing: border-box;
