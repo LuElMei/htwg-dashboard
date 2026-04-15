@@ -2,7 +2,8 @@
 
 **Team:** 
 * Alexander Bille (310855)
-* Luca Meier ()
+* Luca Meier (313655)
+* Elischa Ediger (310358)
 
 **repository:** 
 [github.com/LuElMei/htwg-dashboard](https://github.com/LuElMei/htwg-dashboard)
