@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>mensa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <aside class="sidebar">
+    <header class="header">
+        <img src="assets/images/htwg-logo-no-bg.png" alt="HTWG Logo" class="header-logo">
+        <p class="header-text">Dashboard</p>
+        <a href="index.html" class="dashboard-profile">
+            <i data-lucide="circle-user-round" class="dashboard-profile-icon"></i>
+        </a>
+    </header>
+
+    <section class="content-wrapper">
+        <aside class="sidebar">
             <h2 class="sidebar-title">Menü</h2>
             <ul>
                 <li class="sidebar-item">
@@ -36,7 +45,68 @@
                 </li>
             </ul>
         </aside>
-        <script src="https://unpkg.com/lucide@latest"></script>
-    <script> lucide.createIcons(); </script>
+
+        <main class="content">
+            <h1>Mensa</h1>
+            <h3>Heutige Angebote</h3>
+
+            <section class="mensa-page-grid">
+                <article class="mensa-page-card">
+                    <h2 class="mensa-page-title">Seezeit-Teller</h2>
+                    <p class="mensa-page-description">
+                        Schwaebisches Linsengericht mit Spaetzle und kleinem Blattsalat.
+                    </p>
+                    <p class="mensa-page-price">Preis: 3,80 €</p>
+                </article>
+
+                <article class="mensa-page-card">
+                    <h2 class="mensa-page-title">Hin und Weg</h2>
+                    <p class="mensa-page-description">
+                        Kichererbsen-Curry mit Bulgur und frischen Kraeutern.
+                    </p>
+                    <p class="mensa-page-price">Preis: 4,20 €</p>
+                </article>
+
+                <article class="mensa-page-card">
+                    <h2 class="mensa-page-title">Kombinierbar</h2>
+                    <p class="mensa-page-description">
+                        Gefluegel-Masala mit wuerziger Sauce.
+                    </p>
+                    <p class="mensa-page-price">Preis: 4,90 €</p>
+                </article>
+
+                <article class="mensa-page-card">
+                    <h2 class="mensa-page-title">Beilagen</h2>
+                    <ul class="mensa-page-list">
+                        <li>MIE-Nudeln</li>
+                        <li>Kartoffeln</li>
+                        <li>Asiatisches Gemuese</li>
+                        <li>Blattsalat mit Balsamicodressing</li>
+                    </ul>
+                </article>
+
+                <article class="mensa-page-card">
+                    <h2 class="mensa-page-title">Dessert</h2>
+                    <p class="mensa-page-description">
+                        Joghurt mit Fruechten oder Schokopudding.
+                    </p>
+                    <p class="mensa-page-price">Preis: 1,50 €</p>
+                </article>
+
+                <article class="mensa-page-card">
+                    <h2 class="mensa-page-title">Getraenke</h2>
+                    <ul class="mensa-page-list">
+                        <li>Wasser</li>
+                        <li>Apfelschorle</li>
+                        <li>Kaffee</li>
+                        <li>Tee</li>
+                    </ul>
+                </article>
+            </section>
+        </main>
+    </section>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
