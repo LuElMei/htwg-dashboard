@@ -1,4 +1,4 @@
-import type { Course } from '../types'; // Aktive Typisierung
+import type { Course } from '../../types'; // Aktive Typisierung
 import { TimetableEntry } from './TimetableEntry';
 
 interface TimetablePageProps {

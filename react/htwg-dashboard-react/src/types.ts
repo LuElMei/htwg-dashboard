@@ -6,3 +6,20 @@ export interface Course {
     room: string;
     isCurrent: Boolean;
 }
+
+export type MealCategory = 
+    | 'Seezeit-Teller'
+    | 'Hin und Weg'
+    | 'Kombinierbar'
+    | 'Beilagen'
+    | 'Dessert'
+    | 'Getraenke';
+
+export interface Meal {
+    id: string;
+    category: MealCategory;
+    title: string;
+    description?: string;
+    items?: string[];
+    price?: string,
+}
