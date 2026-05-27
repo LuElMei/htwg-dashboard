@@ -23,3 +23,9 @@ export interface Meal {
     items?: string[];
     price?: string,
 }
+
+export interface LibraryStatus {
+    loadPercentage: number;
+    freeSeats: number;
+    totalSeats: number;
+}

@@ -7,6 +7,7 @@ interface MensaCardProps {
 
 export const MensaCard = ({ meal, variant}: MensaCardProps ) => {
     const isWidget = variant === 'widget'
+
     return (
         <article className={`mensa-card ${variant}-style`}>
             <h4 className="mensa-category">{meal.category}</h4>
