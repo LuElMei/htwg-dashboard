@@ -28,4 +28,12 @@ npm run dev
 | **URL-Struktur** | index.html | Pfade: \htwg-dashboard\index.html |
 
 
-|Kriterium | Datei | Zeile / Hinweis
+| Kriterium | Datei | Zeile / Hinweise |
+| :--- | :--- | :--- |
+| **npm + Vite** | package.json, vite.config.js | react/htwg-dashboard-react |
+| **TypeScript aktiv genutzt** | src/types.ts, src/components/mensa/MensaCard.tsx | Z. 18-25, Z. 3-6 |
+| **Komponentenzerlegung** | src/components/ | library, mensa, timetable |
+| **Props-Übergabe** | src/App.tsx | Z. 68-81 |
+| **useState** | src/App.tsx | Z. 26-56 |
+| **useEffect** | src/App.tsx | Z. 15-24 |
+| **Durchgängige Nutzeraktion** | src/components/LoginPage.tsx | Benutzername, Passwort -> Name wird auf Dashboard angezeigt |
