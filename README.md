@@ -8,6 +8,12 @@
 **repository:** 
 [github.com/LuElMei/htwg-dashboard](https://github.com/LuElMei/htwg-dashboard)
 
+**Setup:**
+```bash
+cd \react\htwg-dashboard-react
+npm install
+npm run dev
+
 **Projektidee:**
 
 > Eine Web App die wichtige Informationen rund um die Hochschule HTWG-Konstanz zusammenfasst. Als Beispiel enthält die Web App den Stundenplan, das Mensamenü etc. . Die Idee kam, weil alle Informationen, rund um die HTWG-Konstanz, über mehrere Websiten verteilt sind.
@@ -20,3 +26,5 @@
 | **Media Query** | style.css | Z. 297-386 u. Z. 463-468 |
 | **URL-Struktur** | index.html | Pfade: \htwg-dashboard\index.html |
 
+
+|Kriterium | Datei | Zeile / Hinweis
