@@ -13,6 +13,7 @@
 cd \react\htwg-dashboard-react
 npm install
 npm run dev
+```
 
 **Projektidee:**
 
