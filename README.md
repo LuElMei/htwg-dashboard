@@ -19,6 +19,7 @@ npm run dev
 
 > Eine Web App die wichtige Informationen rund um die Hochschule HTWG-Konstanz zusammenfasst. Als Beispiel enthält die Web App den Stundenplan, das Mensamenü etc. . Die Idee kam, weil alle Informationen, rund um die HTWG-Konstanz, über mehrere Websiten verteilt sind.
 
+**Meilenstein_1**
 | Kriterium | Datei | Zeile / Hinweis |
 | :--- | :--- | :--- |
 | **Sematische HTML-Struktur** | dashboard.html | ... |
@@ -27,7 +28,7 @@ npm run dev
 | **Media Query** | style.css | Z. 297-386 u. Z. 463-468 |
 | **URL-Struktur** | index.html | Pfade: \htwg-dashboard\index.html |
 
-
+**Meilenstein_2**
 | Kriterium | Datei | Zeile / Hinweise |
 | :--- | :--- | :--- |
 | **npm + Vite** | package.json, vite.config.js | react/htwg-dashboard-react |
