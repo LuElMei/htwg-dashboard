@@ -1,28 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
+import { LoginPage } from './components/LoginPage';
 import { DashboardPage } from './components/Dashboard';
 import { TimetablePage } from './components/timetable/TimetablePage';
 import { MensaPage } from './components/mensa/MensaPage';
-import { BibliothekPage } from './components/library/LibPage';
+import { LibPage } from './components/library/LibPage';
 
 // Typen importieren
 import type { Course, Meal, LibraryStatus } from './types';
 
 export default function App() {
-  // 1. STATE FÜR DIE NAVIGATION (Standardmäßig auf 'dashboard')
+  // 1. STATE FÜR DIE NAVIGATION
   const [activePage, setActivePage] = useState<'dashboard' | 'timetable' | 'mensa' | 'bibliothek'>('dashboard');
-  
-  // State für den Usernamen (wird später von der LoginPage befüllt, jetzt als Dummy)
-  const [username] = useState<string>('Luca');
 
-  // 2. TESTDATEN (Entspricht exakt deinen originalen HTML-Inhalten)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const contentElement = document.querySelector('.content');
+
+    if (contentElement) {
+      contentElement.scrollTop = 0;
+    }
+    [activePage]
+  });
+  
+  // State für den Usernamen und Login-Status
+  const [username, setUserName] = useState<string>('');
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  const handleLogin = (name: string) => {
+    setUserName(name);
+    setIsLoggedIn(true);
+    setActivePage('dashboard');
+  };
+
+  // 2. TESTDATEN
   const [courses] = useState<Course[]>([
     { id: '1', day: 'Dienstag', time: '8:00 - 9:30', subject: 'Programmiertechnik 2', room: 'Raum 101', isCurrent: false },
     { id: '2', day: 'Dienstag', time: '9:45 - 11:15', subject: 'Datenbanken', room: 'Raum 303', isCurrent: false },
     { id: '3', day: 'Donnerstag', time: '8:00 - 9:30', subject: 'Algebra', room: 'Raum 202', isCurrent: false },
     { id: '4', day: 'Donnerstag', time: '9:45 - 11:15', subject: 'Betriebssysteme', room: 'Raum 404', isCurrent: false },
-    { id: '5', day: 'Montag', time: '11:30 - 13:00', subject: 'Software Engineering', room: 'Raum 505', isCurrent: true }, // isCurrent für das Widget-Styling
+    { id: '5', day: 'Montag', time: '11:30 - 13:00', subject: 'Software Engineering', room: 'Raum 505', isCurrent: true },
   ]);
 
   const [meals] = useState<Meal[]>([
@@ -40,7 +59,18 @@ export default function App() {
     totalSeats: 120
   });
 
-  // 3. SEITEN-SWITCHER LOGIK
+  // Helper-Funktion für einen schönen Header-Titel je nach Seite
+  const getPageTitle = () => {
+    switch (activePage) {
+      case 'dashboard': return 'Dashboard';
+      case 'timetable': return 'Stundenplan';
+      case 'mensa': return 'Mensa Speiseplan';
+      case 'bibliothek': return 'Bibliothek';
+      default: return 'Dashboard';
+    }
+  };
+
+  // 3. SEITEN-SWITCHER LOGIK (gibt NUR den reinen Seiteninhalt zurück)
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
@@ -50,22 +80,24 @@ export default function App() {
       case 'mensa':
         return <MensaPage meals={meals} />;
       case 'bibliothek':
-        return <BibliothekPage status={bibStatus} />;
+        return <LibPage status={bibStatus} />;
       default:
         return <DashboardPage username={username} courses={courses} meals={meals} bibStatus={bibStatus} />;
     }
   };
 
+  // Wenn nicht eingeloggt, zeige NUR die LoginPage
+  if (!isLoggedIn) {
+    return <LoginPage onLoginSuccess={handleLogin} />;
+  }
+
+  // Wenn eingeloggt, baue das HTML-Grundgerüst auf, das deine CSS-Klassen erwartet
   return (
-    <div className="app-container">
-      {/* Header bekommt den Seitennamen als Titel */}
-      <Header title="Dashboard" />
+    <div className="app-layout-root">
+      <Header title={getPageTitle()} />
 
       <div className="content-wrapper">
-        {/* WICHTIG: Die Sidebar muss wissen, welche Seite aktiv ist */}
-        <Sidebar activePage={activePage} />
-        
-        {/* Hier wird die jeweilige Seite dynamisch reingeladen */}
+        <Sidebar activePage={activePage} onPageChange={setActivePage} />
         {renderPage()}
       </div>
     </div>

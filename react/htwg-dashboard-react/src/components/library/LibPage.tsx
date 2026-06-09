@@ -5,9 +5,8 @@ interface LibPageProps {
     status: LibraryStatus;
 }
 
-export const BibliothekPage = ({ status }: LibPageProps) => {
+export const LibPage = ({ status }: LibPageProps) => {
     
-    // Die statischen Zusatzinfos sauber als Datenstruktur ausgelagert
     const libInfos = [
         {
             id: 'hours',

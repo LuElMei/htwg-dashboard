@@ -1,4 +1,4 @@
-import type { Meal } from '../../types'; // Aktive Typisierung
+import type { Meal } from '../../types';
 import { MensaCard } from './MensaCard';
 
 interface Props {
@@ -7,18 +7,19 @@ interface Props {
 
 export const MensaPage = ({ meals }: Props) => {
   return (
-    <div className="mensa-page">
-      <h1>Mensa Speiseplan</h1>
+    <main className="content">
+      <h1>Mensa</h1>
+      <h3>Heutige Angebote</h3>
       
-      {/* Container für das Grid-Layout aus deinem Screenshot */}
-      <div className="mensa-grid">
+      <section className="mensa-page-grid">
         {meals.map((meal) => (
           <MensaCard 
+            key={meal.id}
             meal={meal} 
-            variant="page" // Hier schalten wir das Layout auf 'Karten-Modus'
+            variant="page" // Schaltet auf die große Unterseite um
           />
         ))}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };

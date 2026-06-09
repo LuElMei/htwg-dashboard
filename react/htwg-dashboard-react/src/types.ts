@@ -4,7 +4,7 @@ export interface Course {
     time: string;
     subject: string;
     room: string;
-    isCurrent: Boolean;
+    isCurrent: boolean;
 }
 
 export type MealCategory = 

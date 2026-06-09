@@ -8,7 +8,7 @@ interface TimetableWidgetProps {
 export const TimetableWidget = ({ courses }: TimetableWidgetProps) => {
     const displayedCourses = courses.slice(0, 3);
     return (
-        <div className="widget-box large timetable">
+        <div className="widget box-large timetable">
             <h3 className="timetable-text">Stundenplan</h3>
             {displayedCourses.length < 1 ? (
                 <p>Keine Vorlesungen heute</p>
