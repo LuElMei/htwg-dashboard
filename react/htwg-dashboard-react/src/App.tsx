@@ -22,8 +22,7 @@ export default function App() {
     if (contentElement) {
       contentElement.scrollTop = 0;
     }
-    [activePage]
-  });
+  }, [activePage]);
   
   // State für den Usernamen und Login-Status
   const [username, setUserName] = useState<string>('');
