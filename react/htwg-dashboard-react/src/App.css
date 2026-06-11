@@ -70,7 +70,6 @@ body {
     padding: 20px 0;
 }
 
-/* todo: fix padding so that whole area can be clicked */ 
 .sidebar-item {
     padding: 0 20px;
     border-left: 4px solid transparent;

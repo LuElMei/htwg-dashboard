@@ -2,22 +2,20 @@ import { LayoutDashboard, CalendarDays, Utensils, BookOpen } from 'lucide-react'
 
 interface SidebarProps {
   activePage: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek';
-  onPageChange: (page: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek') => void; // Neu: Die "Fernbedienung" für die App.tsx
+  onPageChange: (page: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek') => void;
 }
 
 export const Sidebar = ({ activePage, onPageChange }: SidebarProps) => {
   
-  // Kleine Hilfsfunktion für den Klick
   const handleNav = (e: React.MouseEvent, page: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek') => {
-    e.preventDefault(); // WICHTIG: Verhindert, dass der Browser die Seite neu lädt
-    onPageChange(page); // Hier feuern wir die Funktion ab!
+    e.preventDefault();
+    onPageChange(page);
   };
 
   return (
     <aside className="sidebar">
       <h2 className="sidebar-title">Menü</h2>
       <ul>
-        {/* Dashboard Link */}
         <li className={`sidebar-item ${activePage === 'dashboard' ? 'active' : ''}`}>
           <a 
             href="#dashboard" 
@@ -29,7 +27,6 @@ export const Sidebar = ({ activePage, onPageChange }: SidebarProps) => {
           </a>
         </li>
 
-        {/* Stundenplan Link */}
         <li className={`sidebar-item ${activePage === 'timetable' ? 'active' : ''}`}>
           <a 
             href="#timetable" 
@@ -41,7 +38,6 @@ export const Sidebar = ({ activePage, onPageChange }: SidebarProps) => {
           </a>
         </li>
 
-        {/* Mensa Link */}
         <li className={`sidebar-item ${activePage === 'mensa' ? 'active' : ''}`}>
           <a 
             href="#mensa" 
@@ -53,7 +49,6 @@ export const Sidebar = ({ activePage, onPageChange }: SidebarProps) => {
           </a>
         </li>
 
-        {/* Bibliothek Link */}
         <li className={`sidebar-item ${activePage === 'bibliothek' ? 'active' : ''}`}>
           <a 
             href="#bibliothek" 

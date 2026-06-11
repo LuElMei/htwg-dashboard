@@ -16,7 +16,7 @@ export const MensaPage = ({ meals }: Props) => {
           <MensaCard 
             key={meal.id}
             meal={meal} 
-            variant="page" // Schaltet auf die große Unterseite um
+            variant="page"
           />
         ))}
       </section>

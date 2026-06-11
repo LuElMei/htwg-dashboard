@@ -5,15 +5,13 @@ interface LoginPageProps {
 }
 
 export const LoginPage = ({ onLoginSuccess }: LoginPageProps) => {
-    // Lokaler State für die Formular-Eingaben (Controlled Components)
     const [inputName, setInputName] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // Verhindert das Neuladen der Seite beim Absenden
+        e.preventDefault();
         
         if (inputName.trim() !== '') {
-            // Wir übergeben den Namen an die App.tsx zurück
             onLoginSuccess(inputName);
         }
     };
@@ -30,7 +28,6 @@ export const LoginPage = ({ onLoginSuccess }: LoginPageProps) => {
             </header>
 
             <main className="setup-main">
-                {/* Das Formular ruft beim Absenden unsere handleSubmit-Funktion auf */}
                 <form onSubmit={handleSubmit} className="form-elem">
                     <div className="form-elem">
                         <label htmlFor="user-name">Username</label>
@@ -40,7 +37,7 @@ export const LoginPage = ({ onLoginSuccess }: LoginPageProps) => {
                             placeholder="z.B Max Mustermann" 
                             required 
                             value={inputName}
-                            onChange={(e) => setInputName(e.target.value)} // Speichert die Eingabe live
+                            onChange={(e) => setInputName(e.target.value)}
                         />
                     </div>
 
@@ -52,11 +49,10 @@ export const LoginPage = ({ onLoginSuccess }: LoginPageProps) => {
                             placeholder="z.B 123" 
                             required 
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)} // Speichert das Passwort live
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                     
-                    {/* Der Button schickt das Formular ab */}
                     <button type="submit" className="button-confirm-index">Bestätigen</button>
                 </form>
                 

@@ -19,10 +19,8 @@ export const LibCard = ({ title, variant, status, children }: LibCardProps) => {
                 <h2>{title}</h2>
             )}
 
-            {/* AUTOMATISCHE AUSLASTUNGS-LOGIK */}
             {status && (
                 <>
-                    {/* Hier wird die Textklasse und das Wording je nach Variante angepasst */}
                     <p className="bib-status-text">
                         {status.loadPercentage}% voll
                     </p>

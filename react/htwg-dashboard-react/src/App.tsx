@@ -11,7 +11,6 @@ import { LibPage } from './components/library/LibPage';
 import type { Course, Meal, LibraryStatus } from './types';
 
 export default function App() {
-  // 1. STATE FÜR DIE NAVIGATION
   const [activePage, setActivePage] = useState<'dashboard' | 'timetable' | 'mensa' | 'bibliothek'>('dashboard');
 
   useEffect(() => {
@@ -35,7 +34,7 @@ export default function App() {
     setActivePage('dashboard');
   };
 
-  // 2. TESTDATEN
+  //Testdaten
   const [courses] = useState<Course[]>([
     { id: '1', day: 'Dienstag', time: '8:00 - 9:30', subject: 'Programmiertechnik 2', room: 'Raum 101', isCurrent: false },
     { id: '2', day: 'Dienstag', time: '9:45 - 11:15', subject: 'Datenbanken', room: 'Raum 303', isCurrent: false },
@@ -59,7 +58,6 @@ export default function App() {
     totalSeats: 120
   });
 
-  // Helper-Funktion für einen schönen Header-Titel je nach Seite
   const getPageTitle = () => {
     switch (activePage) {
       case 'dashboard': return 'Dashboard';
@@ -70,7 +68,7 @@ export default function App() {
     }
   };
 
-  // 3. SEITEN-SWITCHER LOGIK (gibt NUR den reinen Seiteninhalt zurück)
+  //Seitenswitcher logik
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
@@ -86,12 +84,10 @@ export default function App() {
     }
   };
 
-  // Wenn nicht eingeloggt, zeige NUR die LoginPage
   if (!isLoggedIn) {
     return <LoginPage onLoginSuccess={handleLogin} />;
   }
 
-  // Wenn eingeloggt, baue das HTML-Grundgerüst auf, das deine CSS-Klassen erwartet
   return (
     <div className="app-layout-root">
       <Header title={getPageTitle()} />

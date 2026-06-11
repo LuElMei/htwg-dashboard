@@ -11,21 +11,17 @@ interface DashboardPageProps {
 }
 
 export const DashboardPage = ({ username, courses, meals, bibStatus }: DashboardPageProps) => {
-    // Sichere dir die ersten 3 Mahlzeiten für das kompakte Widget-Layout
     const widgetMeals = meals.slice(0, 4);
 
     return (
         <main className="content">
-            {/* Dynamische Begrüßung basierend auf dem Login-Input */}
             <h1>Guten Morgen, {username}</h1>
             <h3>4. April 2026, KW 20</h3>
 
             <section className="bento-box-grid">
                 
-                {/* 1. STUNDENPLAN WIDGET */}
                 <TimetableWidget courses={courses} />
 
-                {/* 2. MENSA WIDGET */}
                 <div className="widget box-tall mensa">
                     <h3 className="mensa-text">Mensa Angebot</h3>
                     {widgetMeals.map(meal => (
@@ -33,10 +29,8 @@ export const DashboardPage = ({ username, courses, meals, bibStatus }: Dashboard
                     ))}
                 </div>
 
-                {/* 3. BIBLIOTHEK WIDGET (Unsere extrem smarte Komponente!) */}
                 <LibCard title="Bibliothek" variant="widget" status={bibStatus} />
 
-                {/* 4. NOTEN WIDGET (Direkt hier integriert) */}
                 <div className="widget box-small noten">
                     <h3 className="noten-title">Kürzliche Noten</h3>
                     <div className="noten-item">

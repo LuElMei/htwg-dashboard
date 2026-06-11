@@ -10,12 +10,9 @@ export const TimetablePage = ({ courses }: TimetablePageProps) => {
     const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
     
     return (
-    // 'content' stellt sicher, dass die Seite rechts neben der Sidebar bleibt
     <main className="content">
       <h1>Stundenplan</h1>
       <h3>KW 20, 4. April 2026</h3>
-      
-      {/* HIER HINZUGEFÜGT: Der Wrapper, der das seitliche Scrollen aktiviert! */}
       <div className="timetable-wrapper">
         <table className="timetable-table">
           <thead>
