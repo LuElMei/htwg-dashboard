@@ -6,11 +6,14 @@ interface Props {
   meals: Meal[];
 }
 
+// Erlaubt echte Kategorien plus die Gesamtansicht.
 type MensaFilter = MealCategory | 'Alle';
 
 export const MensaPage = ({ meals }: Props) => {
+  // Merkt sich, welche Kategorie gerade ausgewählt ist.
   const [activeCategory, setActiveCategory] = useState<MensaFilter>('Alle');
 
+  // Aus dieser Liste werden die Filter-Buttons erzeugt.
   const categories: MensaFilter[] = [
     'Alle',
     'Seezeit-Teller',
@@ -21,6 +24,7 @@ export const MensaPage = ({ meals }: Props) => {
     'Getraenke',
   ];
 
+  // Zeigt entweder alle Gerichte oder nur die passende Kategorie.
   const filteredMeals = activeCategory === 'Alle'
     ? meals
     : meals.filter((meal) => meal.category === activeCategory);
@@ -36,6 +40,7 @@ export const MensaPage = ({ meals }: Props) => {
             key={category}
             type="button"
             className={`mensa-filter-button ${activeCategory === category ? 'active' : ''}`}
+            // Klick aktualisiert den Filter-State.
             onClick={() => setActiveCategory(category)}
           >
             {category}
