@@ -10,10 +10,12 @@
 
 **Setup:**
 ```bash
-cd \react\htwg-dashboard-react
+cd react\htwg-dashboard-react
 npm install
 npm run dev
 ```
+Die App laeuft dann unter http://localhost:5173.
+Der Build wurde mit `npm run build` geprueft.
 
 **Projektidee:**
 
@@ -31,10 +33,11 @@ npm run dev
 **Meilenstein_2**
 | Kriterium | Datei | Zeile / Hinweise |
 | :--- | :--- | :--- |
-| **npm + Vite** | package.json, vite.config.js | react/htwg-dashboard-react |
+| **npm + Vite** | react/htwg-dashboard-react/package.json, react/htwg-dashboard-react/vite.config.ts | Projektordner |
 | **TypeScript aktiv genutzt** | src/types.ts, src/components/mensa/MensaCard.tsx | Z. 18-25, Z. 3-6 |
 | **Komponentenzerlegung** | src/components/ | library, mensa, timetable |
 | **Props-Übergabe** | src/App.tsx | Z. 68-81 |
-| **useState** | src/App.tsx | Z. 26-56 |
-| **useEffect** | src/App.tsx | Z. 15-24 |
+| **useState** | src/App.tsx, src/components/mensa/MensaPage.tsx | App-State Z. 15, 28-55; Mensa-Filter Z. 12 |
+| **useEffect** | src/App.tsx | Z. 17-25 |
+| **Eigener Beitrag Elischa** | src/components/mensa/MensaPage.tsx, src/App.css | Mensa-Kategoriefilter: TS-Typ Z. 9, State Z. 12, Filterlogik Z. 24-26, Buttons Z. 33-44, Styling Z. 582-603 |
 | **Durchgängige Nutzeraktion** | src/components/LoginPage.tsx | Benutzername, Passwort -> Name wird auf Dashboard angezeigt |

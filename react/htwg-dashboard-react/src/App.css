@@ -578,6 +578,29 @@ input {
     margin-bottom: 30px;
 }
 
+.mensa-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0 8px;
+}
+
+.mensa-filter-button {
+    border: 1px solid var(--color-primary);
+    border-radius: var(--border-radius);
+    background-color: white;
+    color: var(--color-primary);
+    cursor: pointer;
+    font: inherit;
+    padding: 8px 12px;
+}
+
+.mensa-filter-button.active,
+.mensa-filter-button:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
 .mensa-page-card {
     background-color: white;
     border: 1px solid grey;
