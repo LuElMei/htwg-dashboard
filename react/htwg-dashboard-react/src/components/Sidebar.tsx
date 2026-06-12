@@ -1,3 +1,5 @@
+import { Link, useLocation } from 'react-router-dom';
+
 import { LayoutDashboard, CalendarDays, Utensils, BookOpen } from 'lucide-react';
 
 interface SidebarProps {
@@ -5,59 +7,41 @@ interface SidebarProps {
   onPageChange: (page: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek') => void;
 }
 
-export const Sidebar = ({ activePage, onPageChange }: SidebarProps) => {
+export const Sidebar = () => {
   
-  const handleNav = (e: React.MouseEvent, page: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek') => {
-    e.preventDefault();
-    onPageChange(page);
-  };
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   return (
     <aside className="sidebar">
       <h2 className="sidebar-title">Menü</h2>
       <ul>
-        <li className={`sidebar-item ${activePage === 'dashboard' ? 'active' : ''}`}>
-          <a 
-            href="#dashboard" 
-            onClick={(e) => handleNav(e, 'dashboard')} 
-            className="sidebar-item-link"
-          >
+        <li className={`sidebar-item ${currentPath === 'dashboard' ? 'active' : ''}`}>
+          <Link to="/dashboard" className="sidebar-item-link">
             <LayoutDashboard className="sidebar-icon" />
             <div className="sidebar-item-text">Dashboard</div>
-          </a>
+          </Link>
         </li>
 
-        <li className={`sidebar-item ${activePage === 'timetable' ? 'active' : ''}`}>
-          <a 
-            href="#timetable" 
-            onClick={(e) => handleNav(e, 'timetable')} 
-            className="sidebar-item-link"
-          >
+        <li className={`sidebar-item ${currentPath === 'timetable' ? 'active' : ''}`}>
+          <Link to="/timetable" className="sidebar-item-link">
             <CalendarDays className="sidebar-icon" />
             <div className="sidebar-item-text">Stundenplan</div>
-          </a>
+          </Link>
         </li>
 
-        <li className={`sidebar-item ${activePage === 'mensa' ? 'active' : ''}`}>
-          <a 
-            href="#mensa" 
-            onClick={(e) => handleNav(e, 'mensa')} 
-            className="sidebar-item-link"
-          >
+        <li className={`sidebar-item ${currentPath === 'mensa' ? 'active' : ''}`}>
+          <Link to="/mensa" className="sidebar-item-link">
             <Utensils className="sidebar-icon" />
             <div className="sidebar-item-text">Mensa</div>
-          </a>
+          </Link>
         </li>
 
-        <li className={`sidebar-item ${activePage === 'bibliothek' ? 'active' : ''}`}>
-          <a 
-            href="#bibliothek" 
-            onClick={(e) => handleNav(e, 'bibliothek')} 
-            className="sidebar-item-link"
-          >
+        <li className={`sidebar-item ${currentPath === 'bibliothek' ? 'active' : ''}`}>
+          <Link to="/bibliothek" className="sidebar-item-link">
             <BookOpen className="sidebar-icon" />
             <div className="sidebar-item-text">Bibliothek</div>
-          </a>
+          </Link>
         </li>
       </ul>
     </aside>
