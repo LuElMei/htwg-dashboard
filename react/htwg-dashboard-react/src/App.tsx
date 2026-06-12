@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { LoginPage } from './components/LoginPage';
@@ -9,6 +10,7 @@ import { LibPage } from './components/library/LibPage';
 
 // Typen importieren
 import type { Course, Meal, LibraryStatus } from './types';
+import { Divide } from 'lucide-react';
 
 export default function App() {
   const [activePage, setActivePage] = useState<'dashboard' | 'timetable' | 'mensa' | 'bibliothek'>('dashboard');
@@ -67,34 +69,39 @@ export default function App() {
     }
   };
 
-  //Seitenswitcher logik
-  const renderPage = () => {
-    switch (activePage) {
-      case 'dashboard':
-        return <DashboardPage username={username} courses={courses} meals={meals} bibStatus={bibStatus} />;
-      case 'timetable':
-        return <TimetablePage courses={courses} />;
-      case 'mensa':
-        return <MensaPage meals={meals} />;
-      case 'bibliothek':
-        return <LibPage status={bibStatus} />;
-      default:
-        return <DashboardPage username={username} courses={courses} meals={meals} bibStatus={bibStatus} />;
-    }
-  };
-
-  if (!isLoggedIn) {
-    return <LoginPage onLoginSuccess={handleLogin} />;
-  }
-
   return (
-    <div className="app-layout-root">
-      <Header title={getPageTitle()} />
+    <BrowserRouter>
+      <Routes>
+        <Route 
+          path="/login"
+          element={!isLoggedIn ? <LoginPage onLoginSuccess={handleLogin}/> : <Navigate to="/dashboard" replace />}
+        />
 
-      <div className="content-wrapper">
-        <Sidebar activePage={activePage} onPageChange={setActivePage} />
-        {renderPage()}
-      </div>
-    </div>
-  );
+        <Route
+          path="/*"
+          element={
+            isLoggedIn ? (
+              <div className="app-layout-root">
+                <Header title={getPageTitle()} />
+
+                <div className="content-wrapper">
+                  <Sidebar activePage={activePage} onPageChange={setActivePage} />
+
+                  <Routes>
+                    <Route path="dashboard" element={<DashboardPage username={username} courses={courses} meals={meals} bibStatus={bibStatus} /> } />
+                    <Route path="timetable" element={<TimetablePage courses={courses} /> } />
+                    <Route path="mensa" element={<MensaPage meals={meals} /> } />
+                    <Route path="bibliothek" element={<LibPage status={bibStatus} /> } />
+                    <Route path="*" element={<Navigate to="/dashboard" replace/>} />
+                  </Routes>
+                </div>
+              </div>
+            ) : (
+              <Navigate to="/login" replace/>
+            )
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  )
 }
