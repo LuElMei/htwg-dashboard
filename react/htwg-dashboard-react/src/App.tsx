@@ -10,7 +10,6 @@ import { LibPage } from './components/library/LibPage';
 
 // Typen importieren
 import type { Course, Meal, LibraryStatus } from './types';
-import { Divide } from 'lucide-react';
 
 export default function App() {
   const [activePage, setActivePage] = useState<'dashboard' | 'timetable' | 'mensa' | 'bibliothek'>('dashboard');
@@ -85,7 +84,7 @@ export default function App() {
                 <Header title={getPageTitle()} />
 
                 <div className="content-wrapper">
-                  <Sidebar activePage={activePage} onPageChange={setActivePage} />
+                  <Sidebar/>
 
                   <Routes>
                     <Route path="dashboard" element={<DashboardPage username={username} courses={courses} meals={meals} bibStatus={bibStatus} /> } />
