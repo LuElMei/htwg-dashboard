@@ -1,18 +1,21 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
-interface LoginPageProps {
-    onLoginSuccess: (username: string) => void;
-}
+interface LoginPageProps {}
 
-export const LoginPage = ({ onLoginSuccess }: LoginPageProps) => {
+export const LoginPage = ({}: LoginPageProps) => {
     const [inputName, setInputName] = useState('');
     const [password, setPassword] = useState('');
+    const { login } = useAuth();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         
         if (inputName.trim() !== '') {
-            onLoginSuccess(inputName);
+            login(
+                { id: 'mock-id-123', username: inputName, email: 'standard@email.com'},
+                'mock-jwt-token'
+            );
         }
     };
 

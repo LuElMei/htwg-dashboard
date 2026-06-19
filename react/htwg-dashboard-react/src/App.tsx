@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { LoginPage } from './components/LoginPage';
@@ -25,14 +26,7 @@ export default function App() {
   }, [activePage]);
   
   // State für den Usernamen und Login-Status
-  const [username, setUserName] = useState<string>('');
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
-  const handleLogin = (name: string) => {
-    setUserName(name);
-    setIsLoggedIn(true);
-    setActivePage('dashboard');
-  };
+  const { isAuthenticated, user, logout } = useAuth();
 
   //Testdaten
   const [courses] = useState<Course[]>([
@@ -73,13 +67,13 @@ export default function App() {
       <Routes>
         <Route 
           path="/login"
-          element={!isLoggedIn ? <LoginPage onLoginSuccess={handleLogin}/> : <Navigate to="/dashboard" replace />}
+          element={!isAuthenticated ? <LoginPage/> : <Navigate to="/dashboard" replace />}
         />
 
         <Route
           path="/*"
           element={
-            isLoggedIn ? (
+            isAuthenticated ? (
               <div className="app-layout-root">
                 <Header title={getPageTitle()} />
 
@@ -87,7 +81,7 @@ export default function App() {
                   <Sidebar/>
 
                   <Routes>
-                    <Route path="dashboard" element={<DashboardPage username={username} courses={courses} meals={meals} bibStatus={bibStatus} /> } />
+                    <Route path="dashboard" element={<DashboardPage username={user?.username || ''} courses={courses} meals={meals} bibStatus={bibStatus} /> } />
                     <Route path="timetable" element={<TimetablePage courses={courses} /> } />
                     <Route path="mensa" element={<MensaPage meals={meals} /> } />
                     <Route path="bibliothek" element={<LibPage status={bibStatus} /> } />
