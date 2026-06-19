@@ -773,40 +773,6 @@ createRoot(document.getElementById('root')!).render(
 )
 </file>
 
-<file path="react/htwg-dashboard-react/package.json">
-{
-  "name": "htwg-dashboard-react",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "lucide-react": "^1.17.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@types/node": "^24.12.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.5.0",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.9"
-  }
-}
-</file>
-
 <file path="react/htwg-dashboard-react/tsconfig.json">
 {
   "files": [],
@@ -866,74 +832,6 @@ export const TimetablePage = ({ courses }: TimetablePageProps) => {
         </table>
       </div>
     </main>
-  );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/Sidebar.tsx">
-import { LayoutDashboard, CalendarDays, Utensils, BookOpen } from 'lucide-react';
-
-interface SidebarProps {
-  activePage: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek';
-  onPageChange: (page: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek') => void;
-}
-
-export const Sidebar = ({ activePage, onPageChange }: SidebarProps) => {
-  
-  const handleNav = (e: React.MouseEvent, page: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek') => {
-    e.preventDefault();
-    onPageChange(page);
-  };
-
-  return (
-    <aside className="sidebar">
-      <h2 className="sidebar-title">Menü</h2>
-      <ul>
-        <li className={`sidebar-item ${activePage === 'dashboard' ? 'active' : ''}`}>
-          <a 
-            href="#dashboard" 
-            onClick={(e) => handleNav(e, 'dashboard')} 
-            className="sidebar-item-link"
-          >
-            <LayoutDashboard className="sidebar-icon" />
-            <div className="sidebar-item-text">Dashboard</div>
-          </a>
-        </li>
-
-        <li className={`sidebar-item ${activePage === 'timetable' ? 'active' : ''}`}>
-          <a 
-            href="#timetable" 
-            onClick={(e) => handleNav(e, 'timetable')} 
-            className="sidebar-item-link"
-          >
-            <CalendarDays className="sidebar-icon" />
-            <div className="sidebar-item-text">Stundenplan</div>
-          </a>
-        </li>
-
-        <li className={`sidebar-item ${activePage === 'mensa' ? 'active' : ''}`}>
-          <a 
-            href="#mensa" 
-            onClick={(e) => handleNav(e, 'mensa')} 
-            className="sidebar-item-link"
-          >
-            <Utensils className="sidebar-icon" />
-            <div className="sidebar-item-text">Mensa</div>
-          </a>
-        </li>
-
-        <li className={`sidebar-item ${activePage === 'bibliothek' ? 'active' : ''}`}>
-          <a 
-            href="#bibliothek" 
-            onClick={(e) => handleNav(e, 'bibliothek')} 
-            className="sidebar-item-link"
-          >
-            <BookOpen className="sidebar-icon" />
-            <div className="sidebar-item-text">Bibliothek</div>
-          </a>
-        </li>
-      </ul>
-    </aside>
   );
 };
 </file>
@@ -1598,6 +1496,41 @@ input {
 }
 </file>
 
+<file path="react/htwg-dashboard-react/package.json">
+{
+  "name": "htwg-dashboard-react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^1.17.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.17.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.9"
+  }
+}
+</file>
+
 <file path="react/htwg-dashboard-react/src/components/mensa/MensaCard.tsx">
 import type { Meal } from '../../types';
 
@@ -1637,6 +1570,58 @@ export const MensaCard = ({ meal, variant }: MensaCardProps) => {
             </div>
         </article>
     );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/Sidebar.tsx">
+import { Link, useLocation } from 'react-router-dom';
+
+import { LayoutDashboard, CalendarDays, Utensils, BookOpen } from 'lucide-react';
+
+interface SidebarProps {
+  activePage: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek';
+  onPageChange: (page: 'dashboard' | 'timetable' | 'mensa' | 'bibliothek') => void;
+}
+
+export const Sidebar = () => {
+  
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  return (
+    <aside className="sidebar">
+      <h2 className="sidebar-title">Menü</h2>
+      <ul>
+        <li className={`sidebar-item ${currentPath === 'dashboard' ? 'active' : ''}`}>
+          <Link to="/dashboard" className="sidebar-item-link">
+            <LayoutDashboard className="sidebar-icon" />
+            <div className="sidebar-item-text">Dashboard</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === 'timetable' ? 'active' : ''}`}>
+          <Link to="/timetable" className="sidebar-item-link">
+            <CalendarDays className="sidebar-icon" />
+            <div className="sidebar-item-text">Stundenplan</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === 'mensa' ? 'active' : ''}`}>
+          <Link to="/mensa" className="sidebar-item-link">
+            <Utensils className="sidebar-icon" />
+            <div className="sidebar-item-text">Mensa</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === 'bibliothek' ? 'active' : ''}`}>
+          <Link to="/bibliothek" className="sidebar-item-link">
+            <BookOpen className="sidebar-icon" />
+            <div className="sidebar-item-text">Bibliothek</div>
+          </Link>
+        </li>
+      </ul>
+    </aside>
+  );
 };
 </file>
 
@@ -1741,6 +1726,7 @@ export const MensaPage = ({ meals }: Props) => {
 
 <file path="react/htwg-dashboard-react/src/App.tsx">
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { LoginPage } from './components/LoginPage';
@@ -1809,36 +1795,41 @@ export default function App() {
     }
   };
 
-  //Seitenswitcher logik
-  const renderPage = () => {
-    switch (activePage) {
-      case 'dashboard':
-        return <DashboardPage username={username} courses={courses} meals={meals} bibStatus={bibStatus} />;
-      case 'timetable':
-        return <TimetablePage courses={courses} />;
-      case 'mensa':
-        return <MensaPage meals={meals} />;
-      case 'bibliothek':
-        return <LibPage status={bibStatus} />;
-      default:
-        return <DashboardPage username={username} courses={courses} meals={meals} bibStatus={bibStatus} />;
-    }
-  };
-
-  if (!isLoggedIn) {
-    return <LoginPage onLoginSuccess={handleLogin} />;
-  }
-
   return (
-    <div className="app-layout-root">
-      <Header title={getPageTitle()} />
+    <BrowserRouter>
+      <Routes>
+        <Route 
+          path="/login"
+          element={!isLoggedIn ? <LoginPage onLoginSuccess={handleLogin}/> : <Navigate to="/dashboard" replace />}
+        />
 
-      <div className="content-wrapper">
-        <Sidebar activePage={activePage} onPageChange={setActivePage} />
-        {renderPage()}
-      </div>
-    </div>
-  );
+        <Route
+          path="/*"
+          element={
+            isLoggedIn ? (
+              <div className="app-layout-root">
+                <Header title={getPageTitle()} />
+
+                <div className="content-wrapper">
+                  <Sidebar/>
+
+                  <Routes>
+                    <Route path="dashboard" element={<DashboardPage username={username} courses={courses} meals={meals} bibStatus={bibStatus} /> } />
+                    <Route path="timetable" element={<TimetablePage courses={courses} /> } />
+                    <Route path="mensa" element={<MensaPage meals={meals} /> } />
+                    <Route path="bibliothek" element={<LibPage status={bibStatus} /> } />
+                    <Route path="*" element={<Navigate to="/dashboard" replace/>} />
+                  </Routes>
+                </div>
+              </div>
+            ) : (
+              <Navigate to="/login" replace/>
+            )
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 </file>
 
