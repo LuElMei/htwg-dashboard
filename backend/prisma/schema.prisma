@@ -13,28 +13,3 @@ model User {
   password  String
   createdAt DateTime @default(now())
 }
-
-model Course {
-  id        String   @id @default(uuid())
-  day       String
-  time      String
-  subject   String
-  room      String
-  isCurrent Boolean  @default(false)
-}
-
-model Meal {
-  id          String     @id @default(uuid())
-  category    String     // z.b "Seezeit-Teller", "Beilagen"
-  title       String
-  description String?
-  price       String?
-  items       MealItem[]
-}
-
-model MealItem {
-  id     String @id @default(uuid())
-  name   String
-  mealId String
-  meal   Meal   @relation(fields: [mealId], references: [id], onDelete: Cascade)
-}
