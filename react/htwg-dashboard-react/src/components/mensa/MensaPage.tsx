@@ -4,12 +4,15 @@ import { MensaCard } from './MensaCard';
 
 interface Props {
   meals: Meal[];
+  isLoading: boolean;
+  error: string | null;
+  onRetry: () => void;
 }
 
 // Erlaubt echte Kategorien plus die Gesamtansicht.
 type MensaFilter = MealCategory | 'Alle';
 
-export const MensaPage = ({ meals }: Props) => {
+export const MensaPage = ({ meals, isLoading, error, onRetry }: Props) => {
   // Merkt sich, welche Kategorie gerade ausgewählt ist.
   const [activeCategory, setActiveCategory] = useState<MensaFilter>('Alle');
 
@@ -34,6 +37,19 @@ export const MensaPage = ({ meals }: Props) => {
       <h1>Mensa</h1>
       <h3>Heutige Angebote</h3>
 
+      {isLoading && <p className="fetch-status">Mensa-Daten werden geladen...</p>}
+
+      {error && (
+        <div className="fetch-error" role="alert">
+          <p>{error}</p>
+          <button type="button" onClick={onRetry}>Erneut versuchen</button>
+        </div>
+      )}
+
+      {!isLoading && !error && meals.length === 0 && (
+        <p className="fetch-status">Aktuell sind keine Mensa-Angebote vorhanden.</p>
+      )}
+
       <div className="mensa-filter" aria-label="Mensa Kategorie Filter">
         {categories.map((category) => (
           <button
@@ -48,7 +64,7 @@ export const MensaPage = ({ meals }: Props) => {
         ))}
       </div>
       
-      <section className="mensa-page-grid">
+      {!isLoading && !error && <section className="mensa-page-grid">
         {filteredMeals.map((meal) => (
           <MensaCard 
             key={meal.id}
@@ -56,7 +72,7 @@ export const MensaPage = ({ meals }: Props) => {
             variant="page"
           />
         ))}
-      </section>
+      </section>}
     </main>
   );
 };

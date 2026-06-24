@@ -7,10 +7,19 @@ interface DashboardPageProps {
     username: string;
     courses: Course[];
     meals: Meal[];
+    mealsLoading: boolean;
+    mealsError: string | null;
     bibStatus: LibraryStatus;
 }
 
-export const DashboardPage = ({ username, courses, meals, bibStatus }: DashboardPageProps) => {
+export const DashboardPage = ({
+    username,
+    courses,
+    meals,
+    mealsLoading,
+    mealsError,
+    bibStatus,
+}: DashboardPageProps) => {
     const widgetMeals = meals.slice(0, 4);
 
     return (
@@ -24,7 +33,9 @@ export const DashboardPage = ({ username, courses, meals, bibStatus }: Dashboard
 
                 <div className="widget box-tall mensa">
                     <h3 className="mensa-text">Mensa Angebot</h3>
-                    {widgetMeals.map(meal => (
+                    {mealsLoading && <p>Mensa-Daten werden geladen...</p>}
+                    {mealsError && <p role="alert">Mensa-Daten sind nicht verfuegbar.</p>}
+                    {!mealsLoading && !mealsError && widgetMeals.map(meal => (
                         <MensaCard key={meal.id} meal={meal} variant="widget" />
                     ))}
                 </div>
