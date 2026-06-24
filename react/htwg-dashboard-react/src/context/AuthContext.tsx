@@ -1,33 +1,38 @@
-import React, { createContext, useContext, useState } from 'react';
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
+import { getCurrentUser, loginRequest, registerRequest } from '../api';
+import type { User } from '../types';
+import { AuthContext } from './auth-context';
 
-// Definition, wie unser User-Objekt aussieht
-export interface User {
-  id: string;
-  username: string;
-  email: string;
-}
-
-// Definition der Daten, die der Context bereitstellt
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  isAuthenticated: boolean;
-  login: (user: User, token: string) => void;
-  logout: () => void;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  const login = (newUser: User, newToken: string) => {
-    setUser(newUser);
+  const finishAuthentication = async (newToken: string) => {
+    // Der geschuetzte Endpunkt prueft den Token und liefert den eingeloggten User.
+    const { user: authenticatedUser } = await getCurrentUser(newToken);
     setToken(newToken);
-    // Tipp aus der Vorlesung: Das Token wird im State behalten,
-    // nicht im localStorage, um XSS-Angriffe zu erschweren!
+    setUser(authenticatedUser);
+  };
+
+  const login = async (username: string, password: string) => {
+    setIsAuthenticating(true);
+    try {
+      const { token: newToken } = await loginRequest(username, password);
+      await finishAuthentication(newToken);
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
+
+  const register = async (username: string, email: string, password: string) => {
+    setIsAuthenticating(true);
+    try {
+      const { token: newToken } = await registerRequest(username, email, password);
+      await finishAuthentication(newToken);
+    } finally {
+      setIsAuthenticating(false);
+    }
   };
 
   const logout = () => {
@@ -36,17 +41,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, isAuthenticated: !!token, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        token,
+        isAuthenticated: Boolean(token && user),
+        isAuthenticating,
+        login,
+        register,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
-};
-
-// Custom Hook, um den Context in Komponenten extrem einfach zu nutzen
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth muss innerhalb eines AuthProviders verwendet werden');
-  }
-  return context;
 };

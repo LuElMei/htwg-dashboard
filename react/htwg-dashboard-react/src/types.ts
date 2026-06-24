@@ -29,3 +29,9 @@ export interface LibraryStatus {
     freeSeats: number;
     totalSeats: number;
 }
+
+export interface User {
+    id: string;
+    username: string;
+    email: string;
+}
