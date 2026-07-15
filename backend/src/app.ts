@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import jwt, { type JwtPayload } from 'jsonwebtoken';
 import prisma from './db';
+import rateLimit from 'express-rate-limit';
 
 dotenv.config();
 
@@ -52,11 +53,20 @@ const requireAuth = (
   }
 };
 
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  message: { error: 'Zu viele Anmeldeversuche. Bitte in 15 Minuten erneut versuchen.' },
+  skip: () => process.env.NODE_ENV === 'test',
+});
+
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.post('/api/auth/register', async (req, res) => {
+app.post('/api/auth/register', authLimiter ,async (req, res) => {
   const username = String(req.body.username ?? '').trim();
   const email = String(req.body.email ?? '').trim().toLowerCase();
   const password = String(req.body.password ?? '');
@@ -96,7 +106,7 @@ app.post('/api/auth/register', async (req, res) => {
   res.status(201).json({ token: createToken(user.id, user.username) });
 });
 
-app.post('/api/auth/login', async (req, res) => {
+app.post('/api/auth/login', authLimiter, async (req, res) => {
   const username = String(req.body.username ?? '').trim();
   const password = String(req.body.password ?? '');
   const user = await prisma.user.findUnique({ where: { username } });
