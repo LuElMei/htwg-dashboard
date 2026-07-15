@@ -8,36 +8,27 @@
 **repository:** 
 [github.com/LuElMei/htwg-dashboard](https://github.com/LuElMei/htwg-dashboard)
 
-**Frontend-Setup:**
+**Setup (einmalig):**
 ```bash
-cd react\htwg-dashboard-react
 npm install
-npm run dev
-```
-Die App laeuft dann unter http://localhost:5173.
-Der Build wurde mit `npm run build` geprueft.
+cp backend/.env.example backend/.env
+npm run setup
+In backend/.env anschliessend ein eigenes JWT_SECRET eintragen.
+npm run setup installiert die Dependencies von Backend und Frontend, erzeugt den
+Prisma-Client und legt die SQLite-Datenbank an.
 
-**Backend-Setup (zweites Terminal):**
-```bash
-cd backend
-npm install
-npm run prisma:generate
-npm run db:migrate
+Starten:
 npm run dev
-```
-Das Backend laeuft dann unter http://localhost:3000.
+Startet Backend (http://localhost:3000) und Frontend (http://localhost:5173)
+gemeinsam in einem Terminal. Die App laeuft dann unter http://localhost:5173.
 
-**Testuser:**
-```text
+Testuser:
 Username: testuser
 Passwort: test1234
-```
+Wird beim ersten Backend-Start automatisch angelegt.
 
-**Tests:**
-```bash
-cd backend
+Tests:
 npm test
-```
 
 **Projektidee:**
 
