@@ -13,22 +13,29 @@
 npm install
 cp backend/.env.example backend/.env
 npm run setup
-In backend/.env anschliessend ein eigenes JWT_SECRET eintragen.
-npm run setup installiert die Dependencies von Backend und Frontend, erzeugt den
+```
+In `backend/.env` anschliessend ein eigenes `JWT_SECRET` eintragen.
+`npm run setup` installiert die Dependencies von Backend und Frontend, erzeugt den
 Prisma-Client und legt die SQLite-Datenbank an.
 
-Starten:
+**Starten:**
+```bash
 npm run dev
-Startet Backend (http://localhost:3000) und Frontend (http://localhost:5173)
-gemeinsam in einem Terminal. Die App laeuft dann unter http://localhost:5173.
+```
+Startet Backend (http://localhost:3000) und Frontend (http://localhost:5173) gemeinsam
+in einem Terminal. Die App laeuft dann unter http://localhost:5173.
 
-Testuser:
+**Testuser:**
+```text
 Username: testuser
 Passwort: test1234
-Wird beim ersten Backend-Start automatisch angelegt.
+```
+Der Testuser wird beim ersten Backend-Start automatisch angelegt.
 
-Tests:
+**Tests:**
+```bash
 npm test
+```
 
 **Projektidee:**
 
