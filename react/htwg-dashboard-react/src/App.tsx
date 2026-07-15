@@ -120,7 +120,12 @@ const AuthenticatedApp = () => {
 };
 
 const AppRoutes = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isRestoring } = useAuth();
+
+  // Solange der Token geprueft wird, darf noch nicht auf /login umgeleitet werden.
+  if (isRestoring) {
+    return <p className="fetch-status">Sitzung wird wiederhergestellt...</p>;
+  }
 
   return (
     <Routes>
