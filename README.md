@@ -9,6 +9,7 @@
 [github.com/LuElMei/htwg-dashboard](https://github.com/LuElMei/htwg-dashboard)
 
 **Setup (einmalig):**
+Vorraussetzung: Node 20 oder neuer
 ```bash
 npm install
 cp backend/.env.example backend/.env
