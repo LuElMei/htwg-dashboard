@@ -16,14 +16,7 @@ import { TimetablePage } from './components/timetable/TimetablePage';
 import { MensaPage } from './components/mensa/MensaPage';
 import { LibPage } from './components/library/LibPage';
 import type { Course, LibraryStatus, Meal } from './types';
-
-const courses: Course[] = [
-  { id: '1', day: 'Dienstag', time: '8:00 - 9:30', subject: 'Programmiertechnik 2', room: 'Raum 101', isCurrent: false },
-  { id: '2', day: 'Dienstag', time: '9:45 - 11:15', subject: 'Datenbanken', room: 'Raum 303', isCurrent: false },
-  { id: '3', day: 'Donnerstag', time: '8:00 - 9:30', subject: 'Algebra', room: 'Raum 202', isCurrent: false },
-  { id: '4', day: 'Donnerstag', time: '9:45 - 11:15', subject: 'Betriebssysteme', room: 'Raum 404', isCurrent: false },
-  { id: '5', day: 'Montag', time: '11:30 - 13:00', subject: 'Software Engineering', room: 'Raum 505', isCurrent: true },
-];
+import { getCourses } from './api';
 
 const libraryStatus: LibraryStatus = {
   loadPercentage: 65,
@@ -32,8 +25,9 @@ const libraryStatus: LibraryStatus = {
 };
 
 const AuthenticatedApp = () => {
-  const { user, logout } = useAuth();
+  const { user, token, logout } = useAuth();
   const location = useLocation();
+  const [courses, setCourses] = useState<Course[]>([]);
   const [meals, setMeals] = useState<Meal[]>([]);
   const [mealsLoading, setMealsLoading] = useState(true);
   const [mealsError, setMealsError] = useState<string | null>(null);
@@ -43,6 +37,7 @@ const AuthenticatedApp = () => {
     window.scrollTo(0, 0);
     document.querySelector('.content')?.scrollTo(0, 0);
   }, [location.pathname]);
+  
 
   useEffect(() => {
     const controller = new AbortController();
@@ -64,6 +59,20 @@ const AuthenticatedApp = () => {
 
     return () => controller.abort();
   }, [mealsRequestVersion]);
+
+  useEffect(() => {
+    if (!token) return;
+    
+    const controller = new AbortController();
+    
+    getCourses(token, controller.signal)
+      .then(setCourses)
+      .catch((err) => {
+         if (!controller.signal.aborted) console.error("Fehler beim Kurse laden:", err);
+      });
+
+    return () => controller.abort();
+  }, [token]);
 
   const retryMeals = () => {
     setMealsLoading(true);

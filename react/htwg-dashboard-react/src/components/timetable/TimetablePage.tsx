@@ -1,14 +1,36 @@
 import type { Course } from '../../types';
 import { TimetableEntry } from './TimetableEntry';
+import { useState } from 'react';
+import { useAuth } from '../../context/useAuth';
+import { uploadTimetable } from '../../api';
 
 interface TimetablePageProps {
     courses: Course[];
 }
 
 export const TimetablePage = ({ courses }: TimetablePageProps) => {
-    const timeSlots = ["8:00 - 9:30", "9:45 - 11:15", "11:30 - 13:00", "13:00 - 14:00", "14:00 - 15:30", "15:45 - 17:15"];
+    const startTimes = Array.from(new Set(courses.map(course => course.time.split(' - ')[0]))).sort();
     const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
-    
+    const { token } = useAuth();
+    const [isUploading, setIsUploading] = useState(false);
+
+    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file || !token) return;
+
+        setIsUploading(true);
+        try {
+            await uploadTimetable(token, file);
+            alert('Stundenplan erfolgreich importiert! Bitte Seite neu laden.');
+            window.location.reload();
+        } catch (error) {
+            alert('Fehler beim Importieren.');
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+
     return (
     <main className="content">
       <h1>Stundenplan</h1>
@@ -22,18 +44,29 @@ export const TimetablePage = ({ courses }: TimetablePageProps) => {
             </tr>
           </thead>
           <tbody>
-            {timeSlots.map(slot => (
-              <tr key={slot}>
-                <td className="time-column">{slot}</td>
+            {startTimes.map(startTime => (
+              <tr key={startTime}>
+                <td className="time-column">{startTime}</td>
                 {days.map(day => {
-                  const course = courses.find(c => c.day === day && c.time === slot);
+                  // filter() liefert uns ein Array ALLER Kurse zu dieser Startzeit
+                  const matchingCourses = courses.filter(
+                    c => c.day === day && c.time.startsWith(startTime)
+                  );
+
                   return (
-                    <td key={`${day}-${slot}`} className={course ? "subject" : ""}>
-                      {course ? (
-                        <TimetableEntry course={course} />
-                      ) : (
-                        slot === "13:00 - 14:00" ? "-" : "" 
-                      )}
+                    <td 
+                      key={`${day}-${startTime}`} 
+                      className={matchingCourses.length > 0 ? "subject" : ""}
+                    >
+                      {matchingCourses.map((course, index) => (
+                        <div key={course.id || index} className="timetable-cell-entry">
+                          <TimetableEntry course={course} />
+                          {/* Trennlinie einfügen, wenn mehr als ein Kurs in der Zelle ist */}
+                          {index < matchingCourses.length - 1 && (
+                            <div className="course-cell-divider" />
+                          )}
+                        </div>
+                      ))}
                     </td>
                   );
                 })}
@@ -41,6 +74,19 @@ export const TimetablePage = ({ courses }: TimetablePageProps) => {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="upload-container">
+        <label htmlFor="ics-upload" className="mensa-filter-button">
+          {isUploading ? 'Wird hochgeladen...' : '.ics Datei hochladen'}
+        </label>
+        <input 
+            id="ics-upload" 
+            type="file" 
+            accept=".ics" 
+            style={{ display: 'none' }} 
+            onChange={handleFileUpload} 
+            disabled={isUploading}
+        />
       </div>
     </main>
   );

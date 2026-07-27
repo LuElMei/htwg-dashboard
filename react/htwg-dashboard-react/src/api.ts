@@ -1,4 +1,5 @@
 import type { Meal, User } from './types';
+import type { Course } from './types';
 
 const API_URL = import.meta.env.VITE_API_URL ?? '/api';
 
@@ -46,3 +47,25 @@ export const getCurrentUser = (token: string) =>
 
 export const getMeals = (signal?: AbortSignal) =>
   requestJson<Meal[]>('/meals', { signal });
+
+export const uploadTimetable = (token: string, file: File) => {
+  const formData = new FormData();
+  formData.append('icsFile', file);
+
+  return fetch(`${API_URL}/timetable/upload`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  }).then(res => {
+    if (!res.ok) throw new Error('Upload fehlgeschlagen');
+    return res.json();
+  });
+};
+
+export const getCourses = (token: string, signal?: AbortSignal) =>
+  requestJson<Course[]>('/timetable', {
+    headers: { Authorization: `Bearer ${token}` },
+    signal,
+  });

@@ -12,6 +12,7 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  courses   Course[]
 }
 
 model Meal {
@@ -24,8 +25,19 @@ model Meal {
 }
 
 model MealItem {
-  id     String   @id @default(uuid())
+  id     String @id @default(uuid())
   name   String
   mealId String
-  meal   Meal     @relation(fields: [mealId], references: [id], onDelete: Cascade)
+  meal   Meal   @relation(fields: [mealId], references: [id], onDelete: Cascade)
+}
+
+model Course {
+  id        String  @id @default(uuid())
+  day       String
+  time      String
+  subject   String
+  room      String
+  isCurrent Boolean @default(false)
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

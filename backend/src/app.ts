@@ -5,6 +5,9 @@ import bcrypt from 'bcryptjs';
 import jwt, { type JwtPayload } from 'jsonwebtoken';
 import prisma from './db';
 import rateLimit from 'express-rate-limit';
+import multer from 'multer';
+import ical from 'node-ical';
+import fs from'fs';
 
 dotenv.config();
 
@@ -261,3 +264,84 @@ export const seedDatabase = async () => {
     console.log(`Seed-Daten angelegt, inklusive Beilagen-ID ${sideDish.id}.`);
   }
 };
+
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/api/timetable/upload', requireAuth, upload.single('icsFile'), async (req: AuthenticatedRequest, res) => {
+  if (!req.file) {
+    res.status(400).json({ error: 'Keine Datei hochgeladen.' });
+    return;
+  }
+
+  try {
+    const events = await ical.async.parseFile(req.file.path);
+    const coursesToSave = [];
+
+    for (const ev of Object.values(events)) {
+      if (!ev) continue;
+
+      if (ev.type === 'VEVENT') {
+        const event = ev as any;
+
+        const getVal = (field: any) => typeof field === 'object' && field !== null ? field.val : field;
+
+        const summary = getVal(event.summary) || 'Unbekannt';
+        const location = getVal(event.location) || 'Unbekannt';
+        const start = event.start as Date;
+        const end = event.end as Date;
+
+        if (!start || !end) continue;
+
+        let dayString = new Intl.DateTimeFormat('de-DE', { weekday: 'long' }).format(start);
+
+        if (event.rrule) {
+          const ruleStr = event.rrule.toString();
+          if (ruleStr.includes('BYDAY=MO')) dayString = 'Montag';
+          if (ruleStr.includes('BYDAY=TU')) dayString = 'Dienstag';
+          if (ruleStr.includes('BYDAY=WE')) dayString = 'Mittwoch';
+          if (ruleStr.includes('BYDAY=TH')) dayString = 'Donnerstag';
+          if (ruleStr.includes('BYDAY=FR')) dayString = 'Freitag';
+        }
+        
+        const timeString = `${start.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}`;
+
+        coursesToSave.push({
+          subject: String(summary),
+          room: String(location),
+          day: dayString,
+          time: timeString,
+          userId: req.authUser!.userId,
+        });
+      }
+    }
+
+    await prisma.course.deleteMany({ where: { userId: req.authUser!.userId } });
+    
+    if (coursesToSave.length > 0) {
+      await prisma.course.createMany({ data: coursesToSave });
+    }
+
+    fs.unlinkSync(req.file.path);
+
+    res.status(200).json({ message: 'Stundenplan erfolgreich importiert!', count: coursesToSave.length });
+  } catch (error) {
+    console.error('Fehler beim Kalender-Upload:', error);
+    res.status(500).json({ error: 'Fehler beim Verarbeiten der Kalenderdatei.' });
+  }
+});
+
+app.get('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const userCourses = await prisma.course.findMany({
+      where: { userId: req.authUser!.userId },
+      orderBy: [
+        { day: 'asc' }, 
+        { time: 'asc' }
+      ]
+    });
+    res.json(userCourses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Fehler beim Laden des Stundenplans.' });
+  }
+});
