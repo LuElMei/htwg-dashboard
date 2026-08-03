@@ -147,7 +147,7 @@ const AuthenticatedApp = () => {
             }
           />
           <Route path="bibliothek" element={<LibPage status={libStatus} />} />
-          <Route path="noten" element={<GradesPage />} />
+          <Route path="noten" element={<GradesPage courses={courses} />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </div>

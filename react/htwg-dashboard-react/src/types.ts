@@ -43,4 +43,5 @@ export interface Grade {
     subject: string;
     grade: string | number;
     semester?: string;
+    courseId?: string;
 }
