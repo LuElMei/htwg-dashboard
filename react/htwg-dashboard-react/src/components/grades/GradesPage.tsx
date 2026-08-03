@@ -1,41 +1,55 @@
 import { useState, useEffect } from 'react';
-import type { Course, Grade } from '../../types';
+import type { Course } from '../../types';
+import { useAuth } from '../../context/useAuth';
+import { getGrades, saveGrade } from '../../api';
 
 interface GradesPageProps {
   courses: Course[];
 }
 
-const STORAGE_KEY = 'htwg-dashboard-user-grades';
-
 export const GradesPage = ({ courses }: GradesPageProps) => {
-  // Extract unique subjects from uploaded courses/timetable
+  const { token } = useAuth();
+  const [gradesMap, setGradesMap] = useState<Record<string, string>>({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Eindeutige Fächernamen aus den hochgeladenen Kursen extrahieren
   const uniqueSubjects = Array.from(
     new Set(courses.map((c) => c.subject.trim()))
   ).filter(Boolean);
 
-  // Load existing grades from LocalStorage or initialize with empty grades
-  const [gradesMap, setGradesMap] = useState<Record<string, string>>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : {};
-    } catch {
-      return {};
-    }
-  });
-
-  // Save changes to localStorage
+  // Noten beim Laden der Seite aus der DB abrufen
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(gradesMap));
-  }, [gradesMap]);
+    if (!token) return;
+    const controller = new AbortController();
 
-  const handleGradeChange = (subject: string, value: string) => {
-    setGradesMap((prev) => ({
-      ...prev,
-      [subject]: value,
-    }));
+    getGrades(token, controller.signal)
+      .then((data) => {
+        const map: Record<string, string> = {};
+        data.forEach((item) => {
+          map[item.subject] = String(item.grade);
+        });
+        setGradesMap(map);
+      })
+      .catch((err) => console.error('Fehler beim Noten laden:', err))
+      .finally(() => setIsLoading(false));
+
+    return () => controller.abort();
+  }, [token]);
+
+  // Wenn der User eine Note einträgt, sofort in der DB speichern
+  const handleGradeChange = async (subject: string, value: string) => {
+    setGradesMap((prev) => ({ ...prev, [subject]: value }));
+
+    if (token) {
+      try {
+        await saveGrade(token, subject, value);
+      } catch (err) {
+        console.error('Fehler beim Speichern der Note:', err);
+      }
+    }
   };
 
-  // Calculate Average Grade
+  // Schnitt-Berechnung
   const numericGrades = Object.values(gradesMap)
     .map((g) => parseFloat(g.replace(',', '.')))
     .filter((g) => !isNaN(g) && g > 0);
@@ -45,18 +59,24 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
       ? (numericGrades.reduce((a, b) => a + b, 0) / numericGrades.length).toFixed(2)
       : '-';
 
+  if (isLoading) {
+    return (
+      <main className="content">
+        <p className="fetch-status">Noten werden geladen...</p>
+      </main>
+    );
+  }
+
   return (
     <main className="content">
       <h1>Notenübersicht</h1>
       <h3>Durchschnitt: {averageGrade}</h3>
 
       {uniqueSubjects.length === 0 ? (
-        <div style={{ marginTop: '20px' }}>
-          <p>
-            Keine Fächer gefunden. Bitte lade zuerst deinen Stundenplan (ICS-Datei) auf der{' '}
-            <strong>Stundenplan-Seite</strong> hoch.
-          </p>
-        </div>
+        <p style={{ marginTop: '20px' }}>
+          Keine Fächer vorhanden. Lade zuerst eine <code>.ics</code>-Kalenderdatei auf der{' '}
+          <strong>Stundenplan-Seite</strong> hoch.
+        </p>
       ) : (
         <div className="timetable-wrapper">
           <table className="timetable-table">
@@ -64,7 +84,7 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
               <tr>
                 <th style={{ textAlign: 'left' }}>Modul / Fach</th>
                 <th style={{ width: '180px' }}>Note eintragen</th>
-                <th style={{ width: '120px' }}>Status</th>
+                <th style={{ width: '140px' }}>Status</th>
               </tr>
             </thead>
             <tbody>

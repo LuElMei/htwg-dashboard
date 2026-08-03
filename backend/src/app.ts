@@ -402,3 +402,46 @@ app.get('/api/library', async (_req: Request, res: Response) => {
     });
   }
 });
+
+// Noten des Users abrufen
+app.get('/api/grades', requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const grades = await prisma.grade.findMany({
+      where: { userId: req.authUser!.userId },
+    });
+    res.json(grades);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Laden der Noten.' });
+  }
+});
+
+// Note für ein Fach speichern/aktualisieren
+app.post('/api/grades', requireAuth, async (req: AuthenticatedRequest, res) => {
+  const { subject, grade } = req.body;
+
+  if (!subject) {
+    res.status(400).json({ error: 'Fach ist erforderlich.' });
+    return;
+  }
+
+  try {
+    const updatedGrade = await prisma.grade.upsert({
+      where: {
+        userId_subject: {
+          userId: req.authUser!.userId,
+          subject: String(subject),
+        },
+      },
+      update: { grade: String(grade) },
+      create: {
+        subject: String(subject),
+        grade: String(grade),
+        userId: req.authUser!.userId,
+      },
+    });
+
+    res.json(updatedGrade);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Speichern der Note.' });
+  }
+});

@@ -13,6 +13,7 @@ model User {
   password  String
   createdAt DateTime @default(now())
   courses   Course[]
+  grades Grade[]
 }
 
 model Meal {
@@ -40,4 +41,14 @@ model Course {
   isCurrent Boolean @default(false)
   userId    String
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Grade {      // <-- NEU
+  id        String   @id @default(uuid())
+  subject   String
+  grade     String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subject]) // Jeder User hat pro Fach max. eine Note
 }

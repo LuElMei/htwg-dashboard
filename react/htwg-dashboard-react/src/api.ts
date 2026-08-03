@@ -1,6 +1,7 @@
 import type { Meal, User } from './types';
 import type { Course } from './types';
 import type { LibraryStatus } from './types';
+import type { Grade } from './types';
 
 const API_URL = import.meta.env.VITE_API_URL ?? '/api';
 
@@ -73,3 +74,19 @@ export const getCourses = (token: string, signal?: AbortSignal) =>
 
 export const getLibraryStatus = (signal?: AbortSignal) =>
   requestJson<LibraryStatus>('/library', { signal });
+
+export const getGrades = (token: string, signal?: AbortSignal) =>
+  requestJson<Grade[]>('/grades', {
+    headers: { Authorization: `Bearer ${token}` },
+    signal,
+  });
+
+export const saveGrade = (token: string, subject: string, grade: string) =>
+  requestJson<Grade>('/grades', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ subject, grade }),
+  });
