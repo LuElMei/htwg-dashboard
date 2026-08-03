@@ -16,8 +16,8 @@ import { TimetablePage } from './components/timetable/TimetablePage';
 import { MensaPage } from './components/mensa/MensaPage';
 import { LibPage } from './components/library/LibPage';
 import { GradesPage } from './components/grades/GradesPage';
-import type { Course, LibraryStatus, Meal } from './types';
-import { getCourses } from './api';
+import type { Course, LibraryStatus, Meal, Grade } from './types';
+import { getCourses, getGrades } from './api';
 
 import { getLibraryStatus } from './api';
 
@@ -99,6 +99,8 @@ const AuthenticatedApp = () => {
     '/noten': 'Notenübersicht'
   };
 
+  const [grades, setGrades] = useState<Grade[]>([]);
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -112,6 +114,20 @@ const AuthenticatedApp = () => {
 
     return () => controller.abort();
   }, []);
+
+  useEffect(() => {
+    if (!token) return;
+
+    const controller = new AbortController();
+
+    getGrades(token, controller.signal)
+      .then(setGrades)
+      .catch((err) => {
+        if (!controller.signal.aborted) console.error("Fehler beim Noten laden:", err);
+      });
+
+    return () => controller.abort();
+  }, [token]);
 
   return (
     <div className="app-layout-root">
@@ -131,6 +147,7 @@ const AuthenticatedApp = () => {
                 mealsLoading={mealsLoading}
                 mealsError={mealsError}
                 bibStatus={libStatus}
+                grades={grades}
               />
             }
           />

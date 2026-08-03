@@ -1,4 +1,4 @@
-import type { Course, Meal, LibraryStatus } from './../types';
+import type { Course, Meal, LibraryStatus, Grade } from './../types';
 import { TimetableWidget } from './timetable/TimetableWidget';
 import { MensaCard } from './mensa/MensaCard';
 import { LibCard } from './library/LibCard';
@@ -10,6 +10,7 @@ interface DashboardPageProps {
     mealsLoading: boolean;
     mealsError: string | null;
     bibStatus: LibraryStatus;
+    grades: Grade[];
 }
 
 export const DashboardPage = ({
@@ -19,8 +20,13 @@ export const DashboardPage = ({
     mealsLoading,
     mealsError,
     bibStatus,
+    grades,
+
 }: DashboardPageProps) => {
     const widgetMeals = meals.slice(0, 4);
+
+    const recentGrades = grades.filter((g) => g.grade && String(g.grade).trim() !== '')
+        .slice(0, 3);
 
     return (
         <main className="content">
@@ -44,16 +50,19 @@ export const DashboardPage = ({
 
                 <div className="widget box-small noten">
                     <h3 className="noten-title">Kürzliche Noten</h3>
-                    <div className="noten-item">
-                        <h4 className="noten-item-title">Programmiertechnik 2</h4>
-                        <div className="noten-divider"></div>
-                        <div className="noten-item-content">3.3</div>
-                    </div>
-                    <div className="noten-item">
-                        <h4 className="noten-item-title">Algebra</h4>
-                        <div className="noten-divider"></div>
-                        <div className="noten-item-content">5.0</div>
-                    </div>
+                    {recentGrades.length === 0 ? (
+                        <p style={{ fontSize: '0.85rem', color: '#888', margin: '5px 0' }}>
+                            Noch keine Noten eingetragen.
+                        </p>
+                    ) : (
+                        recentGrades.map((item) => (
+                            <div key={item.id} className="noten-item">
+                                <h4 className="noten-item-title">{item.subject}</h4>
+                                <div className="noten-divider"></div>
+                                <div className="noten-item-content">{item.grade}</div>
+                            </div>
+                        ))
+                    )}
                 </div>
 
             </section>
