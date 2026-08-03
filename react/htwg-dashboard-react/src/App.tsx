@@ -15,6 +15,7 @@ import { DashboardPage } from './components/Dashboard';
 import { TimetablePage } from './components/timetable/TimetablePage';
 import { MensaPage } from './components/mensa/MensaPage';
 import { LibPage } from './components/library/LibPage';
+import { GradesPage } from './components/grades/GradesPage';
 import type { Course, LibraryStatus, Meal } from './types';
 import { getCourses } from './api';
 
@@ -92,9 +93,10 @@ const AuthenticatedApp = () => {
 
   const pageTitle: Record<string, string> = {
     '/dashboard': 'Dashboard',
-    '/timetable': 'Stundenplan',
+    '/stundenplan': 'Stundenplan',
     '/mensa': 'Mensa Speiseplan',
     '/bibliothek': 'Bibliothek',
+    '/noten': 'Notenübersicht'
   };
 
   useEffect(() => {
@@ -145,6 +147,7 @@ const AuthenticatedApp = () => {
             }
           />
           <Route path="bibliothek" element={<LibPage status={libStatus} />} />
+          <Route path="noten" element={<GradesPage />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </div>

@@ -37,3 +37,10 @@ export interface User {
     username: string;
     email: string;
 }
+
+export interface Grade {
+    id: string;
+    subject: string;
+    grade: string | number;
+    semester?: string;
+}

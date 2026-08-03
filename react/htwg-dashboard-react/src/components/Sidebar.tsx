@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import { LayoutDashboard, CalendarDays, Utensils, BookOpen } from 'lucide-react';
+import { LayoutDashboard, CalendarDays, Utensils, BookOpen, GraduationCap } from 'lucide-react';
 
 export const Sidebar = () => {
   
@@ -36,6 +36,13 @@ export const Sidebar = () => {
           <Link to="/bibliothek" className="sidebar-item-link">
             <BookOpen className="sidebar-icon" />
             <div className="sidebar-item-text">Bibliothek</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === '/noten' ? 'active' : ''}`}>
+          <Link to="/noten" className="sidebar-item-link">
+            <GraduationCap className="sidebar-icon" />
+            <div className="sidebar-item-text">Noten</div>
           </Link>
         </li>
       </ul>
