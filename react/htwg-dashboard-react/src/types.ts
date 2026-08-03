@@ -28,6 +28,8 @@ export interface LibraryStatus {
     loadPercentage: number;
     freeSeats: number;
     totalSeats: number;
+    isClosed?: boolean;
+    statusText?: string;
 }
 
 export interface User {

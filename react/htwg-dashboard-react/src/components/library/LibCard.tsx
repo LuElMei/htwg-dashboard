@@ -21,16 +21,18 @@ export const LibCard = ({ title, variant, status, children }: LibCardProps) => {
 
             {status && (
                 <>
-                    <p className="bib-status-text">
-                        {status.loadPercentage}% voll
+                    <p className={status.isClosed ? "bib-status-text-closed" : "bib-status-text"}>
+                        {status.isClosed ? 'Heute geschlossen' : `${status.loadPercentage}% voll`}
                     </p>
+                    {!status.isClosed && (
+                        <div className="bib-status-container">
+                            <div 
+                                className="bib-status-bar" 
+                                style={{ width: `${status.loadPercentage}%` }}
+                            ></div>
+                        </div>
+                    )}
                     
-                    <div className="bib-status-container">
-                        <div 
-                            className="bib-status-bar" 
-                            style={{ width: `${status.loadPercentage}%` }}
-                        ></div>
-                    </div>
                 </>
             )}
 

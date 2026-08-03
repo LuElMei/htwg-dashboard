@@ -202,6 +202,15 @@ body {
     margin: 0;
 }
 
+.bib-status-text-closed {
+    padding: 0;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
 .bib-status-container {
     width: 100%;
     height: 12px;
@@ -212,7 +221,7 @@ body {
 
 .bib-status-bar {
     height: 100%;
-    width: 65%;
+    width: 10%;
     background: linear-gradient(90deg, green, yellow);
     border-radius: 6px;
     transition: width 0.5s ease-in-out;

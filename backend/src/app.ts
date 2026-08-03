@@ -9,6 +9,9 @@ import multer from 'multer';
 import ical from 'node-ical';
 import fs from'fs';
 
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
 dotenv.config();
 
 export const app = express();
@@ -343,5 +346,59 @@ app.get('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) =>
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Fehler beim Laden des Stundenplans.' });
+  }
+});
+
+app.get('/api/library', async (_req: Request, res: Response) => {
+  try {
+    // 1. Die echte Affluences JSONP-URL abfragen
+    // (Füge hier deine genaue URL ein, die du im Network-Tab kopiert hast!)
+    const response = await axios.get('https://webapi.affluences.com/api/fillRate?token=6r3Kuo6JjNhH9e&callback=callback_0', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+      },
+      timeout: 5000,
+    });
+
+    const rawData = response.data; // Der String mit "callback_0({...})"
+
+    // 2. Den JSON-Teil aus dem callback_0(...) herausschneiden
+    const jsonMatch = typeof rawData === 'string' ? rawData.match(/callback_\d+\((.*)\);?/s) : null;
+    
+    if (!jsonMatch || !jsonMatch[1]) {
+      throw new Error('JSONP-Format konnte nicht geparst werden.');
+    }
+
+    // 3. Den extrahierten Text in ein echtes JavaScript-Objekt umwandeln
+    const parsedData = JSON.parse(jsonMatch[1]);
+
+    // 4. Werte herausholen
+    const loadPercentage = typeof parsedData.progress === 'number' ? parsedData.progress : 0;
+    const isClosed = parsedData.current_state?.state === 'closed_for_the_day';
+    const statusText = parsedData.current_state?.localized_state ?? '';
+
+    // Berechnen der Plätze (z. B. basierend auf 120 Gesamtsitzplätzen)
+    const totalSeats = 120;
+    const occupiedSeats = Math.round((loadPercentage / 100) * totalSeats);
+    const freeSeats = isClosed ? 0 : totalSeats - occupiedSeats;
+
+    // 5. Sauberes JSON an euer React-Frontend schicken
+    res.json({
+      loadPercentage,
+      freeSeats,
+      totalSeats,
+      isClosed,
+      statusText,
+    });
+  } catch (error) {
+    console.error('Fehler beim Abrufen der Bibliotheks-Auslastung:', error);
+
+    // Ausweichdaten (Fallback), falls die API nicht erreichbar ist
+    res.json({
+      loadPercentage: 65,
+      freeSeats: 42,
+      totalSeats: 120,
+      isFallback: true,
+    });
   }
 });

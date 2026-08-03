@@ -1,5 +1,6 @@
 import type { Meal, User } from './types';
 import type { Course } from './types';
+import type { LibraryStatus } from './types';
 
 const API_URL = import.meta.env.VITE_API_URL ?? '/api';
 
@@ -69,3 +70,6 @@ export const getCourses = (token: string, signal?: AbortSignal) =>
     headers: { Authorization: `Bearer ${token}` },
     signal,
   });
+
+export const getLibraryStatus = (signal?: AbortSignal) =>
+  requestJson<LibraryStatus>('/library', { signal });

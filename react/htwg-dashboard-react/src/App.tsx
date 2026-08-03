@@ -18,6 +18,8 @@ import { LibPage } from './components/library/LibPage';
 import type { Course, LibraryStatus, Meal } from './types';
 import { getCourses } from './api';
 
+import { getLibraryStatus } from './api';
+
 const libraryStatus: LibraryStatus = {
   loadPercentage: 65,
   freeSeats: 42,
@@ -33,6 +35,7 @@ const AuthenticatedApp = () => {
   const [mealsError, setMealsError] = useState<string | null>(null);
   const [mealsRequestVersion, setMealsRequestVersion] = useState(0);
 
+  
   useEffect(() => {
     window.scrollTo(0, 0);
     document.querySelector('.content')?.scrollTo(0, 0);
@@ -74,6 +77,13 @@ const AuthenticatedApp = () => {
     return () => controller.abort();
   }, [token]);
 
+  const [libStatus, setLibStatus] = useState<LibraryStatus>({
+    loadPercentage: 0,
+    freeSeats: 0,
+    totalSeats: 200,
+  });
+
+
   const retryMeals = () => {
     setMealsLoading(true);
     setMealsError(null);
@@ -86,6 +96,20 @@ const AuthenticatedApp = () => {
     '/mensa': 'Mensa Speiseplan',
     '/bibliothek': 'Bibliothek',
   };
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    getLibraryStatus(controller.signal)
+      .then(setLibStatus)
+      .catch((err) => {
+        if (!controller.signal.aborted) {
+          console.error("Fehler beim Laden der Bibliotheksdaten:", err);
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
 
   return (
     <div className="app-layout-root">
@@ -104,7 +128,7 @@ const AuthenticatedApp = () => {
                 meals={meals}
                 mealsLoading={mealsLoading}
                 mealsError={mealsError}
-                bibStatus={libraryStatus}
+                bibStatus={libStatus}
               />
             }
           />
@@ -120,7 +144,7 @@ const AuthenticatedApp = () => {
               />
             }
           />
-          <Route path="bibliothek" element={<LibPage status={libraryStatus} />} />
+          <Route path="bibliothek" element={<LibPage status={libStatus} />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </div>
