@@ -459,24 +459,6 @@ export default defineConfig([
 <svg xmlns="http://www.w3.org/2000/svg" width="77" height="47" fill="none" aria-labelledby="vite-logo-title" viewBox="0 0 77 47"><title id="vite-logo-title">Vite</title><style>.parenthesis{fill:#000}@media (prefers-color-scheme:dark){.parenthesis{fill:#fff}}</style><path fill="#9135ff" d="M40.151 45.71c-.663.844-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.493c-.92 0-1.457-1.04-.92-1.788l7.479-10.471c1.07-1.498 0-3.578-1.842-3.578H15.443c-.92 0-1.456-1.04-.92-1.788l9.696-13.576c.213-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.472c-1.07 1.497 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.087.89 1.83L40.153 45.712z"/><mask id="a" width="48" height="47" x="14" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#000" d="M40.047 45.71c-.663.843-2.02.374-2.02-.699V34.708a2.26 2.26 0 0 0-2.262-2.262H24.389c-.92 0-1.457-1.04-.92-1.788l7.479-10.472c1.07-1.497 0-3.578-1.842-3.578H15.34c-.92 0-1.456-1.04-.92-1.788l9.696-13.575c.213-.297.556-.474.92-.474H53.93c.92 0 1.456 1.04.92 1.788L47.37 13.03c-1.07 1.498 0 3.578 1.842 3.578h11.376c.944 0 1.474 1.088.89 1.831L40.049 45.712z"/></mask><g mask="url(#a)"><g filter="url(#b)"><ellipse cx="5.508" cy="14.704" fill="#eee6ff" rx="5.508" ry="14.704" transform="rotate(269.814 20.96 11.29)scale(-1 1)"/></g><g filter="url(#c)"><ellipse cx="10.399" cy="29.851" fill="#eee6ff" rx="10.399" ry="29.851" transform="rotate(89.814 -16.902 -8.275)scale(1 -1)"/></g><g filter="url(#d)"><ellipse cx="5.508" cy="30.487" fill="#8900ff" rx="5.508" ry="30.487" transform="rotate(89.814 -19.197 -7.127)scale(1 -1)"/></g><g filter="url(#e)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.928 4.177)scale(1 -1)"/></g><g filter="url(#f)"><ellipse cx="5.508" cy="30.599" fill="#8900ff" rx="5.508" ry="30.599" transform="rotate(89.814 -25.738 5.52)scale(1 -1)"/></g><g filter="url(#g)"><ellipse cx="14.072" cy="22.078" fill="#eee6ff" rx="14.072" ry="22.078" transform="rotate(93.35 31.245 55.578)scale(-1 1)"/></g><g filter="url(#h)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#i)"><ellipse cx="3.47" cy="21.501" fill="#8900ff" rx="3.47" ry="21.501" transform="rotate(89.009 35.419 55.202)scale(-1 1)"/></g><g filter="url(#j)"><ellipse cx="14.592" cy="9.743" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(39.51 14.592 9.743)"/></g><g filter="url(#k)"><ellipse cx="61.728" cy="-5.321" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 61.728 -5.32)"/></g><g filter="url(#l)"><ellipse cx="55.618" cy="7.104" fill="#00c2ff" rx="5.971" ry="9.665" transform="rotate(37.892 55.618 7.104)"/></g><g filter="url(#m)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#n)"><ellipse cx="12.326" cy="39.103" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 12.326 39.103)"/></g><g filter="url(#o)"><ellipse cx="49.857" cy="30.678" fill="#8900ff" rx="4.407" ry="29.108" transform="rotate(37.892 49.857 30.678)"/></g><g filter="url(#p)"><ellipse cx="52.623" cy="33.171" fill="#00c2ff" rx="5.971" ry="15.297" transform="rotate(37.892 52.623 33.17)"/></g></g><path d="M6.919 0c-9.198 13.166-9.252 33.575 0 46.789h6.215c-9.25-13.214-9.196-33.623 0-46.789zm62.424 0h-6.215c9.198 13.166 9.252 33.575 0 46.789h6.215c9.25-13.214 9.196-33.623 0-46.789" class="parenthesis"/><defs><filter id="b" width="60.045" height="41.654" x="-5.564" y="16.92" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="c" width="90.34" height="51.437" x="-40.407" y="-6.762" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="d" width="79.355" height="29.4" x="-35.435" y="2.801" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="e" width="79.579" height="29.4" x="-30.84" y="20.8" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="f" width="79.579" height="29.4" x="-29.307" y="21.949" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="g" width="74.749" height="58.852" x="29.961" y="-17.13" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="7.659"/></filter><filter id="h" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="i" width="61.377" height="25.362" x="37.754" y="3.055" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="j" width="56.045" height="63.649" x="-13.43" y="-22.082" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="k" width="54.814" height="64.646" x="34.321" y="-37.644" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="l" width="33.541" height="35.313" x="38.847" y="-10.552" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="m" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="n" width="54.814" height="64.646" x="-15.081" y="6.78" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="o" width="54.814" height="64.646" x="22.45" y="-1.645" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter><filter id="p" width="39.409" height="43.623" x="32.919" y="11.36" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_2002_17286" stdDeviation="4.596"/></filter></defs></svg>
 </file>
 
-<file path="react/htwg-dashboard-react/src/components/timetable/TimetableEntry.tsx">
-import type { Course } from '../../types';
-
-
-interface TimetableEntryProps {
-    course: Course,
-}
-
-export const TimetableEntry = ({ course }: TimetableEntryProps) => {
-    return (
-        <div className="course-info">
-            <h4 className="subject-name">{course.subject}</h4>
-            <span className="subject-room">{course.room}</span>
-        </div>
-    );
-};
-</file>
-
 <file path="react/htwg-dashboard-react/src/context/useAuth.ts">
 import { useContext } from 'react';
 import { AuthContext } from './auth-context';
@@ -786,6 +768,49 @@ export const LibPage = ({ status }: LibPageProps) => {
                 ))}
             </section>
         </main>
+    );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/timetable/TimetableEntry.tsx">
+import type { Course } from '../../types';
+
+
+interface TimetableEntryProps {
+    course: Course;
+    onDelete?: () => void;
+}
+
+export const TimetableEntry = ({ course, onDelete }: TimetableEntryProps) => {
+    return (
+        <div className="course-info" style={{ position: 'relative' }}>
+            {onDelete && (
+                <button 
+                    onClick={onDelete}
+                    title="Fach löschen"
+                    style={{
+                        position: 'absolute',
+                        top: '-5px',
+                        right: '-5px',
+                        background: '#ff4444',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '20px',
+                        height: '20px',
+                        cursor: 'pointer',
+                        fontSize: '12px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                >
+                    ✕
+                </button>
+            )}
+            <h4 className="subject-name">{course.subject}</h4>
+            <span className="subject-room">{course.room}</span>
+        </div>
     );
 };
 </file>
@@ -1527,102 +1552,6 @@ export const MensaCard = ({ meal, variant }: MensaCardProps) => {
 };
 </file>
 
-<file path="react/htwg-dashboard-react/src/components/timetable/TimetablePage.tsx">
-import type { Course } from '../../types';
-import { TimetableEntry } from './TimetableEntry';
-import { useState } from 'react';
-import { useAuth } from '../../context/useAuth';
-import { uploadTimetable } from '../../api';
-
-interface TimetablePageProps {
-    courses: Course[];
-}
-
-export const TimetablePage = ({ courses }: TimetablePageProps) => {
-    const startTimes = Array.from(new Set(courses.map(course => course.time.split(' - ')[0]))).sort();
-    const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
-    const { token } = useAuth();
-    const [isUploading, setIsUploading] = useState(false);
-
-    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (!file || !token) return;
-
-        setIsUploading(true);
-        try {
-            await uploadTimetable(token, file);
-            alert('Stundenplan erfolgreich importiert! Bitte Seite neu laden.');
-            window.location.reload();
-        } catch (error) {
-            alert('Fehler beim Importieren.');
-        } finally {
-            setIsUploading(false);
-        }
-    };
-
-
-    return (
-    <main className="content">
-      <h1>Stundenplan</h1>
-      <h3>KW 20, 4. April 2026</h3>
-      <div className="timetable-wrapper">
-        <table className="timetable-table">
-          <thead>
-            <tr>
-              <th>Zeit</th>
-              {days.map(day => <th key={day}>{day}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {startTimes.map(startTime => (
-              <tr key={startTime}>
-                <td className="time-column">{startTime}</td>
-                {days.map(day => {
-                  // filter() liefert uns ein Array ALLER Kurse zu dieser Startzeit
-                  const matchingCourses = courses.filter(
-                    c => c.day === day && c.time.startsWith(startTime)
-                  );
-
-                  return (
-                    <td 
-                      key={`${day}-${startTime}`} 
-                      className={matchingCourses.length > 0 ? "subject" : ""}
-                    >
-                      {matchingCourses.map((course, index) => (
-                        <div key={course.id || index} className="timetable-cell-entry">
-                          <TimetableEntry course={course} />
-                          {/* Trennlinie einfügen, wenn mehr als ein Kurs in der Zelle ist */}
-                          {index < matchingCourses.length - 1 && (
-                            <div className="course-cell-divider" />
-                          )}
-                        </div>
-                      ))}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="upload-container">
-        <label htmlFor="ics-upload" className="mensa-filter-button">
-          {isUploading ? 'Wird hochgeladen...' : '.ics Datei hochladen'}
-        </label>
-        <input 
-            id="ics-upload" 
-            type="file" 
-            accept=".ics" 
-            style={{ display: 'none' }} 
-            onChange={handleFileUpload} 
-            disabled={isUploading}
-        />
-      </div>
-    </main>
-  );
-};
-</file>
-
 <file path="backend/prisma/schema.prisma">
 datasource db {
   provider = "sqlite"
@@ -1677,6 +1606,191 @@ model Grade {      // <-- NEU
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, subject]) // Jeder User hat pro Fach max. eine Note
+}
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/timetable/TimetablePage.tsx">
+import type { Course } from '../../types';
+import { TimetableEntry } from './TimetableEntry';
+import { useState } from 'react';
+import { useAuth } from '../../context/useAuth';
+import { uploadTimetable } from '../../api';
+
+interface TimetablePageProps {
+    courses: Course[];
+    onAddCourse: (course: Partial<Course>) => void;
+    onDeleteCourse: (id: string) => void;
+}
+
+export const TimetablePage = ({ courses, onAddCourse, onDeleteCourse }: TimetablePageProps) => {
+    const startTimes = Array.from(new Set(courses.map(course => course.time.split(' - ')[0]))).sort();
+    const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
+    const { token } = useAuth();
+    const [isUploading, setIsUploading] = useState(false);
+    const [newSubject, setNewSubject] = useState('');
+    const [newRoom, setNewRoom] = useState('');
+    const [newDay, setNewDay] = useState('Montag');
+    const [newTime, setNewTime] = useState('08:00 - 09:30');
+
+    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file || !token) return;
+
+        setIsUploading(true);
+        try {
+            await uploadTimetable(token, file);
+            alert('Stundenplan erfolgreich importiert! Bitte Seite neu laden.');
+            window.location.reload();
+        } catch (error) {
+            alert('Fehler beim Importieren.');
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+
+    return (
+    <main className="content">
+      <h1>Stundenplan</h1>
+      <h3>KW 20, 4. April 2026</h3>
+      <div className="timetable-wrapper">
+        <table className="timetable-table">
+          <thead>
+            <tr>
+              <th>Zeit</th>
+              {days.map(day => <th key={day}>{day}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {startTimes.map(startTime => (
+              <tr key={startTime}>
+                <td className="time-column">{startTime}</td>
+                {days.map(day => {
+                  // filter() liefert uns ein Array ALLER Kurse zu dieser Startzeit
+                  const matchingCourses = courses.filter(
+                    c => c.day === day && c.time.startsWith(startTime)
+                  );
+
+                  return (
+                    <td 
+                      key={`${day}-${startTime}`} 
+                      className={matchingCourses.length > 0 ? "subject" : ""}
+                    >
+                      {matchingCourses.map((course, index) => (
+                        <div key={course.id || index} className="timetable-cell-entry">
+                          <TimetableEntry course={course} onDelete={() => course.id ? onDeleteCourse(course.id) : undefined} />
+                          {/* Trennlinie einfügen, wenn mehr als ein Kurs in der Zelle ist */}
+                          {index < matchingCourses.length - 1 && (
+                            <div className="course-cell-divider" />
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="upload-container">
+        <div className="mensa-page-card" style={{ marginTop: '30px', textAlign: 'left' }}>
+        <h3 style={{ marginTop: 0 }}>Eigenes Fach hinzufügen</h3>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
+          <input 
+            type="text" placeholder="Fach (z.B. Mathe)" value={newSubject} 
+            onChange={e => setNewSubject(e.target.value)} style={{ flex: 1, minWidth: '150px' }} 
+          />
+          <input 
+            type="text" placeholder="Raum (z.B. O 123)" value={newRoom} 
+            onChange={e => setNewRoom(e.target.value)} style={{ flex: 1, minWidth: '100px' }} 
+          />
+          <select value={newDay} onChange={e => setNewDay(e.target.value)} style={{ padding: '5px', marginTop: '10px' }}>
+            {days.map(d => <option key={d} value={d}>{d}</option>)}
+          </select>
+          <input 
+            type="text" placeholder="Zeit (z.B. 08:00 - 09:30)" value={newTime} 
+            onChange={e => setNewTime(e.target.value)} style={{ flex: 1, minWidth: '150px' }} 
+          />
+          <button 
+            className="button-confirm-index" 
+            style={{ marginTop: '10px', padding: '6px 15px', fontSize: '14px' }}
+            onClick={() => {
+              if (newSubject && newTime) {
+                onAddCourse({ subject: newSubject, room: newRoom, day: newDay, time: newTime });
+                setNewSubject('');
+                setNewRoom('');
+              }
+            }}
+          >
+            Hinzufügen
+          </button>
+        </div>
+      </div>
+        <label htmlFor="ics-upload" className="mensa-filter-button">
+          {isUploading ? 'Wird hochgeladen...' : '.ics Datei hochladen'}
+        </label>
+        <input 
+            id="ics-upload" 
+            type="file" 
+            accept=".ics" 
+            style={{ display: 'none' }} 
+            onChange={handleFileUpload} 
+            disabled={isUploading}
+        />
+      </div>
+    </main>
+  );
+};
+</file>
+
+<file path="backend/package.json">
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "vitest run src/auth.test.ts",
+    "prisma:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "axios": "^1.19.0",
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.11.1",
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "node-ical": "^0.27.1"
+  },
+  "devDependencies": {
+    "@prisma/config": "^7.8.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.2.0",
+    "@types/supertest": "^7.2.0",
+    "prisma": "^7.8.0",
+    "supertest": "^7.2.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
 }
 </file>
 
@@ -1775,6 +1889,7 @@ body {
 
 .content {
     flex: 1;
+    min-width: 0;
     padding-left: 10px;
     padding-right: 20%;
     background-color: var(--color-neutral-light);
@@ -2259,7 +2374,7 @@ input {
 .timetable-wrapper {
     display: block;
     overflow-x: auto;
-    max-width: 100vw;
+    width: 100%;
 }
 
 .timetable-table {
@@ -2382,54 +2497,58 @@ input {
 }
 </file>
 
-<file path="backend/package.json">
-{
-  "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "test": "vitest run src/auth.test.ts",
-    "prisma:generate": "prisma generate",
-    "db:migrate": "prisma migrate deploy"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@prisma/adapter-better-sqlite3": "^7.8.0",
-    "@prisma/client": "^7.8.0",
-    "axios": "^1.19.0",
-    "bcryptjs": "^3.0.3",
-    "better-sqlite3": "^12.11.1",
-    "cheerio": "^1.2.0",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.5.2",
-    "jsonwebtoken": "^9.0.3",
-    "multer": "^2.2.0",
-    "node-ical": "^0.27.1"
-  },
-  "devDependencies": {
-    "@prisma/config": "^7.8.0",
-    "@types/bcryptjs": "^2.4.6",
-    "@types/better-sqlite3": "^7.6.13",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/multer": "^2.2.0",
-    "@types/supertest": "^7.2.0",
-    "prisma": "^7.8.0",
-    "supertest": "^7.2.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
-  }
-}
+<file path="react/htwg-dashboard-react/src/components/Sidebar.tsx">
+import { Link, useLocation } from 'react-router-dom';
+
+import { LayoutDashboard, CalendarDays, Utensils, BookOpen, GraduationCap } from 'lucide-react';
+
+export const Sidebar = () => {
+  
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  return (
+    <aside className="sidebar">
+      <h2 className="sidebar-title">Menü</h2>
+      <ul>
+        <li className={`sidebar-item ${currentPath === '/dashboard' ? 'active' : ''}`}>
+          <Link to="/dashboard" className="sidebar-item-link">
+            <LayoutDashboard className="sidebar-icon" />
+            <div className="sidebar-item-text">Dashboard</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === '/timetable' ? 'active' : ''}`}>
+          <Link to="/timetable" className="sidebar-item-link">
+            <CalendarDays className="sidebar-icon" />
+            <div className="sidebar-item-text">Stundenplan</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === '/mensa' ? 'active' : ''}`}>
+          <Link to="/mensa" className="sidebar-item-link">
+            <Utensils className="sidebar-icon" />
+            <div className="sidebar-item-text">Mensa</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === '/bibliothek' ? 'active' : ''}`}>
+          <Link to="/bibliothek" className="sidebar-item-link">
+            <BookOpen className="sidebar-icon" />
+            <div className="sidebar-item-text">Bibliothek</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === '/noten' ? 'active' : ''}`}>
+          <Link to="/noten" className="sidebar-item-link">
+            <GraduationCap className="sidebar-icon" />
+            <div className="sidebar-item-text">Noten</div>
+          </Link>
+        </li>
+      </ul>
+    </aside>
+  );
+};
 </file>
 
 <file path="backend/src/app.ts">
@@ -2791,6 +2910,47 @@ app.get('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) =>
   }
 });
 
+app.post('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) => {
+  const { subject, room, day, time } = req.body;
+
+  if (!subject || !day || !time) {
+    res.status(400).json({ error: 'Fach, Tag und Zeit sind Pflichtfelder.' });
+    return;
+  }
+
+  try {
+    const newCourse = await prisma.course.create({
+      data: {
+        subject: String(subject),
+        room: String(room || ''),
+        day: String(day),
+        time: String(time),
+        userId: req.authUser!.userId,
+      },
+    });
+    res.status(201).json(newCourse);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Erstellen des Kurses.' });
+  }
+});
+
+app.delete('/api/timetable/:id', requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const courseId = String(req.params.id);
+
+    await prisma.course.deleteMany({
+      where: {
+        id: courseId,
+        userId: req.authUser!.userId 
+      }
+    });
+    
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Löschen des Kurses.' });
+  }
+});
+
 app.get('/api/library', async (_req: Request, res: Response) => {
   try {
     // 1. Die echte Affluences JSONP-URL abfragen
@@ -2982,60 +3142,22 @@ export const saveGrade = (token: string, subject: string, grade: string) =>
     },
     body: JSON.stringify({ subject, grade }),
   });
-</file>
 
-<file path="react/htwg-dashboard-react/src/components/Sidebar.tsx">
-import { Link, useLocation } from 'react-router-dom';
+export const addCourse = (token: string, courseData: Partial<Course>) =>
+  requestJson<Course>('/timetable', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(courseData),
+  });
 
-import { LayoutDashboard, CalendarDays, Utensils, BookOpen, GraduationCap } from 'lucide-react';
-
-export const Sidebar = () => {
-  
-  const location = useLocation();
-  const currentPath = location.pathname;
-
-  return (
-    <aside className="sidebar">
-      <h2 className="sidebar-title">Menü</h2>
-      <ul>
-        <li className={`sidebar-item ${currentPath === '/dashboard' ? 'active' : ''}`}>
-          <Link to="/dashboard" className="sidebar-item-link">
-            <LayoutDashboard className="sidebar-icon" />
-            <div className="sidebar-item-text">Dashboard</div>
-          </Link>
-        </li>
-
-        <li className={`sidebar-item ${currentPath === '/timetable' ? 'active' : ''}`}>
-          <Link to="/timetable" className="sidebar-item-link">
-            <CalendarDays className="sidebar-icon" />
-            <div className="sidebar-item-text">Stundenplan</div>
-          </Link>
-        </li>
-
-        <li className={`sidebar-item ${currentPath === '/mensa' ? 'active' : ''}`}>
-          <Link to="/mensa" className="sidebar-item-link">
-            <Utensils className="sidebar-icon" />
-            <div className="sidebar-item-text">Mensa</div>
-          </Link>
-        </li>
-
-        <li className={`sidebar-item ${currentPath === '/bibliothek' ? 'active' : ''}`}>
-          <Link to="/bibliothek" className="sidebar-item-link">
-            <BookOpen className="sidebar-icon" />
-            <div className="sidebar-item-text">Bibliothek</div>
-          </Link>
-        </li>
-
-        <li className={`sidebar-item ${currentPath === '/noten' ? 'active' : ''}`}>
-          <Link to="/noten" className="sidebar-item-link">
-            <GraduationCap className="sidebar-icon" />
-            <div className="sidebar-item-text">Noten</div>
-          </Link>
-        </li>
-      </ul>
-    </aside>
-  );
-};
+export const deleteCourse = (token: string, id: string) =>
+  requestJson<{ success: boolean }>(`/timetable/${id}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  });
 </file>
 
 <file path="react/htwg-dashboard-react/src/components/mensa/MensaPage.tsx">
@@ -3327,7 +3449,7 @@ import { MensaPage } from './components/mensa/MensaPage';
 import { LibPage } from './components/library/LibPage';
 import { GradesPage } from './components/grades/GradesPage';
 import type { Course, LibraryStatus, Meal, Grade } from './types';
-import { getCourses, getGrades } from './api';
+import { getCourses, getGrades, addCourse, deleteCourse } from './api';
 
 import { getLibraryStatus } from './api';
 
@@ -3394,6 +3516,26 @@ const AuthenticatedApp = () => {
     freeSeats: 0,
     totalSeats: 200,
   });
+
+  const handleDeleteCourse = async (courseId: string) => {
+    if (!token) return;
+    try {
+      await deleteCourse(token, courseId);
+      setCourses(prev => prev.filter(c => c.id !== courseId));
+    } catch (error) {
+      console.error("Fehler beim Löschen:", error);
+    }
+  };
+
+  const handleAddCourse = async (courseData: Partial<Course>) => {
+  if (!token) return;
+    try {
+      const newCourse = await addCourse(token, courseData);
+      setCourses(prev => [...prev, newCourse]);
+    } catch (error) {
+      console.error("Fehler beim Hinzufügen:", error);
+    }
+  };  
 
 
   const retryMeals = () => {
@@ -3462,7 +3604,7 @@ const AuthenticatedApp = () => {
               />
             }
           />
-          <Route path="timetable" element={<TimetablePage courses={courses} />} />
+          <Route path="timetable" element={<TimetablePage courses={courses} onAddCourse={handleAddCourse} onDeleteCourse={handleDeleteCourse}/>} />
           <Route
             path="mensa"
             element={

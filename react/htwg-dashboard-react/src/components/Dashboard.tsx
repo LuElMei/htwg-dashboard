@@ -25,7 +25,7 @@ export const DashboardPage = ({
 }: DashboardPageProps) => {
     const widgetMeals = meals.slice(0, 4);
 
-    const recentGrades = grades.filter((g) => g.grade && String(g.grade).trim() !== '')
+    const recentGrades = grades.filter((g) => g.grade && String(g.grade).trim() !== 'hidden')
         .slice(0, 3);
 
     return (

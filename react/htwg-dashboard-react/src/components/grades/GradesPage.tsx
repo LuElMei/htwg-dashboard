@@ -11,13 +11,8 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
   const { token } = useAuth();
   const [gradesMap, setGradesMap] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [newSubject, setNewSubject] = useState(''); // <-- Neuer State für die Eingabe
 
-  // Eindeutige Fächernamen aus den hochgeladenen Kursen extrahieren
-  const uniqueSubjects = Array.from(
-    new Set(courses.map((c) => c.subject.trim()))
-  ).filter(Boolean);
-
-  // Noten beim Laden der Seite aus der DB abrufen
   useEffect(() => {
     if (!token) return;
     const controller = new AbortController();
@@ -36,10 +31,17 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
     return () => controller.abort();
   }, [token]);
 
-  // Wenn der User eine Note einträgt, sofort in der DB speichern
+  const allSubjects = Array.from(
+    new Set([
+      ...courses.map((c) => c.subject.trim()),
+      ...Object.keys(gradesMap)
+    ])
+  ).filter(Boolean);
+
+  const visibleSubjects = allSubjects.filter(subject => gradesMap[subject] !== 'hidden');
+
   const handleGradeChange = async (subject: string, value: string) => {
     setGradesMap((prev) => ({ ...prev, [subject]: value }));
-
     if (token) {
       try {
         await saveGrade(token, subject, value);
@@ -49,7 +51,33 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
     }
   };
 
-  // Schnitt-Berechnung
+  const handleDeleteSubject = async (subject: string) => {
+    setGradesMap((prev) => ({ ...prev, [subject]: 'hidden' }));
+    if (token) {
+      try {
+        await saveGrade(token, subject, 'hidden');
+      } catch (err) {
+        console.error('Fehler beim Ausblenden:', err);
+      }
+    }
+  };
+
+  const handleAddSubject = async () => {
+    const subject = newSubject.trim();
+    if (!subject) return;
+    
+    setGradesMap((prev) => ({ ...prev, [subject]: '' }));
+    setNewSubject('');
+    
+    if (token) {
+      try {
+        await saveGrade(token, subject, '');
+      } catch (err) {
+        console.error('Fehler beim Hinzufügen:', err);
+      }
+    }
+  };
+
   const numericGrades = Object.values(gradesMap)
     .map((g) => parseFloat(g.replace(',', '.')))
     .filter((g) => !isNaN(g) && g > 0);
@@ -72,10 +100,9 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
       <h1>Notenübersicht</h1>
       <h3>Durchschnitt: {averageGrade}</h3>
 
-      {uniqueSubjects.length === 0 ? (
+      {visibleSubjects.length === 0 ? (
         <p style={{ marginTop: '20px' }}>
-          Keine Fächer vorhanden. Lade zuerst eine <code>.ics</code>-Kalenderdatei auf der{' '}
-          <strong>Stundenplan-Seite</strong> hoch.
+          Keine Fächer vorhanden. Lade einen Stundenplan hoch oder füge manuell Fächer hinzu.
         </p>
       ) : (
         <div className="timetable-wrapper">
@@ -85,10 +112,11 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
                 <th style={{ textAlign: 'left' }}>Modul / Fach</th>
                 <th style={{ width: '180px' }}>Note eintragen</th>
                 <th style={{ width: '140px' }}>Status</th>
+                <th style={{ width: '50px' }}></th>
               </tr>
             </thead>
             <tbody>
-              {uniqueSubjects.map((subject) => {
+              {visibleSubjects.map((subject) => {
                 const currentGrade = gradesMap[subject] ?? '';
                 const numGrade = parseFloat(currentGrade.replace(',', '.'));
                 const isValid = !isNaN(numGrade) && numGrade > 0;
@@ -103,7 +131,7 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
                       <input
                         type="text"
                         placeholder="z.B. 1.7"
-                        value={currentGrade}
+                        value={currentGrade === 'hidden' ? '' : currentGrade}
                         onChange={(e) => handleGradeChange(subject, e.target.value)}
                         style={{
                           width: '80px',
@@ -134,6 +162,23 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
                         <span style={{ color: '#888' }}>-</span>
                       )}
                     </td>
+                    <td>
+                      <button 
+                        onClick={() => handleDeleteSubject(subject)}
+                        title="Fach entfernen"
+                        style={{
+                          background: '#ff4444',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '4px',
+                          padding: '4px 8px',
+                          cursor: 'pointer',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        ✕
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
@@ -141,6 +186,27 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
           </table>
         </div>
       )}
+
+      <div className="mensa-page-card" style={{ marginTop: '30px', textAlign: 'left', maxWidth: '500px' }}>
+        <h3 style={{ marginTop: 0 }}>Eigenes Fach hinzufügen</h3>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <input 
+            type="text" 
+            placeholder="Fachname (z.B. Software Engineering)" 
+            value={newSubject} 
+            onChange={e => setNewSubject(e.target.value)} 
+            style={{ flex: 1, margin: 0 }} 
+            onKeyDown={(e) => e.key === 'Enter' && handleAddSubject()}
+          />
+          <button 
+            className="button-confirm-index" 
+            style={{ padding: '6px 15px', fontSize: '14px', margin: 0 }}
+            onClick={handleAddSubject}
+          >
+            Hinzufügen
+          </button>
+        </div>
+      </div>
     </main>
   );
 };
