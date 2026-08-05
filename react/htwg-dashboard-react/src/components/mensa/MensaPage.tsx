@@ -7,16 +7,22 @@ interface Props {
   isLoading: boolean;
   error: string | null;
   onRetry: () => void;
+  isDemoMode: boolean;
+  onToggleDemo: () => void;
 }
 
-// Erlaubt echte Kategorien plus die Gesamtansicht.
 type MensaFilter = MealCategory | 'Alle';
 
-export const MensaPage = ({ meals, isLoading, error, onRetry }: Props) => {
-  // Merkt sich, welche Kategorie gerade ausgewählt ist.
+export const MensaPage = ({
+  meals,
+  isLoading,
+  error,
+  onRetry,
+  isDemoMode,
+  onToggleDemo,
+}: Props) => {
   const [activeCategory, setActiveCategory] = useState<MensaFilter>('Alle');
 
-  // Aus dieser Liste werden die Filter-Buttons erzeugt.
   const categories: MensaFilter[] = [
     'Alle',
     'Seezeit-Teller',
@@ -27,52 +33,87 @@ export const MensaPage = ({ meals, isLoading, error, onRetry }: Props) => {
     'Getraenke',
   ];
 
-  // Zeigt entweder alle Gerichte oder nur die passende Kategorie.
-  const filteredMeals = activeCategory === 'Alle'
-    ? meals
-    : meals.filter((meal) => meal.category === activeCategory);
+  const filteredMeals =
+    activeCategory === 'Alle'
+      ? meals
+      : meals.filter((meal) => meal.category === activeCategory);
 
   return (
     <main className="content">
-      <h1>Mensa</h1>
-      <h3>Heutige Angebote</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1>Mensa</h1>
+          <h3>Heutige Angebote</h3>
+        </div>
+
+        {/* Demo-Toggle Button für die Präsentation */}
+        <button
+          type="button"
+          className="mensa-filter-button active"
+          onClick={onToggleDemo}
+          style={{ height: 'fit-content', padding: '8px 16px', fontWeight: 'bold', position: 'relative', cursor: 'pointer', zIndex: 999, pointerEvents: 'auto' }}
+        >
+          {isDemoMode ? '🔴 Live-Status anzeigen (Geschlossen)' : '🟢 Demo-Speiseplan laden'}
+        </button>
+      </div>
 
       {isLoading && <p className="fetch-status">Mensa-Daten werden geladen...</p>}
 
       {error && (
         <div className="fetch-error" role="alert">
           <p>{error}</p>
-          <button type="button" onClick={onRetry}>Erneut versuchen</button>
+          <button type="button" onClick={onRetry}>
+            Erneut versuchen
+          </button>
         </div>
       )}
 
+      {/* Ansprechendes UI-Element, wenn die Mensa geschlossen ist */}
       {!isLoading && !error && meals.length === 0 && (
-        <p className="fetch-status">Aktuell sind keine Mensa-Angebote vorhanden.</p>
+        <div
+          className="mensa-page-card"
+          style={{
+            textAlign: 'center',
+            padding: '40px 20px',
+            marginTop: '20px',
+            backgroundColor: '#fff',
+          }}
+        >
+          <h2>Mensa aktuell geschlossen</h2>
+          <p className="mensa-page-description" style={{ maxWidth: '500px', margin: '15px auto' }}>
+            Die Mensa an der HTWG Konstanz befindet sich aktuell in den Semesterferien /
+            Betriebsferien. Es stehen derzeit keine aktuellen Tagesangebote zur Verfügung.
+          </p>
+          <p style={{ fontSize: '0.9rem', color: '#666' }}>
+            Aktivieren Sie oben rechts den <strong>Demo-Speiseplan</strong>, um die Ansicht für reguläre Vorlesungstage zu simulieren.
+          </p>
+        </div>
       )}
 
-      <div className="mensa-filter" aria-label="Mensa Kategorie Filter">
-        {categories.map((category) => (
-          <button
-            key={category}
-            type="button"
-            className={`mensa-filter-button ${activeCategory === category ? 'active' : ''}`}
-            // Klick aktualisiert den Filter-State.
-            onClick={() => setActiveCategory(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-      
-      {!isLoading && !error && <section className="mensa-page-grid">
-        {filteredMeals.map((meal) => (
-          <MensaCard 
-            key={meal.id}
-            meal={meal} 
-            variant="page"
-          />
-        ))}
-      </section>}
+      {!isLoading && !error && meals.length > 0 && (
+        <>
+          <div className="mensa-filter" aria-label="Mensa Kategorie Filter">
+            {categories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                className={`mensa-filter-button ${
+                  activeCategory === category ? 'active' : ''
+                }`}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          <section className="mensa-page-grid">
+            {filteredMeals.map((meal) => (
+              <MensaCard key={meal.id} meal={meal} variant="page" />
+            ))}
+          </section>
+        </>
+      )}
     </main>
   );
 };

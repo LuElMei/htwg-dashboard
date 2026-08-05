@@ -33,6 +33,7 @@ const AuthenticatedApp = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [meals, setMeals] = useState<Meal[]>([]);
   const [mealsLoading, setMealsLoading] = useState(true);
+  const [isDemoMode, setIsDemoMode] = useState(true);
   const [mealsError, setMealsError] = useState<string | null>(null);
   const [mealsRequestVersion, setMealsRequestVersion] = useState(0);
 
@@ -46,7 +47,7 @@ const AuthenticatedApp = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    getMeals(controller.signal)
+    getMeals(isDemoMode, controller.signal)
       .then(setMeals)
       .catch((error: unknown) => {
         if (!controller.signal.aborted) {
@@ -62,7 +63,7 @@ const AuthenticatedApp = () => {
       });
 
     return () => controller.abort();
-  }, [mealsRequestVersion]);
+  }, [mealsRequestVersion, isDemoMode]);
 
   useEffect(() => {
     if (!token) return;
@@ -160,6 +161,8 @@ const AuthenticatedApp = () => {
                 isLoading={mealsLoading}
                 error={mealsError}
                 onRetry={retryMeals}
+                isDemoMode={isDemoMode}
+                onToggleDemo={() => setIsDemoMode((prev) => !prev)}
               />
             }
           />

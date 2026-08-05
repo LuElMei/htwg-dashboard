@@ -141,21 +141,28 @@ app.get('/api/auth/me', requireAuth, async (req: AuthenticatedRequest, res) => {
   }
 
   res.json({ user });
-});
+})
 
 app.get('/api/meals', async (_req, res) => {
   try {
+    const isDemo = _req.query.demo === 'true';
+
+    if (!isDemo) {
+      res.json([]);
+      return;
+    }
+
     const meals = await prisma.meal.findMany({
       include: { items: true },
       orderBy: { title: 'asc' },
     });
 
-    res.json(
-      meals.map(({ items, ...meal }) => ({
-        ...meal,
-        items: items.map((item) => item.name),
-      })),
-    );
+    const formattedMeals = meals.map(({ items, ...meal }) => ({
+      ...meal,
+      items: items.length > 0 ? items.map((item) => item.name) : undefined,
+    }));
+
+    res.json(formattedMeals)
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Datenbankfehler beim Laden der Mensa-Daten.' });

@@ -47,8 +47,8 @@ export const getCurrentUser = (token: string) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
-export const getMeals = (signal?: AbortSignal) =>
-  requestJson<Meal[]>('/meals', { signal });
+export const getMeals = (isDemo = false, signal?: AbortSignal) =>
+  requestJson<Meal[]>(`/meals${isDemo ? '?demo=true' : ''}`, { signal });
 
 export const uploadTimetable = (token: string, file: File) => {
   const formData = new FormData();

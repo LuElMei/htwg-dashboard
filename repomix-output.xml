@@ -40,92 +40,85 @@ The content is organized as follows:
 </file_summary>
 
 <directory_structure>
+backend/
+  prisma/
+    migrations/
+      20260621124804_init_sqlite/
+        migration.sql
+      20260623152230_only_users/
+        migration.sql
+      20260624172804_restore_meals/
+        migration.sql
+      20260727141150_add_courses/
+        migration.sql
+      20260803171416_add_grades/
+        migration.sql
+      migration_lock.toml
+    schema.prisma
+  src/
+    app.ts
+    auth.test.ts
+    db.ts
+    server.ts
+  .env.example
+  package.json
+  prisma.config.ts
+  tsconfig.json
+react/
+  htwg-dashboard-react/
+    public/
+      assets/
+        htwg-logo-no-bg.png
+      favicon.svg
+      htwg-logo-no-bg.png
+      icons.svg
+    src/
+      assets/
+        hero.png
+        react.svg
+        vite.svg
+      components/
+        grades/
+          GradesPage.tsx
+        library/
+          LibCard.tsx
+          LibPage.tsx
+        mensa/
+          MensaCard.tsx
+          MensaPage.tsx
+        timetable/
+          TimetableEntry.tsx
+          TimetablePage.tsx
+          TimetableWidget.tsx
+        Dashboard.tsx
+        Header.tsx
+        LoginPage.tsx
+        Sidebar.tsx
+      context/
+        auth-context.ts
+        AuthContext.tsx
+        useAuth.ts
+      api.ts
+      App.css
+      App.tsx
+      index.css
+      main.tsx
+      types.ts
+    eslint.config.js
+    index.html
+    package.json
+    README.md
+    tsconfig.app.json
+    tsconfig.json
+    tsconfig.node.json
+    vite.config.ts
 .gitignore
-backend/.env.example
-backend/package.json
-backend/prisma.config.ts
-backend/prisma/migrations/20260621124804_init_sqlite/migration.sql
-backend/prisma/migrations/20260623152230_only_users/migration.sql
-backend/prisma/migrations/20260624172804_restore_meals/migration.sql
-backend/prisma/migrations/20260727141150_add_courses/migration.sql
-backend/prisma/migrations/migration_lock.toml
-backend/prisma/schema.prisma
-backend/src/app.ts
-backend/src/auth.test.ts
-backend/src/db.ts
-backend/src/server.ts
-backend/tsconfig.json
 package.json
-react/htwg-dashboard-react/eslint.config.js
-react/htwg-dashboard-react/index.html
-react/htwg-dashboard-react/package.json
-react/htwg-dashboard-react/public/assets/htwg-logo-no-bg.png
-react/htwg-dashboard-react/public/favicon.svg
-react/htwg-dashboard-react/public/htwg-logo-no-bg.png
-react/htwg-dashboard-react/public/icons.svg
-react/htwg-dashboard-react/README.md
-react/htwg-dashboard-react/src/api.ts
-react/htwg-dashboard-react/src/App.css
-react/htwg-dashboard-react/src/App.tsx
-react/htwg-dashboard-react/src/assets/hero.png
-react/htwg-dashboard-react/src/assets/react.svg
-react/htwg-dashboard-react/src/assets/vite.svg
-react/htwg-dashboard-react/src/components/Dashboard.tsx
-react/htwg-dashboard-react/src/components/Header.tsx
-react/htwg-dashboard-react/src/components/library/LibCard.tsx
-react/htwg-dashboard-react/src/components/library/LibPage.tsx
-react/htwg-dashboard-react/src/components/LoginPage.tsx
-react/htwg-dashboard-react/src/components/mensa/MensaCard.tsx
-react/htwg-dashboard-react/src/components/mensa/MensaPage.tsx
-react/htwg-dashboard-react/src/components/Sidebar.tsx
-react/htwg-dashboard-react/src/components/timetable/TimetableEntry.tsx
-react/htwg-dashboard-react/src/components/timetable/TimetablePage.tsx
-react/htwg-dashboard-react/src/components/timetable/TimetableWidget.tsx
-react/htwg-dashboard-react/src/context/auth-context.ts
-react/htwg-dashboard-react/src/context/AuthContext.tsx
-react/htwg-dashboard-react/src/context/useAuth.ts
-react/htwg-dashboard-react/src/index.css
-react/htwg-dashboard-react/src/main.tsx
-react/htwg-dashboard-react/src/types.ts
-react/htwg-dashboard-react/tsconfig.app.json
-react/htwg-dashboard-react/tsconfig.json
-react/htwg-dashboard-react/tsconfig.node.json
-react/htwg-dashboard-react/vite.config.ts
 README.md
 </directory_structure>
 
 <files>
 This section contains the contents of the repository's files.
-
-<file path="backend/prisma/migrations/20260727141150_add_courses/migration.sql">
--- CreateTable
-CREATE TABLE "Course" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "day" TEXT NOT NULL,
-    "time" TEXT NOT NULL,
-    "subject" TEXT NOT NULL,
-    "room" TEXT NOT NULL,
-    "isCurrent" BOOLEAN NOT NULL DEFAULT false,
-    "userId" TEXT NOT NULL,
-    CONSTRAINT "Course_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
-);
-</file>
-
-<file path="backend/.env.example">
-PORT=3000
-DATABASE_URL=file:./prisma/dev.db
-JWT_SECRET=replace-with-a-long-random-development-secret
-</file>
-
-<file path="backend/prisma.config.ts">
-import { defineConfig } from '@prisma/config';
-
-export default defineConfig({
-    datasource: {
-        url: (globalThis as any).process?.env?.DATABASE_URL ?? 'file:./prisma/dev.db',
-    },
-});
-</file>
 
 <file path="backend/prisma/migrations/20260621124804_init_sqlite/migration.sql">
 -- CreateTable
@@ -215,6 +208,34 @@ CREATE TABLE "MealItem" (
 );
 </file>
 
+<file path="backend/prisma/migrations/20260727141150_add_courses/migration.sql">
+-- CreateTable
+CREATE TABLE "Course" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "day" TEXT NOT NULL,
+    "time" TEXT NOT NULL,
+    "subject" TEXT NOT NULL,
+    "room" TEXT NOT NULL,
+    "isCurrent" BOOLEAN NOT NULL DEFAULT false,
+    "userId" TEXT NOT NULL,
+    CONSTRAINT "Course_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+</file>
+
+<file path="backend/prisma/migrations/20260803171416_add_grades/migration.sql">
+-- CreateTable
+CREATE TABLE "Grade" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "subject" TEXT NOT NULL,
+    "grade" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    CONSTRAINT "Grade_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Grade_userId_subject_key" ON "Grade"("userId", "subject");
+</file>
+
 <file path="backend/prisma/migrations/migration_lock.toml">
 # Please do not edit this file manually
 # It should be added in your version-control system (e.g., Git)
@@ -296,46 +317,10 @@ const prisma = new PrismaClient({ adapter });
 export default prisma;
 </file>
 
-<file path="react/htwg-dashboard-react/eslint.config.js">
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import { defineConfig, globalIgnores } from 'eslint/config'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-  },
-])
-</file>
-
-<file path="react/htwg-dashboard-react/index.html">
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>htwg-dashboard-react</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<file path="backend/.env.example">
+PORT=3000
+DATABASE_URL=file:./prisma/dev.db
+JWT_SECRET=replace-with-a-long-random-development-secret
 </file>
 
 <file path="react/htwg-dashboard-react/public/favicon.svg">
@@ -367,82 +352,6 @@ export default defineConfig([
     <path fill="#08060d" fill-rule="evenodd" d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8zm1.782.91 8.078 11.294c.772 1.08 1.413 1.973 1.425 1.984.016.017.241.02 1.05.017l1.03-.004-2.694-3.766L7.796 5.75 5.722 2.852l-1.039-.004-1.039-.004z" clip-rule="evenodd"/>
   </symbol>
 </svg>
-</file>
-
-<file path="react/htwg-dashboard-react/README.md">
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 </file>
 
 <file path="react/htwg-dashboard-react/src/assets/react.svg">
@@ -600,6 +509,124 @@ code {
 }
 </file>
 
+<file path="react/htwg-dashboard-react/eslint.config.js">
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+])
+</file>
+
+<file path="react/htwg-dashboard-react/index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>htwg-dashboard-react</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="react/htwg-dashboard-react/README.md">
+# React + TypeScript + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+</file>
+
 <file path="react/htwg-dashboard-react/tsconfig.app.json">
 {
   "compilerOptions": {
@@ -655,6 +682,1025 @@ code {
 }
 </file>
 
+<file path="backend/prisma.config.ts">
+import { defineConfig } from '@prisma/config';
+
+export default defineConfig({
+    datasource: {
+        url: (globalThis as any).process?.env?.DATABASE_URL ?? 'file:./prisma/dev.db',
+    },
+});
+</file>
+
+<file path="backend/tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*"]
+}
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/library/LibPage.tsx">
+import type { LibraryStatus } from '../../types';
+import { LibCard } from './LibCard';
+
+interface LibPageProps {
+    status: LibraryStatus;
+}
+
+export const LibPage = ({ status }: LibPageProps) => {
+    
+    const libInfos = [
+        {
+            id: 'hours',
+            title: 'Öffnungszeiten',
+            content: (
+                <ul>
+                    <li>Mo - Fr: 08:00 - 20:00</li>
+                    <li>Sa: 09:00 - 16:00</li>
+                    <li>So: geschlossen</li>
+                </ul>
+            )
+        },
+        {
+            id: 'seats',
+            title: 'Lernplätze',
+            content: (
+                <>
+                    <p>Freie Plätze: {status.freeSeats}</p>
+                    <p>Gesamtplätze: {status.totalSeats}</p>
+                </>
+            )
+        },
+        {
+            id: 'services',
+            title: 'Services',
+            content: (
+                <ul>
+                    <li>WLAN (eduroam) verfügbar</li>
+                    <li>Drucker & Scanner</li>
+                    <li>Gruppenräume reservierbar</li>
+                    <li>Buchausleihe & Fernleihe</li>
+                </ul>
+            )
+        },
+        {
+            id: 'tip',
+            title: '💡 Tipp',
+            content: <p>Die Bibliothek ist morgens am leersten. Perfekt für eine produktive Lernsession!</p>
+        }
+    ];
+
+    return (
+        <main className="content">
+            <h1>Bibliothek</h1>
+            <h3>Informationen & Auslastung</h3>
+
+            <section className="bib-page-grid">
+                <LibCard title="Aktuelle Auslastung" variant="page" status={status} />
+
+                {libInfos.map(info => (
+                    <LibCard key={info.id} title={info.title} variant="page">
+                        {info.content}
+                    </LibCard>
+                ))}
+            </section>
+        </main>
+    );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/timetable/TimetableWidget.tsx">
+import type {Course } from '../../types';
+import { TimetableEntry } from './TimetableEntry';
+
+interface TimetableWidgetProps {
+    courses: Course[];
+}
+
+export const TimetableWidget = ({ courses }: TimetableWidgetProps) => {
+    const displayedCourses = courses.slice(0, 3);
+    return (
+        <div className="widget box-large timetable">
+            <h3 className="timetable-text">Stundenplan</h3>
+            {displayedCourses.length < 1 ? (
+                <p>Keine Vorlesungen heute</p>
+            ) : (
+                displayedCourses.map((course) => (
+                    <article key={course.id} className={`timetable-item ${course.isCurrent ? 'current' : 'later'}`}>
+                        <section className="item-time">{course.time}</section>
+                        <section className="divider"></section>
+                        <section className="item-subject">
+                            <TimetableEntry course={course} />
+                        </section>
+                    </article>
+                ))
+            )}
+        </div>
+    )
+}
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/Header.tsx">
+import { LogOut } from 'lucide-react';
+
+interface HeaderProps {
+    title: string;
+    onLogout: () => void;
+}
+
+export const Header = ({ title, onLogout }: HeaderProps) => {
+    return (
+        <header className="header">
+            <img 
+                src="/assets/htwg-logo-no-bg.png" 
+                alt="HTWG Logo"
+                className="header-logo" 
+            />
+            <p className="header-text">{title}</p>
+            <button
+                type="button"
+                className="dashboard-profile"
+                onClick={onLogout}
+                aria-label="Abmelden"
+                title="Abmelden"
+            >
+                <LogOut className="dashboard-profile-icon" size={28} />
+            </button>
+        </header>
+    )
+}
+</file>
+
+<file path="react/htwg-dashboard-react/src/context/auth-context.ts">
+import { createContext } from 'react';
+import type { User } from '../types';
+
+export interface AuthContextType {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isAuthenticating: boolean;
+  isRestoring: boolean;
+  login: (username: string, password: string) => Promise<void>;
+  register: (username: string, email: string, password: string) => Promise<void>;
+  logout: () => void;
+}
+
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+</file>
+
+<file path="react/htwg-dashboard-react/tsconfig.json">
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  }
+}
+</file>
+
+<file path="react/htwg-dashboard-react/vite.config.ts">
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    },
+  },
+})
+</file>
+
+<file path="backend/src/server.ts">
+import dotenv from 'dotenv';
+import { app, seedDatabase } from './app';
+
+dotenv.config();
+
+const PORT = Number(process.env.PORT) || 3000;
+
+const startServer = async () => {
+  await seedDatabase();
+  app.listen(PORT, () => {
+    console.log(`Backend laeuft auf http://localhost:${PORT}`);
+  });
+};
+
+startServer().catch((error) => {
+  console.error('Backend konnte nicht gestartet werden:', error);
+  process.exit(1);
+});
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/grades/GradesPage.tsx">
+import { useState, useEffect } from 'react';
+import type { Course } from '../../types';
+import { useAuth } from '../../context/useAuth';
+import { getGrades, saveGrade } from '../../api';
+
+interface GradesPageProps {
+  courses: Course[];
+}
+
+export const GradesPage = ({ courses }: GradesPageProps) => {
+  const { token } = useAuth();
+  const [gradesMap, setGradesMap] = useState<Record<string, string>>({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Eindeutige Fächernamen aus den hochgeladenen Kursen extrahieren
+  const uniqueSubjects = Array.from(
+    new Set(courses.map((c) => c.subject.trim()))
+  ).filter(Boolean);
+
+  // Noten beim Laden der Seite aus der DB abrufen
+  useEffect(() => {
+    if (!token) return;
+    const controller = new AbortController();
+
+    getGrades(token, controller.signal)
+      .then((data) => {
+        const map: Record<string, string> = {};
+        data.forEach((item) => {
+          map[item.subject] = String(item.grade);
+        });
+        setGradesMap(map);
+      })
+      .catch((err) => console.error('Fehler beim Noten laden:', err))
+      .finally(() => setIsLoading(false));
+
+    return () => controller.abort();
+  }, [token]);
+
+  // Wenn der User eine Note einträgt, sofort in der DB speichern
+  const handleGradeChange = async (subject: string, value: string) => {
+    setGradesMap((prev) => ({ ...prev, [subject]: value }));
+
+    if (token) {
+      try {
+        await saveGrade(token, subject, value);
+      } catch (err) {
+        console.error('Fehler beim Speichern der Note:', err);
+      }
+    }
+  };
+
+  // Schnitt-Berechnung
+  const numericGrades = Object.values(gradesMap)
+    .map((g) => parseFloat(g.replace(',', '.')))
+    .filter((g) => !isNaN(g) && g > 0);
+
+  const averageGrade =
+    numericGrades.length > 0
+      ? (numericGrades.reduce((a, b) => a + b, 0) / numericGrades.length).toFixed(2)
+      : '-';
+
+  if (isLoading) {
+    return (
+      <main className="content">
+        <p className="fetch-status">Noten werden geladen...</p>
+      </main>
+    );
+  }
+
+  return (
+    <main className="content">
+      <h1>Notenübersicht</h1>
+      <h3>Durchschnitt: {averageGrade}</h3>
+
+      {uniqueSubjects.length === 0 ? (
+        <p style={{ marginTop: '20px' }}>
+          Keine Fächer vorhanden. Lade zuerst eine <code>.ics</code>-Kalenderdatei auf der{' '}
+          <strong>Stundenplan-Seite</strong> hoch.
+        </p>
+      ) : (
+        <div className="timetable-wrapper">
+          <table className="timetable-table">
+            <thead>
+              <tr>
+                <th style={{ textAlign: 'left' }}>Modul / Fach</th>
+                <th style={{ width: '180px' }}>Note eintragen</th>
+                <th style={{ width: '140px' }}>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {uniqueSubjects.map((subject) => {
+                const currentGrade = gradesMap[subject] ?? '';
+                const numGrade = parseFloat(currentGrade.replace(',', '.'));
+                const isValid = !isNaN(numGrade) && numGrade > 0;
+                const isPassed = isValid && numGrade <= 4.0;
+
+                return (
+                  <tr key={subject}>
+                    <td style={{ textAlign: 'left', fontWeight: 'bold' }}>
+                      {subject}
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        placeholder="z.B. 1.7"
+                        value={currentGrade}
+                        onChange={(e) => handleGradeChange(subject, e.target.value)}
+                        style={{
+                          width: '80px',
+                          padding: '6px',
+                          textAlign: 'center',
+                          borderRadius: '4px',
+                          border: '1px solid #ccc',
+                          marginTop: 0,
+                        }}
+                      />
+                    </td>
+                    <td>
+                      {isValid ? (
+                        <span
+                          style={{
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            fontWeight: 'bold',
+                            backgroundColor: isPassed
+                              ? 'rgba(76, 175, 80, 0.15)'
+                              : 'rgba(244, 67, 54, 0.15)',
+                            color: isPassed ? '#2e7d32' : '#c62828',
+                          }}
+                        >
+                          {isPassed ? 'Bestanden' : 'Nicht bestanden'}
+                        </span>
+                      ) : (
+                        <span style={{ color: '#888' }}>-</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </main>
+  );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/library/LibCard.tsx">
+import type { ReactNode } from 'react';
+import type { LibraryStatus } from '../../types';
+
+interface LibCardProps {
+    title: string;
+    variant: 'widget' | 'page';
+    status?: LibraryStatus;
+    children?: ReactNode;
+}
+
+export const LibCard = ({ title, variant, status, children }: LibCardProps) => {
+    const isWidget = variant === 'widget';
+
+    return (
+        <article className={isWidget ? "widget box-small bib" : "bib-page-card"}>
+            {isWidget ? (
+                <h3 className="bib-text">{title}</h3>
+            ) : (
+                <h2>{title}</h2>
+            )}
+
+            {status && (
+                <>
+                    <p className={status.isClosed ? "bib-status-text-closed" : "bib-status-text"}>
+                        {status.isClosed ? 'Heute geschlossen' : `${status.loadPercentage}% voll`}
+                    </p>
+                    {!status.isClosed && (
+                        <div className="bib-status-container">
+                            <div 
+                                className="bib-status-bar" 
+                                style={{ width: `${status.loadPercentage}%` }}
+                            ></div>
+                        </div>
+                    )}
+                    
+                </>
+            )}
+
+            {!status && children}
+        </article>
+    );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/context/AuthContext.tsx">
+import { useEffect, useState, type ReactNode } from 'react';
+import { getCurrentUser, loginRequest, registerRequest } from '../api';
+import type { User } from '../types';
+import { AuthContext } from './auth-context';
+
+const TOKEN_STORAGE_KEY = 'htwg-dashboard-token';
+
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(() =>
+    localStorage.getItem(TOKEN_STORAGE_KEY),
+  );
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [isRestoring, setIsRestoring] = useState(() =>
+    Boolean(localStorage.getItem(TOKEN_STORAGE_KEY)),
+  );
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY);
+
+    if (!storedToken) {
+      return;
+    }
+
+    let isCancelled = false;
+
+    getCurrentUser(storedToken)
+      .then(({ user: restoredUser }) => {
+        if (!isCancelled) {
+          setUser(restoredUser);
+        }
+      })
+      .catch(() => {
+        if (!isCancelled) {
+          localStorage.removeItem(TOKEN_STORAGE_KEY);
+          setToken(null);
+        }
+      })
+      .finally(() => {
+        if (!isCancelled) {
+          setIsRestoring(false);
+        }
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
+
+  const finishAuthentication = async (newToken: string) => {
+    const { user: authenticatedUser } = await getCurrentUser(newToken);
+    localStorage.setItem(TOKEN_STORAGE_KEY, newToken);
+    setToken(newToken);
+    setUser(authenticatedUser);
+  };
+
+  const login = async (username: string, password: string) => {
+    setIsAuthenticating(true);
+    try {
+      const { token: newToken } = await loginRequest(username, password);
+      await finishAuthentication(newToken);
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
+
+  const register = async (username: string, email: string, password: string) => {
+    setIsAuthenticating(true);
+    try {
+      const { token: newToken } = await registerRequest(username, email, password);
+      await finishAuthentication(newToken);
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem(TOKEN_STORAGE_KEY);
+    setUser(null);
+    setToken(null);
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        token,
+        isAuthenticated: Boolean(token && user),
+        isAuthenticating,
+        isRestoring,
+        login,
+        register,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/main.tsx">
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+
+import { AuthProvider } from './context/AuthContext.tsx';
+import './App.css'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </StrictMode>,
+)
+</file>
+
+<file path="react/htwg-dashboard-react/package.json">
+{
+  "name": "htwg-dashboard-react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^1.17.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.17.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.9"
+  }
+}
+</file>
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+backend/.env
+repomix-output.xml
+
+# Datenbank
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/mensa/MensaCard.tsx">
+import type { Meal } from '../../types';
+
+interface MensaCardProps {
+    meal: Meal;
+    variant: 'widget' | 'page';
+}
+
+export const MensaCard = ({ meal, variant }: MensaCardProps) => {
+    const isWidget = variant === 'widget';
+
+    return (
+        <article className={isWidget ? "mensa-item" : "mensa-page-card"}>
+            
+            <h4 className={isWidget ? "mensa-item-title" : "mensa-page-title"}>
+                {meal.category}
+            </h4>
+
+            <div className="mensa-content">
+                {meal.items ? (
+                    <ul className={isWidget ? "mensa-beilagen-list" : "mensa-page-list"}>
+                        {meal.items.map(item => (
+                            <li key={item} className={isWidget ? "mensa-beilagen-item" : ""}>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className={isWidget ? "mensa-item-content" : "mensa-page-description"}>
+                        {meal.description}
+                    </p>
+                )}
+
+                {!isWidget && meal.price && (
+                    <p className="mensa-page-price">Preis: {meal.price}</p>
+                )}
+            </div>
+        </article>
+    );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/timetable/TimetablePage.tsx">
+import type { Course } from '../../types';
+import { TimetableEntry } from './TimetableEntry';
+import { useState } from 'react';
+import { useAuth } from '../../context/useAuth';
+import { uploadTimetable } from '../../api';
+
+interface TimetablePageProps {
+    courses: Course[];
+}
+
+export const TimetablePage = ({ courses }: TimetablePageProps) => {
+    const startTimes = Array.from(new Set(courses.map(course => course.time.split(' - ')[0]))).sort();
+    const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
+    const { token } = useAuth();
+    const [isUploading, setIsUploading] = useState(false);
+
+    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file || !token) return;
+
+        setIsUploading(true);
+        try {
+            await uploadTimetable(token, file);
+            alert('Stundenplan erfolgreich importiert! Bitte Seite neu laden.');
+            window.location.reload();
+        } catch (error) {
+            alert('Fehler beim Importieren.');
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+
+    return (
+    <main className="content">
+      <h1>Stundenplan</h1>
+      <h3>KW 20, 4. April 2026</h3>
+      <div className="timetable-wrapper">
+        <table className="timetable-table">
+          <thead>
+            <tr>
+              <th>Zeit</th>
+              {days.map(day => <th key={day}>{day}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {startTimes.map(startTime => (
+              <tr key={startTime}>
+                <td className="time-column">{startTime}</td>
+                {days.map(day => {
+                  // filter() liefert uns ein Array ALLER Kurse zu dieser Startzeit
+                  const matchingCourses = courses.filter(
+                    c => c.day === day && c.time.startsWith(startTime)
+                  );
+
+                  return (
+                    <td 
+                      key={`${day}-${startTime}`} 
+                      className={matchingCourses.length > 0 ? "subject" : ""}
+                    >
+                      {matchingCourses.map((course, index) => (
+                        <div key={course.id || index} className="timetable-cell-entry">
+                          <TimetableEntry course={course} />
+                          {/* Trennlinie einfügen, wenn mehr als ein Kurs in der Zelle ist */}
+                          {index < matchingCourses.length - 1 && (
+                            <div className="course-cell-divider" />
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="upload-container">
+        <label htmlFor="ics-upload" className="mensa-filter-button">
+          {isUploading ? 'Wird hochgeladen...' : '.ics Datei hochladen'}
+        </label>
+        <input 
+            id="ics-upload" 
+            type="file" 
+            accept=".ics" 
+            style={{ display: 'none' }} 
+            onChange={handleFileUpload} 
+            disabled={isUploading}
+        />
+      </div>
+    </main>
+  );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/Dashboard.tsx">
+import type { Course, Meal, LibraryStatus, Grade } from './../types';
+import { TimetableWidget } from './timetable/TimetableWidget';
+import { MensaCard } from './mensa/MensaCard';
+import { LibCard } from './library/LibCard';
+
+interface DashboardPageProps {
+    username: string;
+    courses: Course[];
+    meals: Meal[];
+    mealsLoading: boolean;
+    mealsError: string | null;
+    bibStatus: LibraryStatus;
+    grades: Grade[];
+}
+
+export const DashboardPage = ({
+    username,
+    courses,
+    meals,
+    mealsLoading,
+    mealsError,
+    bibStatus,
+    grades,
+
+}: DashboardPageProps) => {
+    const widgetMeals = meals.slice(0, 4);
+
+    const recentGrades = grades.filter((g) => g.grade && String(g.grade).trim() !== '')
+        .slice(0, 3);
+
+    return (
+        <main className="content">
+            <h1>Guten Morgen, {username}</h1>
+            <h3>4. April 2026, KW 20</h3>
+
+            <section className="bento-box-grid">
+                
+                <TimetableWidget courses={courses} />
+
+                <div className="widget box-tall mensa">
+                    <h3 className="mensa-text">Mensa Angebot</h3>
+                    {mealsLoading && <p>Mensa-Daten werden geladen...</p>}
+                    {mealsError && <p role="alert">Mensa-Daten sind nicht verfuegbar.</p>}
+                    {!mealsLoading && !mealsError && widgetMeals.map(meal => (
+                        <MensaCard key={meal.id} meal={meal} variant="widget" />
+                    ))}
+                </div>
+
+                <LibCard title="Bibliothek" variant="widget" status={bibStatus} />
+
+                <div className="widget box-small noten">
+                    <h3 className="noten-title">Kürzliche Noten</h3>
+                    {recentGrades.length === 0 ? (
+                        <p style={{ fontSize: '0.85rem', color: '#888', margin: '5px 0' }}>
+                            Noch keine Noten eingetragen.
+                        </p>
+                    ) : (
+                        recentGrades.map((item) => (
+                            <div key={item.id} className="noten-item">
+                                <h4 className="noten-item-title">{item.subject}</h4>
+                                <div className="noten-divider"></div>
+                                <div className="noten-item-content">{item.grade}</div>
+                            </div>
+                        ))
+                    )}
+                </div>
+
+            </section>
+        </main>
+    );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/LoginPage.tsx">
+import { useState, type FormEvent } from 'react';
+import { useAuth } from '../context/useAuth';
+
+type AuthMode = 'login' | 'register';
+
+export const LoginPage = () => {
+    const [mode, setMode] = useState<AuthMode>('login');
+    const [inputName, setInputName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const { login, register, isAuthenticating } = useAuth();
+
+    const handleSubmit = async (event: FormEvent) => {
+        event.preventDefault();
+        setError(null);
+
+        try {
+            if (mode === 'register') {
+                await register(inputName, email, password);
+            } else {
+                await login(inputName, password);
+            }
+        } catch (requestError) {
+            setError(
+                requestError instanceof Error
+                    ? requestError.message
+                    : 'Authentifizierung ist fehlgeschlagen.',
+            );
+        }
+    };
+
+    const switchMode = () => {
+        setMode((currentMode) => currentMode === 'login' ? 'register' : 'login');
+        setError(null);
+    };
+
+    return (
+        <div className="login-main">
+            <header className="main-header">
+                <div className="logo">
+                    <div className="logo-link">
+                        <img src="/assets/htwg-logo-no-bg.png" alt="HTWG Logo" className="logo-image" />
+                        <span className="page-title">Dashboard</span>
+                    </div>
+                </div>
+            </header>
+
+            <main className="setup-main">
+                <h1 className="auth-title">
+                    {mode === 'login' ? 'Anmelden' : 'Registrieren'}
+                </h1>
+
+                <form onSubmit={handleSubmit} className="form-elem">
+                    <div className="form-elem">
+                        <label htmlFor="user-name">Username</label>
+                        <input
+                            type="text"
+                            id="user-name"
+                            placeholder="z.B. Max Mustermann"
+                            minLength={3}
+                            required
+                            value={inputName}
+                            onChange={(event) => setInputName(event.target.value)}
+                        />
+                    </div>
+
+                    {mode === 'register' && (
+                        <div className="form-elem">
+                            <label htmlFor="user-email">E-Mail</label>
+                            <input
+                                type="email"
+                                id="user-email"
+                                placeholder="name@htwg-konstanz.de"
+                                required
+                                value={email}
+                                onChange={(event) => setEmail(event.target.value)}
+                            />
+                        </div>
+                    )}
+
+                    <div className="form-elem">
+                        <label htmlFor="user-password">Passwort</label>
+                        <input
+                            type="password"
+                            id="user-password"
+                            placeholder="Mindestens 8 Zeichen"
+                            minLength={8}
+                            required
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                        />
+                    </div>
+
+                    {error && <p className="auth-error" role="alert">{error}</p>}
+
+                    <button
+                        type="submit"
+                        className="button-confirm-index"
+                        disabled={isAuthenticating}
+                    >
+                        {isAuthenticating
+                            ? 'Bitte warten...'
+                            : mode === 'login'
+                                ? 'Anmelden'
+                                : 'Account erstellen'}
+                    </button>
+                </form>
+
+                <button type="button" className="auth-mode-button" onClick={switchMode}>
+                    {mode === 'login'
+                        ? 'Noch kein Account? Registrieren'
+                        : 'Schon registriert? Anmelden'}
+                </button>
+            </main>
+        </div>
+    );
+};
+</file>
+
+<file path="package.json">
+{
+  "name": "htwg-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c blue,magenta \"npm run dev --prefix backend\" \"npm run dev --prefix react/htwg-dashboard-react\"",
+    "setup": "npm install --prefix backend && npm install --prefix react/htwg-dashboard-react && npm run prisma:generate --prefix backend && npm run db:migrate --prefix backend",
+    "build": "npm run build --prefix backend && npm run build --prefix react/htwg-dashboard-react",
+    "test": "npm test --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
+</file>
+
+<file path="backend/prisma/schema.prisma">
+datasource db {
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  courses   Course[]
+  grades Grade[]
+}
+
+model Meal {
+  id          String     @id @default(uuid())
+  category    String
+  title       String
+  description String?
+  price       String?
+  items       MealItem[]
+}
+
+model MealItem {
+  id     String @id @default(uuid())
+  name   String
+  mealId String
+  meal   Meal   @relation(fields: [mealId], references: [id], onDelete: Cascade)
+}
+
+model Course {
+  id        String  @id @default(uuid())
+  day       String
+  time      String
+  subject   String
+  room      String
+  isCurrent Boolean @default(false)
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Grade {      // <-- NEU
+  id        String   @id @default(uuid())
+  subject   String
+  grade     String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, subject]) // Jeder User hat pro Fach max. eine Note
+}
+</file>
+
 <file path="backend/src/app.ts">
 import express, { type NextFunction, type Request, type Response } from 'express';
 import cors from 'cors';
@@ -666,6 +1712,9 @@ import rateLimit from 'express-rate-limit';
 import multer from 'multer';
 import ical from 'node-ical';
 import fs from'fs';
+
+import axios from 'axios';
+import * as cheerio from 'cheerio';
 
 dotenv.config();
 
@@ -950,7 +1999,16 @@ app.post('/api/timetable/upload', requireAuth, upload.single('icsFile'), async (
 
         if (!start || !end) continue;
 
-        const dayString = new Intl.DateTimeFormat('de-DE', { weekday: 'long' }).format(start);
+        let dayString = new Intl.DateTimeFormat('de-DE', { weekday: 'long' }).format(start);
+
+        if (event.rrule) {
+          const ruleStr = event.rrule.toString();
+          if (ruleStr.includes('BYDAY=MO')) dayString = 'Montag';
+          if (ruleStr.includes('BYDAY=TU')) dayString = 'Dienstag';
+          if (ruleStr.includes('BYDAY=WE')) dayString = 'Mittwoch';
+          if (ruleStr.includes('BYDAY=TH')) dayString = 'Donnerstag';
+          if (ruleStr.includes('BYDAY=FR')) dayString = 'Freitag';
+        }
         
         const timeString = `${start.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}`;
 
@@ -994,29 +2052,110 @@ app.get('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) =>
     res.status(500).json({ error: 'Fehler beim Laden des Stundenplans.' });
   }
 });
-</file>
 
-<file path="backend/tsconfig.json">
-{
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
-  },
-  "include": ["src/**/*"]
-}
+app.get('/api/library', async (_req: Request, res: Response) => {
+  try {
+    // 1. Die echte Affluences JSONP-URL abfragen
+    // (Füge hier deine genaue URL ein, die du im Network-Tab kopiert hast!)
+    const response = await axios.get('https://webapi.affluences.com/api/fillRate?token=6r3Kuo6JjNhH9e&callback=callback_0', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+      },
+      timeout: 5000,
+    });
+
+    const rawData = response.data; // Der String mit "callback_0({...})"
+
+    // 2. Den JSON-Teil aus dem callback_0(...) herausschneiden
+    const jsonMatch = typeof rawData === 'string' ? rawData.match(/callback_\d+\((.*)\);?/s) : null;
+    
+    if (!jsonMatch || !jsonMatch[1]) {
+      throw new Error('JSONP-Format konnte nicht geparst werden.');
+    }
+
+    // 3. Den extrahierten Text in ein echtes JavaScript-Objekt umwandeln
+    const parsedData = JSON.parse(jsonMatch[1]);
+
+    // 4. Werte herausholen
+    const loadPercentage = typeof parsedData.progress === 'number' ? parsedData.progress : 0;
+    const isClosed = parsedData.current_state?.state === 'closed_for_the_day';
+    const statusText = parsedData.current_state?.localized_state ?? '';
+
+    // Berechnen der Plätze (z. B. basierend auf 120 Gesamtsitzplätzen)
+    const totalSeats = 120;
+    const occupiedSeats = Math.round((loadPercentage / 100) * totalSeats);
+    const freeSeats = isClosed ? 0 : totalSeats - occupiedSeats;
+
+    // 5. Sauberes JSON an euer React-Frontend schicken
+    res.json({
+      loadPercentage,
+      freeSeats,
+      totalSeats,
+      isClosed,
+      statusText,
+    });
+  } catch (error) {
+    console.error('Fehler beim Abrufen der Bibliotheks-Auslastung:', error);
+
+    // Ausweichdaten (Fallback), falls die API nicht erreichbar ist
+    res.json({
+      loadPercentage: 65,
+      freeSeats: 42,
+      totalSeats: 120,
+      isFallback: true,
+    });
+  }
+});
+
+// Noten des Users abrufen
+app.get('/api/grades', requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const grades = await prisma.grade.findMany({
+      where: { userId: req.authUser!.userId },
+    });
+    res.json(grades);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Laden der Noten.' });
+  }
+});
+
+// Note für ein Fach speichern/aktualisieren
+app.post('/api/grades', requireAuth, async (req: AuthenticatedRequest, res) => {
+  const { subject, grade } = req.body;
+
+  if (!subject) {
+    res.status(400).json({ error: 'Fach ist erforderlich.' });
+    return;
+  }
+
+  try {
+    const updatedGrade = await prisma.grade.upsert({
+      where: {
+        userId_subject: {
+          userId: req.authUser!.userId,
+          subject: String(subject),
+        },
+      },
+      update: { grade: String(grade) },
+      create: {
+        subject: String(subject),
+        grade: String(grade),
+        userId: req.authUser!.userId,
+      },
+    });
+
+    res.json(updatedGrade);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Speichern der Note.' });
+  }
+});
 </file>
 
 <file path="react/htwg-dashboard-react/src/api.ts">
 import type { Meal, User } from './types';
 import type { Course } from './types';
+import type { LibraryStatus } from './types';
+import type { Grade } from './types';
 
 const API_URL = import.meta.env.VITE_API_URL ?? '/api';
 
@@ -1086,700 +2225,25 @@ export const getCourses = (token: string, signal?: AbortSignal) =>
     headers: { Authorization: `Bearer ${token}` },
     signal,
   });
-</file>
 
-<file path="react/htwg-dashboard-react/src/components/Header.tsx">
-import { LogOut } from 'lucide-react';
+export const getLibraryStatus = (signal?: AbortSignal) =>
+  requestJson<LibraryStatus>('/library', { signal });
 
-interface HeaderProps {
-    title: string;
-    onLogout: () => void;
-}
-
-export const Header = ({ title, onLogout }: HeaderProps) => {
-    return (
-        <header className="header">
-            <img 
-                src="/assets/htwg-logo-no-bg.png" 
-                alt="HTWG Logo"
-                className="header-logo" 
-            />
-            <p className="header-text">{title}</p>
-            <button
-                type="button"
-                className="dashboard-profile"
-                onClick={onLogout}
-                aria-label="Abmelden"
-                title="Abmelden"
-            >
-                <LogOut className="dashboard-profile-icon" size={28} />
-            </button>
-        </header>
-    )
-}
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/library/LibCard.tsx">
-import type { ReactNode } from 'react';
-import type { LibraryStatus } from '../../types';
-
-interface LibCardProps {
-    title: string;
-    variant: 'widget' | 'page';
-    status?: LibraryStatus;
-    children?: ReactNode;
-}
-
-export const LibCard = ({ title, variant, status, children }: LibCardProps) => {
-    const isWidget = variant === 'widget';
-
-    return (
-        <article className={isWidget ? "widget box-small bib" : "bib-page-card"}>
-            {isWidget ? (
-                <h3 className="bib-text">{title}</h3>
-            ) : (
-                <h2>{title}</h2>
-            )}
-
-            {status && (
-                <>
-                    <p className="bib-status-text">
-                        {status.loadPercentage}% voll
-                    </p>
-                    
-                    <div className="bib-status-container">
-                        <div 
-                            className="bib-status-bar" 
-                            style={{ width: `${status.loadPercentage}%` }}
-                        ></div>
-                    </div>
-                </>
-            )}
-
-            {!status && children}
-        </article>
-    );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/library/LibPage.tsx">
-import type { LibraryStatus } from '../../types';
-import { LibCard } from './LibCard';
-
-interface LibPageProps {
-    status: LibraryStatus;
-}
-
-export const LibPage = ({ status }: LibPageProps) => {
-    
-    const libInfos = [
-        {
-            id: 'hours',
-            title: 'Öffnungszeiten',
-            content: (
-                <ul>
-                    <li>Mo - Fr: 08:00 - 20:00</li>
-                    <li>Sa: 09:00 - 16:00</li>
-                    <li>So: geschlossen</li>
-                </ul>
-            )
-        },
-        {
-            id: 'seats',
-            title: 'Lernplätze',
-            content: (
-                <>
-                    <p>Freie Plätze: {status.freeSeats}</p>
-                    <p>Gesamtplätze: {status.totalSeats}</p>
-                </>
-            )
-        },
-        {
-            id: 'services',
-            title: 'Services',
-            content: (
-                <ul>
-                    <li>WLAN (eduroam) verfügbar</li>
-                    <li>Drucker & Scanner</li>
-                    <li>Gruppenräume reservierbar</li>
-                    <li>Buchausleihe & Fernleihe</li>
-                </ul>
-            )
-        },
-        {
-            id: 'tip',
-            title: '💡 Tipp',
-            content: <p>Die Bibliothek ist morgens am leersten. Perfekt für eine produktive Lernsession!</p>
-        }
-    ];
-
-    return (
-        <main className="content">
-            <h1>Bibliothek</h1>
-            <h3>Informationen & Auslastung</h3>
-
-            <section className="bib-page-grid">
-                <LibCard title="Aktuelle Auslastung" variant="page" status={status} />
-
-                {libInfos.map(info => (
-                    <LibCard key={info.id} title={info.title} variant="page">
-                        {info.content}
-                    </LibCard>
-                ))}
-            </section>
-        </main>
-    );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/timetable/TimetableWidget.tsx">
-import type {Course } from '../../types';
-import { TimetableEntry } from './TimetableEntry';
-
-interface TimetableWidgetProps {
-    courses: Course[];
-}
-
-export const TimetableWidget = ({ courses }: TimetableWidgetProps) => {
-    const displayedCourses = courses.slice(0, 3);
-    return (
-        <div className="widget box-large timetable">
-            <h3 className="timetable-text">Stundenplan</h3>
-            {displayedCourses.length < 1 ? (
-                <p>Keine Vorlesungen heute</p>
-            ) : (
-                displayedCourses.map((course) => (
-                    <article key={course.id} className={`timetable-item ${course.isCurrent ? 'current' : 'later'}`}>
-                        <section className="item-time">{course.time}</section>
-                        <section className="divider"></section>
-                        <section className="item-subject">
-                            <TimetableEntry course={course} />
-                        </section>
-                    </article>
-                ))
-            )}
-        </div>
-    )
-}
-</file>
-
-<file path="react/htwg-dashboard-react/src/context/auth-context.ts">
-import { createContext } from 'react';
-import type { User } from '../types';
-
-export interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  isAuthenticated: boolean;
-  isAuthenticating: boolean;
-  isRestoring: boolean;
-  login: (username: string, password: string) => Promise<void>;
-  register: (username: string, email: string, password: string) => Promise<void>;
-  logout: () => void;
-}
-
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
-</file>
-
-<file path="react/htwg-dashboard-react/tsconfig.json">
-{
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
-  "compilerOptions": {
-    "jsx": "react-jsx"
-  }
-}
-</file>
-
-<file path="react/htwg-dashboard-react/vite.config.ts">
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-      },
-    },
-  },
-})
-</file>
-
-<file path=".gitignore">
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-backend/.env
-repomix-output.xml
-
-# Datenbank
-*.db
-*.db-journal
-*.db-wal
-*.db-shm
-</file>
-
-<file path="backend/prisma/schema.prisma">
-datasource db {
-  provider = "sqlite"
-}
-
-generator client {
-  provider = "prisma-client-js"
-}
-
-model User {
-  id        String   @id @default(uuid())
-  username  String   @unique
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  courses   Course[]
-}
-
-model Meal {
-  id          String     @id @default(uuid())
-  category    String
-  title       String
-  description String?
-  price       String?
-  items       MealItem[]
-}
-
-model MealItem {
-  id     String @id @default(uuid())
-  name   String
-  mealId String
-  meal   Meal   @relation(fields: [mealId], references: [id], onDelete: Cascade)
-}
-
-model Course {
-  id        String  @id @default(uuid())
-  day       String
-  time      String
-  subject   String
-  room      String
-  isCurrent Boolean @default(false)
-  userId    String
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-</file>
-
-<file path="backend/src/server.ts">
-import dotenv from 'dotenv';
-import { app, seedDatabase } from './app';
-
-dotenv.config();
-
-const PORT = Number(process.env.PORT) || 3000;
-
-const startServer = async () => {
-  await seedDatabase();
-  app.listen(PORT, () => {
-    console.log(`Backend laeuft auf http://localhost:${PORT}`);
+export const getGrades = (token: string, signal?: AbortSignal) =>
+  requestJson<Grade[]>('/grades', {
+    headers: { Authorization: `Bearer ${token}` },
+    signal,
   });
-};
 
-startServer().catch((error) => {
-  console.error('Backend konnte nicht gestartet werden:', error);
-  process.exit(1);
-});
-</file>
-
-<file path="react/htwg-dashboard-react/package.json">
-{
-  "name": "htwg-dashboard-react",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "lucide-react": "^1.17.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "react-router-dom": "^7.17.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@types/node": "^24.12.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.5.0",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.9"
-  }
-}
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/Dashboard.tsx">
-import type { Course, Meal, LibraryStatus } from './../types';
-import { TimetableWidget } from './timetable/TimetableWidget';
-import { MensaCard } from './mensa/MensaCard';
-import { LibCard } from './library/LibCard';
-
-interface DashboardPageProps {
-    username: string;
-    courses: Course[];
-    meals: Meal[];
-    mealsLoading: boolean;
-    mealsError: string | null;
-    bibStatus: LibraryStatus;
-}
-
-export const DashboardPage = ({
-    username,
-    courses,
-    meals,
-    mealsLoading,
-    mealsError,
-    bibStatus,
-}: DashboardPageProps) => {
-    const widgetMeals = meals.slice(0, 4);
-
-    return (
-        <main className="content">
-            <h1>Guten Morgen, {username}</h1>
-            <h3>4. April 2026, KW 20</h3>
-
-            <section className="bento-box-grid">
-                
-                <TimetableWidget courses={courses} />
-
-                <div className="widget box-tall mensa">
-                    <h3 className="mensa-text">Mensa Angebot</h3>
-                    {mealsLoading && <p>Mensa-Daten werden geladen...</p>}
-                    {mealsError && <p role="alert">Mensa-Daten sind nicht verfuegbar.</p>}
-                    {!mealsLoading && !mealsError && widgetMeals.map(meal => (
-                        <MensaCard key={meal.id} meal={meal} variant="widget" />
-                    ))}
-                </div>
-
-                <LibCard title="Bibliothek" variant="widget" status={bibStatus} />
-
-                <div className="widget box-small noten">
-                    <h3 className="noten-title">Kürzliche Noten</h3>
-                    <div className="noten-item">
-                        <h4 className="noten-item-title">Programmiertechnik 2</h4>
-                        <div className="noten-divider"></div>
-                        <div className="noten-item-content">3.3</div>
-                    </div>
-                    <div className="noten-item">
-                        <h4 className="noten-item-title">Algebra</h4>
-                        <div className="noten-divider"></div>
-                        <div className="noten-item-content">5.0</div>
-                    </div>
-                </div>
-
-            </section>
-        </main>
-    );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/timetable/TimetablePage.tsx">
-import type { Course } from '../../types';
-import { TimetableEntry } from './TimetableEntry';
-import { useState } from 'react';
-import { useAuth } from '../../context/useAuth';
-import { uploadTimetable } from '../../api';
-
-interface TimetablePageProps {
-    courses: Course[];
-}
-
-export const TimetablePage = ({ courses }: TimetablePageProps) => {
-    const timeSlots = ["8:00 - 9:30", "9:45 - 11:15", "11:30 - 13:00", "13:00 - 14:00", "14:00 - 15:30", "15:45 - 17:15"];
-    const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
-    const { token } = useAuth();
-    const [isUploading, setIsUploading] = useState(false);
-
-    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (!file || !token) return;
-
-        setIsUploading(true);
-        try {
-            await uploadTimetable(token, file);
-            alert('Stundenplan erfolgreich importiert! Bitte Seite neu laden.');
-            window.location.reload();
-        } catch (error) {
-            alert('Fehler beim Importieren.');
-        } finally {
-            setIsUploading(false);
-        }
-    };
-
-
-    return (
-    <main className="content">
-      <h1>Stundenplan</h1>
-      <h3>KW 20, 4. April 2026</h3>
-      <div className="timetable-wrapper">
-        <table className="timetable-table">
-          <thead>
-            <tr>
-              <th>Zeit</th>
-              {days.map(day => <th key={day}>{day}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {timeSlots.map(slot => (
-              <tr key={slot}>
-                <td className="time-column">{slot}</td>
-                {days.map(day => {
-                  const course = courses.find(c => c.day === day && c.time === slot);
-                  return (
-                    <td key={`${day}-${slot}`} className={course ? "subject" : ""}>
-                      {course ? (
-                        <TimetableEntry course={course} />
-                      ) : (
-                        slot === "13:00 - 14:00" ? "-" : "" 
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="upload-container">
-        <label htmlFor="ics-upload" className="mensa-filter-button">
-          {isUploading ? 'Wird hochgeladen...' : '.ics Datei hochladen'}
-        </label>
-        <input 
-            id="ics-upload" 
-            type="file" 
-            accept=".ics" 
-            style={{ display: 'none' }} 
-            onChange={handleFileUpload} 
-            disabled={isUploading}
-        />
-      </div>
-    </main>
-  );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/context/AuthContext.tsx">
-import { useEffect, useState, type ReactNode } from 'react';
-import { getCurrentUser, loginRequest, registerRequest } from '../api';
-import type { User } from '../types';
-import { AuthContext } from './auth-context';
-
-const TOKEN_STORAGE_KEY = 'htwg-dashboard-token';
-
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(() =>
-    localStorage.getItem(TOKEN_STORAGE_KEY),
-  );
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
-  const [isRestoring, setIsRestoring] = useState(() =>
-    Boolean(localStorage.getItem(TOKEN_STORAGE_KEY)),
-  );
-
-  useEffect(() => {
-    const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY);
-
-    if (!storedToken) {
-      return;
-    }
-
-    let isCancelled = false;
-
-    getCurrentUser(storedToken)
-      .then(({ user: restoredUser }) => {
-        if (!isCancelled) {
-          setUser(restoredUser);
-        }
-      })
-      .catch(() => {
-        if (!isCancelled) {
-          localStorage.removeItem(TOKEN_STORAGE_KEY);
-          setToken(null);
-        }
-      })
-      .finally(() => {
-        if (!isCancelled) {
-          setIsRestoring(false);
-        }
-      });
-
-    return () => {
-      isCancelled = true;
-    };
-  }, []);
-
-  const finishAuthentication = async (newToken: string) => {
-    const { user: authenticatedUser } = await getCurrentUser(newToken);
-    localStorage.setItem(TOKEN_STORAGE_KEY, newToken);
-    setToken(newToken);
-    setUser(authenticatedUser);
-  };
-
-  const login = async (username: string, password: string) => {
-    setIsAuthenticating(true);
-    try {
-      const { token: newToken } = await loginRequest(username, password);
-      await finishAuthentication(newToken);
-    } finally {
-      setIsAuthenticating(false);
-    }
-  };
-
-  const register = async (username: string, email: string, password: string) => {
-    setIsAuthenticating(true);
-    try {
-      const { token: newToken } = await registerRequest(username, email, password);
-      await finishAuthentication(newToken);
-    } finally {
-      setIsAuthenticating(false);
-    }
-  };
-
-  const logout = () => {
-    localStorage.removeItem(TOKEN_STORAGE_KEY);
-    setUser(null);
-    setToken(null);
-  };
-
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        token,
-        isAuthenticated: Boolean(token && user),
-        isAuthenticating,
-        isRestoring,
-        login,
-        register,
-        logout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/main.tsx">
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-
-import { AuthProvider } from './context/AuthContext.tsx';
-import './App.css'
-import App from './App.tsx'
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </StrictMode>,
-)
-</file>
-
-<file path="backend/package.json">
-{
-  "name": "backend",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "test": "vitest run src/auth.test.ts",
-    "prisma:generate": "prisma generate",
-    "db:migrate": "prisma migrate deploy"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@prisma/adapter-better-sqlite3": "^7.8.0",
-    "@prisma/client": "^7.8.0",
-    "bcryptjs": "^3.0.3",
-    "better-sqlite3": "^12.11.1",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "express-rate-limit": "^8.5.2",
-    "jsonwebtoken": "^9.0.3",
-    "multer": "^2.2.0",
-    "node-ical": "^0.27.1"
-  },
-  "devDependencies": {
-    "@prisma/config": "^7.8.0",
-    "@types/bcryptjs": "^2.4.6",
-    "@types/better-sqlite3": "^7.6.13",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/multer": "^2.2.0",
-    "@types/supertest": "^7.2.0",
-    "prisma": "^7.8.0",
-    "supertest": "^7.2.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
-  }
-}
-</file>
-
-<file path="package.json">
-{
-  "name": "htwg-dashboard",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "concurrently -n backend,frontend -c blue,magenta \"npm run dev --prefix backend\" \"npm run dev --prefix react/htwg-dashboard-react\"",
-    "setup": "npm install --prefix backend && npm install --prefix react/htwg-dashboard-react && npm run prisma:generate --prefix backend && npm run db:migrate --prefix backend",
-    "build": "npm run build --prefix backend && npm run build --prefix react/htwg-dashboard-react",
-    "test": "npm test --prefix backend"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.0"
-  }
-}
+export const saveGrade = (token: string, subject: string, grade: string) =>
+  requestJson<Grade>('/grades', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ subject, grade }),
+  });
 </file>
 
 <file path="react/htwg-dashboard-react/src/App.css">
@@ -1987,6 +2451,15 @@ body {
     margin: 0;
 }
 
+.bib-status-text-closed {
+    padding: 0;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
 .bib-status-container {
     width: 100%;
     height: 12px;
@@ -1997,7 +2470,7 @@ body {
 
 .bib-status-bar {
     height: 100%;
-    width: 65%;
+    width: 10%;
     background: linear-gradient(90deg, green, yellow);
     border-radius: 6px;
     transition: width 0.5s ease-in-out;
@@ -2475,253 +2948,53 @@ input {
 }
 </file>
 
-<file path="react/htwg-dashboard-react/src/components/LoginPage.tsx">
-import { useState, type FormEvent } from 'react';
-import { useAuth } from '../context/useAuth';
-
-type AuthMode = 'login' | 'register';
-
-export const LoginPage = () => {
-    const [mode, setMode] = useState<AuthMode>('login');
-    const [inputName, setInputName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState<string | null>(null);
-    const { login, register, isAuthenticating } = useAuth();
-
-    const handleSubmit = async (event: FormEvent) => {
-        event.preventDefault();
-        setError(null);
-
-        try {
-            if (mode === 'register') {
-                await register(inputName, email, password);
-            } else {
-                await login(inputName, password);
-            }
-        } catch (requestError) {
-            setError(
-                requestError instanceof Error
-                    ? requestError.message
-                    : 'Authentifizierung ist fehlgeschlagen.',
-            );
-        }
-    };
-
-    const switchMode = () => {
-        setMode((currentMode) => currentMode === 'login' ? 'register' : 'login');
-        setError(null);
-    };
-
-    return (
-        <div className="login-main">
-            <header className="main-header">
-                <div className="logo">
-                    <div className="logo-link">
-                        <img src="/assets/htwg-logo-no-bg.png" alt="HTWG Logo" className="logo-image" />
-                        <span className="page-title">Dashboard</span>
-                    </div>
-                </div>
-            </header>
-
-            <main className="setup-main">
-                <h1 className="auth-title">
-                    {mode === 'login' ? 'Anmelden' : 'Registrieren'}
-                </h1>
-
-                <form onSubmit={handleSubmit} className="form-elem">
-                    <div className="form-elem">
-                        <label htmlFor="user-name">Username</label>
-                        <input
-                            type="text"
-                            id="user-name"
-                            placeholder="z.B. Max Mustermann"
-                            minLength={3}
-                            required
-                            value={inputName}
-                            onChange={(event) => setInputName(event.target.value)}
-                        />
-                    </div>
-
-                    {mode === 'register' && (
-                        <div className="form-elem">
-                            <label htmlFor="user-email">E-Mail</label>
-                            <input
-                                type="email"
-                                id="user-email"
-                                placeholder="name@htwg-konstanz.de"
-                                required
-                                value={email}
-                                onChange={(event) => setEmail(event.target.value)}
-                            />
-                        </div>
-                    )}
-
-                    <div className="form-elem">
-                        <label htmlFor="user-password">Passwort</label>
-                        <input
-                            type="password"
-                            id="user-password"
-                            placeholder="Mindestens 8 Zeichen"
-                            minLength={8}
-                            required
-                            value={password}
-                            onChange={(event) => setPassword(event.target.value)}
-                        />
-                    </div>
-
-                    {error && <p className="auth-error" role="alert">{error}</p>}
-
-                    <button
-                        type="submit"
-                        className="button-confirm-index"
-                        disabled={isAuthenticating}
-                    >
-                        {isAuthenticating
-                            ? 'Bitte warten...'
-                            : mode === 'login'
-                                ? 'Anmelden'
-                                : 'Account erstellen'}
-                    </button>
-                </form>
-
-                <button type="button" className="auth-mode-button" onClick={switchMode}>
-                    {mode === 'login'
-                        ? 'Noch kein Account? Registrieren'
-                        : 'Schon registriert? Anmelden'}
-                </button>
-            </main>
-        </div>
-    );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/mensa/MensaCard.tsx">
-import type { Meal } from '../../types';
-
-interface MensaCardProps {
-    meal: Meal;
-    variant: 'widget' | 'page';
-}
-
-export const MensaCard = ({ meal, variant }: MensaCardProps) => {
-    const isWidget = variant === 'widget';
-
-    return (
-        <article className={isWidget ? "mensa-item" : "mensa-page-card"}>
-            
-            <h4 className={isWidget ? "mensa-item-title" : "mensa-page-title"}>
-                {meal.category}
-            </h4>
-
-            <div className="mensa-content">
-                {meal.items ? (
-                    <ul className={isWidget ? "mensa-beilagen-list" : "mensa-page-list"}>
-                        {meal.items.map(item => (
-                            <li key={item} className={isWidget ? "mensa-beilagen-item" : ""}>
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p className={isWidget ? "mensa-item-content" : "mensa-page-description"}>
-                        {meal.description}
-                    </p>
-                )}
-
-                {!isWidget && meal.price && (
-                    <p className="mensa-page-price">Preis: {meal.price}</p>
-                )}
-            </div>
-        </article>
-    );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/Sidebar.tsx">
-import { Link, useLocation } from 'react-router-dom';
-
-import { LayoutDashboard, CalendarDays, Utensils, BookOpen } from 'lucide-react';
-
-export const Sidebar = () => {
-  
-  const location = useLocation();
-  const currentPath = location.pathname;
-
-  return (
-    <aside className="sidebar">
-      <h2 className="sidebar-title">Menü</h2>
-      <ul>
-        <li className={`sidebar-item ${currentPath === '/dashboard' ? 'active' : ''}`}>
-          <Link to="/dashboard" className="sidebar-item-link">
-            <LayoutDashboard className="sidebar-icon" />
-            <div className="sidebar-item-text">Dashboard</div>
-          </Link>
-        </li>
-
-        <li className={`sidebar-item ${currentPath === '/timetable' ? 'active' : ''}`}>
-          <Link to="/timetable" className="sidebar-item-link">
-            <CalendarDays className="sidebar-icon" />
-            <div className="sidebar-item-text">Stundenplan</div>
-          </Link>
-        </li>
-
-        <li className={`sidebar-item ${currentPath === '/mensa' ? 'active' : ''}`}>
-          <Link to="/mensa" className="sidebar-item-link">
-            <Utensils className="sidebar-icon" />
-            <div className="sidebar-item-text">Mensa</div>
-          </Link>
-        </li>
-
-        <li className={`sidebar-item ${currentPath === '/bibliothek' ? 'active' : ''}`}>
-          <Link to="/bibliothek" className="sidebar-item-link">
-            <BookOpen className="sidebar-icon" />
-            <div className="sidebar-item-text">Bibliothek</div>
-          </Link>
-        </li>
-      </ul>
-    </aside>
-  );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/types.ts">
-export interface Course {
-    id: string;
-    day: string;
-    time: string;
-    subject: string;
-    room: string;
-    isCurrent: boolean;
-}
-
-export type MealCategory = 
-    | 'Seezeit-Teller'
-    | 'Hin und Weg'
-    | 'Kombinierbar'
-    | 'Beilagen'
-    | 'Dessert'
-    | 'Getraenke';
-
-export interface Meal {
-    id: string;
-    category: MealCategory;
-    title: string;
-    description?: string;
-    items?: string[];
-    price?: string,
-}
-
-export interface LibraryStatus {
-    loadPercentage: number;
-    freeSeats: number;
-    totalSeats: number;
-}
-
-export interface User {
-    id: string;
-    username: string;
-    email: string;
+<file path="backend/package.json">
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "vitest run src/auth.test.ts",
+    "prisma:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "axios": "^1.19.0",
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.11.1",
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "node-ical": "^0.27.1"
+  },
+  "devDependencies": {
+    "@prisma/config": "^7.8.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.2.0",
+    "@types/supertest": "^7.2.0",
+    "prisma": "^7.8.0",
+    "supertest": "^7.2.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
 }
 </file>
 
@@ -2806,165 +3079,107 @@ export const MensaPage = ({ meals, isLoading, error, onRetry }: Props) => {
 };
 </file>
 
-<file path="react/htwg-dashboard-react/src/App.tsx">
-import { useEffect, useState } from 'react';
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-} from 'react-router-dom';
-import { getMeals } from './api';
-import { useAuth } from './context/useAuth';
-import { Header } from './components/Header';
-import { Sidebar } from './components/Sidebar';
-import { LoginPage } from './components/LoginPage';
-import { DashboardPage } from './components/Dashboard';
-import { TimetablePage } from './components/timetable/TimetablePage';
-import { MensaPage } from './components/mensa/MensaPage';
-import { LibPage } from './components/library/LibPage';
-import type { Course, LibraryStatus, Meal } from './types';
-import { getCourses } from './api';
+<file path="react/htwg-dashboard-react/src/components/Sidebar.tsx">
+import { Link, useLocation } from 'react-router-dom';
 
-const libraryStatus: LibraryStatus = {
-  loadPercentage: 65,
-  freeSeats: 42,
-  totalSeats: 120,
-};
+import { LayoutDashboard, CalendarDays, Utensils, BookOpen, GraduationCap } from 'lucide-react';
 
-const AuthenticatedApp = () => {
-  const { user, token, logout } = useAuth();
-  const location = useLocation();
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [meals, setMeals] = useState<Meal[]>([]);
-  const [mealsLoading, setMealsLoading] = useState(true);
-  const [mealsError, setMealsError] = useState<string | null>(null);
-  const [mealsRequestVersion, setMealsRequestVersion] = useState(0);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.querySelector('.content')?.scrollTo(0, 0);
-  }, [location.pathname]);
+export const Sidebar = () => {
   
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    getMeals(controller.signal)
-      .then(setMeals)
-      .catch((error: unknown) => {
-        if (!controller.signal.aborted) {
-          setMealsError(
-            error instanceof Error ? error.message : 'Mensa-Daten konnten nicht geladen werden.',
-          );
-        }
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) {
-          setMealsLoading(false);
-        }
-      });
-
-    return () => controller.abort();
-  }, [mealsRequestVersion]);
-
-  useEffect(() => {
-    if (!token) return;
-    
-    const controller = new AbortController();
-    
-    getCourses(token, controller.signal)
-      .then(setCourses)
-      .catch((err) => {
-         if (!controller.signal.aborted) console.error("Fehler beim Kurse laden:", err);
-      });
-
-    return () => controller.abort();
-  }, [token]);
-
-  const retryMeals = () => {
-    setMealsLoading(true);
-    setMealsError(null);
-    setMealsRequestVersion((version) => version + 1);
-  };
-
-  const pageTitle: Record<string, string> = {
-    '/dashboard': 'Dashboard',
-    '/timetable': 'Stundenplan',
-    '/mensa': 'Mensa Speiseplan',
-    '/bibliothek': 'Bibliothek',
-  };
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   return (
-    <div className="app-layout-root">
-      <Header title={pageTitle[location.pathname] ?? 'Dashboard'} onLogout={logout} />
+    <aside className="sidebar">
+      <h2 className="sidebar-title">Menü</h2>
+      <ul>
+        <li className={`sidebar-item ${currentPath === '/dashboard' ? 'active' : ''}`}>
+          <Link to="/dashboard" className="sidebar-item-link">
+            <LayoutDashboard className="sidebar-icon" />
+            <div className="sidebar-item-text">Dashboard</div>
+          </Link>
+        </li>
 
-      <div className="content-wrapper">
-        <Sidebar />
+        <li className={`sidebar-item ${currentPath === '/timetable' ? 'active' : ''}`}>
+          <Link to="/timetable" className="sidebar-item-link">
+            <CalendarDays className="sidebar-icon" />
+            <div className="sidebar-item-text">Stundenplan</div>
+          </Link>
+        </li>
 
-        <Routes>
-          <Route
-            path="dashboard"
-            element={
-              <DashboardPage
-                username={user?.username ?? ''}
-                courses={courses}
-                meals={meals}
-                mealsLoading={mealsLoading}
-                mealsError={mealsError}
-                bibStatus={libraryStatus}
-              />
-            }
-          />
-          <Route path="timetable" element={<TimetablePage courses={courses} />} />
-          <Route
-            path="mensa"
-            element={
-              <MensaPage
-                meals={meals}
-                isLoading={mealsLoading}
-                error={mealsError}
-                onRetry={retryMeals}
-              />
-            }
-          />
-          <Route path="bibliothek" element={<LibPage status={libraryStatus} />} />
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
-        </Routes>
-      </div>
-    </div>
+        <li className={`sidebar-item ${currentPath === '/mensa' ? 'active' : ''}`}>
+          <Link to="/mensa" className="sidebar-item-link">
+            <Utensils className="sidebar-icon" />
+            <div className="sidebar-item-text">Mensa</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === '/bibliothek' ? 'active' : ''}`}>
+          <Link to="/bibliothek" className="sidebar-item-link">
+            <BookOpen className="sidebar-icon" />
+            <div className="sidebar-item-text">Bibliothek</div>
+          </Link>
+        </li>
+
+        <li className={`sidebar-item ${currentPath === '/noten' ? 'active' : ''}`}>
+          <Link to="/noten" className="sidebar-item-link">
+            <GraduationCap className="sidebar-icon" />
+            <div className="sidebar-item-text">Noten</div>
+          </Link>
+        </li>
+      </ul>
+    </aside>
   );
 };
+</file>
 
-const AppRoutes = () => {
-  const { isAuthenticated, isRestoring } = useAuth();
+<file path="react/htwg-dashboard-react/src/types.ts">
+export interface Course {
+    id: string;
+    day: string;
+    time: string;
+    subject: string;
+    room: string;
+    isCurrent: boolean;
+}
 
-  // Solange der Token geprueft wird, darf noch nicht auf /login umgeleitet werden.
-  if (isRestoring) {
-    return <p className="fetch-status">Sitzung wird wiederhergestellt...</p>;
-  }
+export type MealCategory = 
+    | 'Seezeit-Teller'
+    | 'Hin und Weg'
+    | 'Kombinierbar'
+    | 'Beilagen'
+    | 'Dessert'
+    | 'Getraenke';
 
-  return (
-    <Routes>
-      <Route
-        path="/login"
-        element={!isAuthenticated ? <LoginPage /> : <Navigate to="/dashboard" replace />}
-      />
-      <Route
-        path="/*"
-        element={isAuthenticated ? <AuthenticatedApp /> : <Navigate to="/login" replace />}
-      />
-    </Routes>
-  );
-};
+export interface Meal {
+    id: string;
+    category: MealCategory;
+    title: string;
+    description?: string;
+    items?: string[];
+    price?: string,
+}
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
-  );
+export interface LibraryStatus {
+    loadPercentage: number;
+    freeSeats: number;
+    totalSeats: number;
+    isClosed?: boolean;
+    statusText?: string;
+}
+
+export interface User {
+    id: string;
+    username: string;
+    email: string;
+}
+
+export interface Grade {
+    id: string;
+    subject: string;
+    grade: string | number;
+    semester?: string;
+    courseId?: string;
 }
 </file>
 
@@ -3063,6 +3278,212 @@ Prisma ORM -> SQLite-Datenbank
 
 SSR oder SSG ist fuer dieses Dashboard nicht erforderlich, weil die Anwendung nach dem Login
 interaktiv und benutzerspezifisch ist und ihre aktuellen Daten direkt von der REST-API bezieht.
+</file>
+
+<file path="react/htwg-dashboard-react/src/App.tsx">
+import { useEffect, useState } from 'react';
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
+import { getMeals } from './api';
+import { useAuth } from './context/useAuth';
+import { Header } from './components/Header';
+import { Sidebar } from './components/Sidebar';
+import { LoginPage } from './components/LoginPage';
+import { DashboardPage } from './components/Dashboard';
+import { TimetablePage } from './components/timetable/TimetablePage';
+import { MensaPage } from './components/mensa/MensaPage';
+import { LibPage } from './components/library/LibPage';
+import { GradesPage } from './components/grades/GradesPage';
+import type { Course, LibraryStatus, Meal, Grade } from './types';
+import { getCourses, getGrades } from './api';
+
+import { getLibraryStatus } from './api';
+
+const libraryStatus: LibraryStatus = {
+  loadPercentage: 65,
+  freeSeats: 42,
+  totalSeats: 120,
+};
+
+const AuthenticatedApp = () => {
+  const { user, token, logout } = useAuth();
+  const location = useLocation();
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [meals, setMeals] = useState<Meal[]>([]);
+  const [mealsLoading, setMealsLoading] = useState(true);
+  const [mealsError, setMealsError] = useState<string | null>(null);
+  const [mealsRequestVersion, setMealsRequestVersion] = useState(0);
+
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.querySelector('.content')?.scrollTo(0, 0);
+  }, [location.pathname]);
+  
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    getMeals(controller.signal)
+      .then(setMeals)
+      .catch((error: unknown) => {
+        if (!controller.signal.aborted) {
+          setMealsError(
+            error instanceof Error ? error.message : 'Mensa-Daten konnten nicht geladen werden.',
+          );
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setMealsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, [mealsRequestVersion]);
+
+  useEffect(() => {
+    if (!token) return;
+    
+    const controller = new AbortController();
+    
+    getCourses(token, controller.signal)
+      .then(setCourses)
+      .catch((err) => {
+         if (!controller.signal.aborted) console.error("Fehler beim Kurse laden:", err);
+      });
+
+    return () => controller.abort();
+  }, [token]);
+
+  const [libStatus, setLibStatus] = useState<LibraryStatus>({
+    loadPercentage: 0,
+    freeSeats: 0,
+    totalSeats: 200,
+  });
+
+
+  const retryMeals = () => {
+    setMealsLoading(true);
+    setMealsError(null);
+    setMealsRequestVersion((version) => version + 1);
+  };
+
+  const pageTitle: Record<string, string> = {
+    '/dashboard': 'Dashboard',
+    '/stundenplan': 'Stundenplan',
+    '/mensa': 'Mensa Speiseplan',
+    '/bibliothek': 'Bibliothek',
+    '/noten': 'Notenübersicht'
+  };
+
+  const [grades, setGrades] = useState<Grade[]>([]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    getLibraryStatus(controller.signal)
+      .then(setLibStatus)
+      .catch((err) => {
+        if (!controller.signal.aborted) {
+          console.error("Fehler beim Laden der Bibliotheksdaten:", err);
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    if (!token) return;
+
+    const controller = new AbortController();
+
+    getGrades(token, controller.signal)
+      .then(setGrades)
+      .catch((err) => {
+        if (!controller.signal.aborted) console.error("Fehler beim Noten laden:", err);
+      });
+
+    return () => controller.abort();
+  }, [token]);
+
+  return (
+    <div className="app-layout-root">
+      <Header title={pageTitle[location.pathname] ?? 'Dashboard'} onLogout={logout} />
+
+      <div className="content-wrapper">
+        <Sidebar />
+
+        <Routes>
+          <Route
+            path="dashboard"
+            element={
+              <DashboardPage
+                username={user?.username ?? ''}
+                courses={courses}
+                meals={meals}
+                mealsLoading={mealsLoading}
+                mealsError={mealsError}
+                bibStatus={libStatus}
+                grades={grades}
+              />
+            }
+          />
+          <Route path="timetable" element={<TimetablePage courses={courses} />} />
+          <Route
+            path="mensa"
+            element={
+              <MensaPage
+                meals={meals}
+                isLoading={mealsLoading}
+                error={mealsError}
+                onRetry={retryMeals}
+              />
+            }
+          />
+          <Route path="bibliothek" element={<LibPage status={libStatus} />} />
+          <Route path="noten" element={<GradesPage courses={courses} />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </div>
+    </div>
+  );
+};
+
+const AppRoutes = () => {
+  const { isAuthenticated, isRestoring } = useAuth();
+
+  // Solange der Token geprueft wird, darf noch nicht auf /login umgeleitet werden.
+  if (isRestoring) {
+    return <p className="fetch-status">Sitzung wird wiederhergestellt...</p>;
+  }
+
+  return (
+    <Routes>
+      <Route
+        path="/login"
+        element={!isAuthenticated ? <LoginPage /> : <Navigate to="/dashboard" replace />}
+      />
+      <Route
+        path="/*"
+        element={isAuthenticated ? <AuthenticatedApp /> : <Navigate to="/login" replace />}
+      />
+    </Routes>
+  );
+};
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  );
+}
 </file>
 
 </files>
