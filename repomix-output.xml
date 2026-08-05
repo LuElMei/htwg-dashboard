@@ -40,85 +40,70 @@ The content is organized as follows:
 </file_summary>
 
 <directory_structure>
-backend/
-  prisma/
-    migrations/
-      20260621124804_init_sqlite/
-        migration.sql
-      20260623152230_only_users/
-        migration.sql
-      20260624172804_restore_meals/
-        migration.sql
-      20260727141150_add_courses/
-        migration.sql
-      20260803171416_add_grades/
-        migration.sql
-      migration_lock.toml
-    schema.prisma
-  src/
-    app.ts
-    auth.test.ts
-    db.ts
-    server.ts
-  .env.example
-  package.json
-  prisma.config.ts
-  tsconfig.json
-react/
-  htwg-dashboard-react/
-    public/
-      assets/
-        htwg-logo-no-bg.png
-      favicon.svg
-      htwg-logo-no-bg.png
-      icons.svg
-    src/
-      assets/
-        hero.png
-        react.svg
-        vite.svg
-      components/
-        grades/
-          GradesPage.tsx
-        library/
-          LibCard.tsx
-          LibPage.tsx
-        mensa/
-          MensaCard.tsx
-          MensaPage.tsx
-        timetable/
-          TimetableEntry.tsx
-          TimetablePage.tsx
-          TimetableWidget.tsx
-        Dashboard.tsx
-        Header.tsx
-        LoginPage.tsx
-        Sidebar.tsx
-      context/
-        auth-context.ts
-        AuthContext.tsx
-        useAuth.ts
-      api.ts
-      App.css
-      App.tsx
-      index.css
-      main.tsx
-      types.ts
-    eslint.config.js
-    index.html
-    package.json
-    README.md
-    tsconfig.app.json
-    tsconfig.json
-    tsconfig.node.json
-    vite.config.ts
 .gitignore
+backend/.env.example
+backend/package.json
+backend/prisma.config.ts
+backend/prisma/migrations/20260621124804_init_sqlite/migration.sql
+backend/prisma/migrations/20260623152230_only_users/migration.sql
+backend/prisma/migrations/20260624172804_restore_meals/migration.sql
+backend/prisma/migrations/20260727141150_add_courses/migration.sql
+backend/prisma/migrations/20260803171416_add_grades/migration.sql
+backend/prisma/migrations/migration_lock.toml
+backend/prisma/schema.prisma
+backend/src/app.ts
+backend/src/auth.test.ts
+backend/src/db.ts
+backend/src/server.ts
+backend/tsconfig.json
 package.json
+react/htwg-dashboard-react/eslint.config.js
+react/htwg-dashboard-react/index.html
+react/htwg-dashboard-react/package.json
+react/htwg-dashboard-react/public/assets/htwg-logo-no-bg.png
+react/htwg-dashboard-react/public/favicon.svg
+react/htwg-dashboard-react/public/htwg-logo-no-bg.png
+react/htwg-dashboard-react/public/icons.svg
+react/htwg-dashboard-react/README.md
+react/htwg-dashboard-react/src/api.ts
+react/htwg-dashboard-react/src/App.css
+react/htwg-dashboard-react/src/App.tsx
+react/htwg-dashboard-react/src/assets/hero.png
+react/htwg-dashboard-react/src/assets/react.svg
+react/htwg-dashboard-react/src/assets/vite.svg
+react/htwg-dashboard-react/src/components/Dashboard.tsx
+react/htwg-dashboard-react/src/components/grades/GradesPage.tsx
+react/htwg-dashboard-react/src/components/Header.tsx
+react/htwg-dashboard-react/src/components/library/LibCard.tsx
+react/htwg-dashboard-react/src/components/library/LibPage.tsx
+react/htwg-dashboard-react/src/components/LoginPage.tsx
+react/htwg-dashboard-react/src/components/mensa/MensaCard.tsx
+react/htwg-dashboard-react/src/components/mensa/MensaPage.tsx
+react/htwg-dashboard-react/src/components/Sidebar.tsx
+react/htwg-dashboard-react/src/components/timetable/TimetableEntry.tsx
+react/htwg-dashboard-react/src/components/timetable/TimetablePage.tsx
+react/htwg-dashboard-react/src/components/timetable/TimetableWidget.tsx
+react/htwg-dashboard-react/src/context/auth-context.ts
+react/htwg-dashboard-react/src/context/AuthContext.tsx
+react/htwg-dashboard-react/src/context/useAuth.ts
+react/htwg-dashboard-react/src/index.css
+react/htwg-dashboard-react/src/main.tsx
+react/htwg-dashboard-react/src/types.ts
+react/htwg-dashboard-react/tsconfig.app.json
+react/htwg-dashboard-react/tsconfig.json
+react/htwg-dashboard-react/tsconfig.node.json
+react/htwg-dashboard-react/vite.config.ts
 README.md
 </directory_structure>
 
 <files>
 This section contains the contents of the repository's files.
+
+<file path="backend/.env.example">
+PORT=3000
+DATABASE_URL=file:./prisma/dev.db
+JWT_SECRET=replace-with-a-long-random-development-secret
+</file>
 
 <file path="backend/prisma/migrations/20260621124804_init_sqlite/migration.sql">
 -- CreateTable
@@ -317,10 +302,46 @@ const prisma = new PrismaClient({ adapter });
 export default prisma;
 </file>
 
-<file path="backend/.env.example">
-PORT=3000
-DATABASE_URL=file:./prisma/dev.db
-JWT_SECRET=replace-with-a-long-random-development-secret
+<file path="react/htwg-dashboard-react/eslint.config.js">
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+])
+</file>
+
+<file path="react/htwg-dashboard-react/index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>htwg-dashboard-react</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
 </file>
 
 <file path="react/htwg-dashboard-react/public/favicon.svg">
@@ -352,6 +373,82 @@ JWT_SECRET=replace-with-a-long-random-development-secret
     <path fill="#08060d" fill-rule="evenodd" d="M1.893 1.98c.052.072 1.245 1.769 2.653 3.77l2.892 4.114c.183.261.333.48.333.486s-.068.089-.152.183l-.522.593-.765.867-3.597 4.087c-.375.426-.734.834-.798.905a1 1 0 0 0-.118.148c0 .01.236.017.664.017h.663l.729-.83c.4-.457.796-.906.879-.999a692 692 0 0 0 1.794-2.038c.034-.037.301-.34.594-.675l.551-.624.345-.392a7 7 0 0 1 .34-.374c.006 0 .93 1.306 2.052 2.903l2.084 2.965.045.063h2.275c1.87 0 2.273-.003 2.266-.021-.008-.02-1.098-1.572-3.894-5.547-2.013-2.862-2.28-3.246-2.273-3.266.008-.019.282-.332 2.085-2.38l2-2.274 1.567-1.782c.022-.028-.016-.03-.65-.03h-.674l-.3.342a871 871 0 0 1-1.782 2.025c-.067.075-.405.458-.75.852a100 100 0 0 1-.803.91c-.148.172-.299.344-.99 1.127-.304.343-.32.358-.345.327-.015-.019-.904-1.282-1.976-2.808L6.365 1.85H1.8zm1.782.91 8.078 11.294c.772 1.08 1.413 1.973 1.425 1.984.016.017.241.02 1.05.017l1.03-.004-2.694-3.766L7.796 5.75 5.722 2.852l-1.039-.004-1.039-.004z" clip-rule="evenodd"/>
   </symbol>
 </svg>
+</file>
+
+<file path="react/htwg-dashboard-react/README.md">
+# React + TypeScript + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 </file>
 
 <file path="react/htwg-dashboard-react/src/assets/react.svg">
@@ -509,124 +606,6 @@ code {
 }
 </file>
 
-<file path="react/htwg-dashboard-react/eslint.config.js">
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import { defineConfig, globalIgnores } from 'eslint/config'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      js.configs.recommended,
-      tseslint.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-  },
-])
-</file>
-
-<file path="react/htwg-dashboard-react/index.html">
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>htwg-dashboard-react</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-</file>
-
-<file path="react/htwg-dashboard-react/README.md">
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-</file>
-
 <file path="react/htwg-dashboard-react/tsconfig.app.json">
 {
   "compilerOptions": {
@@ -707,6 +686,37 @@ export default defineConfig({
     "types": ["node"]
   },
   "include": ["src/**/*"]
+}
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/Header.tsx">
+import { LogOut } from 'lucide-react';
+
+interface HeaderProps {
+    title: string;
+    onLogout: () => void;
+}
+
+export const Header = ({ title, onLogout }: HeaderProps) => {
+    return (
+        <header className="header">
+            <img 
+                src="/assets/htwg-logo-no-bg.png" 
+                alt="HTWG Logo"
+                className="header-logo" 
+            />
+            <p className="header-text">{title}</p>
+            <button
+                type="button"
+                className="dashboard-profile"
+                onClick={onLogout}
+                aria-label="Abmelden"
+                title="Abmelden"
+            >
+                <LogOut className="dashboard-profile-icon" size={28} />
+            </button>
+        </header>
+    )
 }
 </file>
 
@@ -811,37 +821,6 @@ export const TimetableWidget = ({ courses }: TimetableWidgetProps) => {
 }
 </file>
 
-<file path="react/htwg-dashboard-react/src/components/Header.tsx">
-import { LogOut } from 'lucide-react';
-
-interface HeaderProps {
-    title: string;
-    onLogout: () => void;
-}
-
-export const Header = ({ title, onLogout }: HeaderProps) => {
-    return (
-        <header className="header">
-            <img 
-                src="/assets/htwg-logo-no-bg.png" 
-                alt="HTWG Logo"
-                className="header-logo" 
-            />
-            <p className="header-text">{title}</p>
-            <button
-                type="button"
-                className="dashboard-profile"
-                onClick={onLogout}
-                aria-label="Abmelden"
-                title="Abmelden"
-            >
-                <LogOut className="dashboard-profile-icon" size={28} />
-            </button>
-        </header>
-    )
-}
-</file>
-
 <file path="react/htwg-dashboard-react/src/context/auth-context.ts">
 import { createContext } from 'react';
 import type { User } from '../types';
@@ -890,6 +869,41 @@ export default defineConfig({
 })
 </file>
 
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+backend/.env
+repomix-output.xml
+
+# Datenbank
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+</file>
+
 <file path="backend/src/server.ts">
 import dotenv from 'dotenv';
 import { app, seedDatabase } from './app';
@@ -909,6 +923,41 @@ startServer().catch((error) => {
   console.error('Backend konnte nicht gestartet werden:', error);
   process.exit(1);
 });
+</file>
+
+<file path="react/htwg-dashboard-react/package.json">
+{
+  "name": "htwg-dashboard-react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^1.17.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.17.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.9"
+  }
+}
 </file>
 
 <file path="react/htwg-dashboard-react/src/components/grades/GradesPage.tsx">
@@ -1224,212 +1273,21 @@ createRoot(document.getElementById('root')!).render(
 )
 </file>
 
-<file path="react/htwg-dashboard-react/package.json">
+<file path="package.json">
 {
-  "name": "htwg-dashboard-react",
+  "name": "htwg-dashboard",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "lucide-react": "^1.17.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "react-router-dom": "^7.17.0"
+    "dev": "concurrently -n backend,frontend -c blue,magenta \"npm run dev --prefix backend\" \"npm run dev --prefix react/htwg-dashboard-react\"",
+    "setup": "npm install --prefix backend && npm install --prefix react/htwg-dashboard-react && npm run prisma:generate --prefix backend && npm run db:migrate --prefix backend",
+    "build": "npm run build --prefix backend && npm run build --prefix react/htwg-dashboard-react",
+    "test": "npm test --prefix backend"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.4",
-    "@types/node": "^24.12.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.5.0",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.9"
+    "concurrently": "^9.1.0"
   }
 }
-</file>
-
-<file path=".gitignore">
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-backend/.env
-repomix-output.xml
-
-# Datenbank
-*.db
-*.db-journal
-*.db-wal
-*.db-shm
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/mensa/MensaCard.tsx">
-import type { Meal } from '../../types';
-
-interface MensaCardProps {
-    meal: Meal;
-    variant: 'widget' | 'page';
-}
-
-export const MensaCard = ({ meal, variant }: MensaCardProps) => {
-    const isWidget = variant === 'widget';
-
-    return (
-        <article className={isWidget ? "mensa-item" : "mensa-page-card"}>
-            
-            <h4 className={isWidget ? "mensa-item-title" : "mensa-page-title"}>
-                {meal.category}
-            </h4>
-
-            <div className="mensa-content">
-                {meal.items ? (
-                    <ul className={isWidget ? "mensa-beilagen-list" : "mensa-page-list"}>
-                        {meal.items.map(item => (
-                            <li key={item} className={isWidget ? "mensa-beilagen-item" : ""}>
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p className={isWidget ? "mensa-item-content" : "mensa-page-description"}>
-                        {meal.description}
-                    </p>
-                )}
-
-                {!isWidget && meal.price && (
-                    <p className="mensa-page-price">Preis: {meal.price}</p>
-                )}
-            </div>
-        </article>
-    );
-};
-</file>
-
-<file path="react/htwg-dashboard-react/src/components/timetable/TimetablePage.tsx">
-import type { Course } from '../../types';
-import { TimetableEntry } from './TimetableEntry';
-import { useState } from 'react';
-import { useAuth } from '../../context/useAuth';
-import { uploadTimetable } from '../../api';
-
-interface TimetablePageProps {
-    courses: Course[];
-}
-
-export const TimetablePage = ({ courses }: TimetablePageProps) => {
-    const startTimes = Array.from(new Set(courses.map(course => course.time.split(' - ')[0]))).sort();
-    const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
-    const { token } = useAuth();
-    const [isUploading, setIsUploading] = useState(false);
-
-    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (!file || !token) return;
-
-        setIsUploading(true);
-        try {
-            await uploadTimetable(token, file);
-            alert('Stundenplan erfolgreich importiert! Bitte Seite neu laden.');
-            window.location.reload();
-        } catch (error) {
-            alert('Fehler beim Importieren.');
-        } finally {
-            setIsUploading(false);
-        }
-    };
-
-
-    return (
-    <main className="content">
-      <h1>Stundenplan</h1>
-      <h3>KW 20, 4. April 2026</h3>
-      <div className="timetable-wrapper">
-        <table className="timetable-table">
-          <thead>
-            <tr>
-              <th>Zeit</th>
-              {days.map(day => <th key={day}>{day}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {startTimes.map(startTime => (
-              <tr key={startTime}>
-                <td className="time-column">{startTime}</td>
-                {days.map(day => {
-                  // filter() liefert uns ein Array ALLER Kurse zu dieser Startzeit
-                  const matchingCourses = courses.filter(
-                    c => c.day === day && c.time.startsWith(startTime)
-                  );
-
-                  return (
-                    <td 
-                      key={`${day}-${startTime}`} 
-                      className={matchingCourses.length > 0 ? "subject" : ""}
-                    >
-                      {matchingCourses.map((course, index) => (
-                        <div key={course.id || index} className="timetable-cell-entry">
-                          <TimetableEntry course={course} />
-                          {/* Trennlinie einfügen, wenn mehr als ein Kurs in der Zelle ist */}
-                          {index < matchingCourses.length - 1 && (
-                            <div className="course-cell-divider" />
-                          )}
-                        </div>
-                      ))}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="upload-container">
-        <label htmlFor="ics-upload" className="mensa-filter-button">
-          {isUploading ? 'Wird hochgeladen...' : '.ics Datei hochladen'}
-        </label>
-        <input 
-            id="ics-upload" 
-            type="file" 
-            accept=".ics" 
-            style={{ display: 'none' }} 
-            onChange={handleFileUpload} 
-            disabled={isUploading}
-        />
-      </div>
-    </main>
-  );
-};
 </file>
 
 <file path="react/htwg-dashboard-react/src/components/Dashboard.tsx">
@@ -1627,21 +1485,142 @@ export const LoginPage = () => {
 };
 </file>
 
-<file path="package.json">
-{
-  "name": "htwg-dashboard",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "concurrently -n backend,frontend -c blue,magenta \"npm run dev --prefix backend\" \"npm run dev --prefix react/htwg-dashboard-react\"",
-    "setup": "npm install --prefix backend && npm install --prefix react/htwg-dashboard-react && npm run prisma:generate --prefix backend && npm run db:migrate --prefix backend",
-    "build": "npm run build --prefix backend && npm run build --prefix react/htwg-dashboard-react",
-    "test": "npm test --prefix backend"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.0"
-  }
+<file path="react/htwg-dashboard-react/src/components/mensa/MensaCard.tsx">
+import type { Meal } from '../../types';
+
+interface MensaCardProps {
+    meal: Meal;
+    variant: 'widget' | 'page';
 }
+
+export const MensaCard = ({ meal, variant }: MensaCardProps) => {
+    const isWidget = variant === 'widget';
+
+    return (
+        <article className={isWidget ? "mensa-item" : "mensa-page-card"}>
+            
+            <h4 className={isWidget ? "mensa-item-title" : "mensa-page-title"}>
+                {meal.category}
+            </h4>
+
+            <div className="mensa-content">
+                {meal.items ? (
+                    <ul className={isWidget ? "mensa-beilagen-list" : "mensa-page-list"}>
+                        {meal.items.map(item => (
+                            <li key={item} className={isWidget ? "mensa-beilagen-item" : ""}>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className={isWidget ? "mensa-item-content" : "mensa-page-description"}>
+                        {meal.description}
+                    </p>
+                )}
+
+                {!isWidget && meal.price && (
+                    <p className="mensa-page-price">Preis: {meal.price}</p>
+                )}
+            </div>
+        </article>
+    );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/timetable/TimetablePage.tsx">
+import type { Course } from '../../types';
+import { TimetableEntry } from './TimetableEntry';
+import { useState } from 'react';
+import { useAuth } from '../../context/useAuth';
+import { uploadTimetable } from '../../api';
+
+interface TimetablePageProps {
+    courses: Course[];
+}
+
+export const TimetablePage = ({ courses }: TimetablePageProps) => {
+    const startTimes = Array.from(new Set(courses.map(course => course.time.split(' - ')[0]))).sort();
+    const days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
+    const { token } = useAuth();
+    const [isUploading, setIsUploading] = useState(false);
+
+    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file || !token) return;
+
+        setIsUploading(true);
+        try {
+            await uploadTimetable(token, file);
+            alert('Stundenplan erfolgreich importiert! Bitte Seite neu laden.');
+            window.location.reload();
+        } catch (error) {
+            alert('Fehler beim Importieren.');
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+
+    return (
+    <main className="content">
+      <h1>Stundenplan</h1>
+      <h3>KW 20, 4. April 2026</h3>
+      <div className="timetable-wrapper">
+        <table className="timetable-table">
+          <thead>
+            <tr>
+              <th>Zeit</th>
+              {days.map(day => <th key={day}>{day}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {startTimes.map(startTime => (
+              <tr key={startTime}>
+                <td className="time-column">{startTime}</td>
+                {days.map(day => {
+                  // filter() liefert uns ein Array ALLER Kurse zu dieser Startzeit
+                  const matchingCourses = courses.filter(
+                    c => c.day === day && c.time.startsWith(startTime)
+                  );
+
+                  return (
+                    <td 
+                      key={`${day}-${startTime}`} 
+                      className={matchingCourses.length > 0 ? "subject" : ""}
+                    >
+                      {matchingCourses.map((course, index) => (
+                        <div key={course.id || index} className="timetable-cell-entry">
+                          <TimetableEntry course={course} />
+                          {/* Trennlinie einfügen, wenn mehr als ein Kurs in der Zelle ist */}
+                          {index < matchingCourses.length - 1 && (
+                            <div className="course-cell-divider" />
+                          )}
+                        </div>
+                      ))}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="upload-container">
+        <label htmlFor="ics-upload" className="mensa-filter-button">
+          {isUploading ? 'Wird hochgeladen...' : '.ics Datei hochladen'}
+        </label>
+        <input 
+            id="ics-upload" 
+            type="file" 
+            accept=".ics" 
+            style={{ display: 'none' }} 
+            onChange={handleFileUpload} 
+            disabled={isUploading}
+        />
+      </div>
+    </main>
+  );
+};
 </file>
 
 <file path="backend/prisma/schema.prisma">
@@ -1699,551 +1678,6 @@ model Grade {      // <-- NEU
 
   @@unique([userId, subject]) // Jeder User hat pro Fach max. eine Note
 }
-</file>
-
-<file path="backend/src/app.ts">
-import express, { type NextFunction, type Request, type Response } from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import bcrypt from 'bcryptjs';
-import jwt, { type JwtPayload } from 'jsonwebtoken';
-import prisma from './db';
-import rateLimit from 'express-rate-limit';
-import multer from 'multer';
-import ical from 'node-ical';
-import fs from'fs';
-
-import axios from 'axios';
-import * as cheerio from 'cheerio';
-
-dotenv.config();
-
-export const app = express();
-const JWT_SECRET = process.env.JWT_SECRET ?? 'development-only-change-me';
-
-interface AuthTokenPayload extends JwtPayload {
-  userId: string;
-  username: string;
-}
-
-interface AuthenticatedRequest extends Request {
-  authUser?: AuthTokenPayload;
-}
-
-app.use(cors({ origin: ['http://localhost:5173', 'http://127.0.0.1:5173'] }));
-app.use(express.json());
-
-const createToken = (userId: string, username: string) =>
-  jwt.sign({ userId, username }, JWT_SECRET, { expiresIn: '2h' });
-
-const requireAuth = (
-  req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction,
-) => {
-  const authorization = req.header('Authorization');
-
-  if (!authorization?.startsWith('Bearer ')) {
-    res.status(401).json({ error: 'Kein gueltiger Authorization-Header vorhanden.' });
-    return;
-  }
-
-  try {
-    const token = authorization.slice('Bearer '.length);
-    const payload = jwt.verify(token, JWT_SECRET);
-
-    if (typeof payload === 'string' || !payload.userId || !payload.username) {
-      throw new Error('Token enthaelt keine Benutzerdaten.');
-    }
-
-    req.authUser = payload as AuthTokenPayload;
-    next();
-  } catch {
-    res.status(401).json({ error: 'Token ist ungueltig oder abgelaufen.' });
-  }
-};
-
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 10,
-  standardHeaders: 'draft-7',
-  legacyHeaders: false,
-  message: { error: 'Zu viele Anmeldeversuche. Bitte in 15 Minuten erneut versuchen.' },
-  skip: () => process.env.NODE_ENV === 'test',
-});
-
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok' });
-});
-
-app.post('/api/auth/register', authLimiter ,async (req, res) => {
-  const username = String(req.body.username ?? '').trim();
-  const email = String(req.body.email ?? '').trim().toLowerCase();
-  const password = String(req.body.password ?? '');
-
-  if (username.length < 3 || !email.includes('@') || password.length < 8) {
-    res.status(400).json({
-      error: 'Username mindestens 3 Zeichen, gueltige E-Mail und Passwort mindestens 8 Zeichen.',
-    });
-    return;
-  }
-
-  const existingUser = await prisma.user.findFirst({
-    where: {
-      OR: [{ username }, { email }],
-    },
-  });
-
-  if (existingUser) {
-    res.status(409).json({ error: 'Username oder E-Mail ist bereits vergeben.' });
-    return;
-  }
-
-  const passwordHash = await bcrypt.hash(password, 12);
-  const user = await prisma.user.create({
-    data: {
-      username,
-      email,
-      password: passwordHash,
-    },
-    select: {
-      id: true,
-      username: true,
-      email: true,
-    },
-  });
-
-  res.status(201).json({ token: createToken(user.id, user.username) });
-});
-
-app.post('/api/auth/login', authLimiter, async (req, res) => {
-  const username = String(req.body.username ?? '').trim();
-  const password = String(req.body.password ?? '');
-  const user = await prisma.user.findUnique({ where: { username } });
-
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    res.status(401).json({ error: 'Username oder Passwort ist falsch.' });
-    return;
-  }
-
-  res.json({ token: createToken(user.id, user.username) });
-});
-
-app.get('/api/auth/me', requireAuth, async (req: AuthenticatedRequest, res) => {
-  const user = await prisma.user.findUnique({
-    where: { id: req.authUser!.userId },
-    select: {
-      id: true,
-      username: true,
-      email: true,
-    },
-  });
-
-  if (!user) {
-    res.status(404).json({ error: 'Benutzer wurde nicht gefunden.' });
-    return;
-  }
-
-  res.json({ user });
-});
-
-app.get('/api/meals', async (_req, res) => {
-  try {
-    const meals = await prisma.meal.findMany({
-      include: { items: true },
-      orderBy: { title: 'asc' },
-    });
-
-    res.json(
-      meals.map(({ items, ...meal }) => ({
-        ...meal,
-        items: items.map((item) => item.name),
-      })),
-    );
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Datenbankfehler beim Laden der Mensa-Daten.' });
-  }
-});
-
-app.post('/api/meals', requireAuth, async (req, res) => {
-  const { category, title, description, price, items } = req.body;
-
-  if (!category || !title) {
-    res.status(400).json({ error: 'Kategorie und Titel sind Pflichtfelder.' });
-    return;
-  }
-
-  try {
-    const newMeal = await prisma.meal.create({
-      data: {
-        category,
-        title,
-        description,
-        price,
-        items: Array.isArray(items)
-          ? {
-              create: items.map((itemName: string) => ({ name: itemName })),
-            }
-          : undefined,
-      },
-      include: { items: true },
-    });
-
-    res.status(201).json({
-      ...newMeal,
-      items: newMeal.items.map((item) => item.name),
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Fehler beim Speichern in der SQL-Datenbank.' });
-  }
-});
-
-export const seedDatabase = async () => {
-  const passwordHash = await bcrypt.hash('test1234', 12);
-
-  await prisma.user.upsert({
-    where: { username: 'testuser' },
-    update: {
-      email: 'testuser@htwg.local',
-      password: passwordHash,
-    },
-    create: {
-      username: 'testuser',
-      email: 'testuser@htwg.local',
-      password: passwordHash,
-    },
-  });
-
-  if ((await prisma.meal.count()) === 0) {
-    await prisma.meal.createMany({
-      data: [
-        {
-          category: 'Seezeit-Teller',
-          title: 'Seezeit-Teller',
-          description: 'Schwaebisches Linsengericht mit Spaetzle und kleinem Blattsalat.',
-          price: '3,80 EUR',
-        },
-        {
-          category: 'Hin und Weg',
-          title: 'Hin und Weg',
-          description: 'Kichererbsen-Curry mit Bulgur und frischen Kraeutern.',
-          price: '4,20 EUR',
-        },
-        {
-          category: 'Kombinierbar',
-          title: 'Kombinierbar',
-          description: 'Gefluegel-Masala mit wuerziger Sauce.',
-          price: '4,90 EUR',
-        },
-        {
-          category: 'Dessert',
-          title: 'Dessert',
-          description: 'Joghurt mit Fruechten oder Schokopudding.',
-          price: '1,50 EUR',
-        },
-      ],
-    });
-
-    const sideDish = await prisma.meal.create({
-      data: {
-        category: 'Beilagen',
-        title: 'Beilagen',
-        items: {
-          create: ['MIE-Nudeln', 'Kartoffeln', 'Asiatisches Gemuese'].map((name) => ({
-            name,
-          })),
-        },
-      },
-    });
-
-    await prisma.meal.create({
-      data: {
-        category: 'Getraenke',
-        title: 'Getraenke',
-        items: {
-          create: ['Wasser', 'Apfelschorle', 'Kaffee', 'Tee'].map((name) => ({ name })),
-        },
-      },
-    });
-
-    console.log(`Seed-Daten angelegt, inklusive Beilagen-ID ${sideDish.id}.`);
-  }
-};
-
-const upload = multer({ dest: 'uploads/' });
-
-app.post('/api/timetable/upload', requireAuth, upload.single('icsFile'), async (req: AuthenticatedRequest, res) => {
-  if (!req.file) {
-    res.status(400).json({ error: 'Keine Datei hochgeladen.' });
-    return;
-  }
-
-  try {
-    const events = await ical.async.parseFile(req.file.path);
-    const coursesToSave = [];
-
-    for (const ev of Object.values(events)) {
-      if (!ev) continue;
-
-      if (ev.type === 'VEVENT') {
-        const event = ev as any;
-
-        const getVal = (field: any) => typeof field === 'object' && field !== null ? field.val : field;
-
-        const summary = getVal(event.summary) || 'Unbekannt';
-        const location = getVal(event.location) || 'Unbekannt';
-        const start = event.start as Date;
-        const end = event.end as Date;
-
-        if (!start || !end) continue;
-
-        let dayString = new Intl.DateTimeFormat('de-DE', { weekday: 'long' }).format(start);
-
-        if (event.rrule) {
-          const ruleStr = event.rrule.toString();
-          if (ruleStr.includes('BYDAY=MO')) dayString = 'Montag';
-          if (ruleStr.includes('BYDAY=TU')) dayString = 'Dienstag';
-          if (ruleStr.includes('BYDAY=WE')) dayString = 'Mittwoch';
-          if (ruleStr.includes('BYDAY=TH')) dayString = 'Donnerstag';
-          if (ruleStr.includes('BYDAY=FR')) dayString = 'Freitag';
-        }
-        
-        const timeString = `${start.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}`;
-
-        coursesToSave.push({
-          subject: String(summary),
-          room: String(location),
-          day: dayString,
-          time: timeString,
-          userId: req.authUser!.userId,
-        });
-      }
-    }
-
-    await prisma.course.deleteMany({ where: { userId: req.authUser!.userId } });
-    
-    if (coursesToSave.length > 0) {
-      await prisma.course.createMany({ data: coursesToSave });
-    }
-
-    fs.unlinkSync(req.file.path);
-
-    res.status(200).json({ message: 'Stundenplan erfolgreich importiert!', count: coursesToSave.length });
-  } catch (error) {
-    console.error('Fehler beim Kalender-Upload:', error);
-    res.status(500).json({ error: 'Fehler beim Verarbeiten der Kalenderdatei.' });
-  }
-});
-
-app.get('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) => {
-  try {
-    const userCourses = await prisma.course.findMany({
-      where: { userId: req.authUser!.userId },
-      orderBy: [
-        { day: 'asc' }, 
-        { time: 'asc' }
-      ]
-    });
-    res.json(userCourses);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Fehler beim Laden des Stundenplans.' });
-  }
-});
-
-app.get('/api/library', async (_req: Request, res: Response) => {
-  try {
-    // 1. Die echte Affluences JSONP-URL abfragen
-    // (Füge hier deine genaue URL ein, die du im Network-Tab kopiert hast!)
-    const response = await axios.get('https://webapi.affluences.com/api/fillRate?token=6r3Kuo6JjNhH9e&callback=callback_0', {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
-      },
-      timeout: 5000,
-    });
-
-    const rawData = response.data; // Der String mit "callback_0({...})"
-
-    // 2. Den JSON-Teil aus dem callback_0(...) herausschneiden
-    const jsonMatch = typeof rawData === 'string' ? rawData.match(/callback_\d+\((.*)\);?/s) : null;
-    
-    if (!jsonMatch || !jsonMatch[1]) {
-      throw new Error('JSONP-Format konnte nicht geparst werden.');
-    }
-
-    // 3. Den extrahierten Text in ein echtes JavaScript-Objekt umwandeln
-    const parsedData = JSON.parse(jsonMatch[1]);
-
-    // 4. Werte herausholen
-    const loadPercentage = typeof parsedData.progress === 'number' ? parsedData.progress : 0;
-    const isClosed = parsedData.current_state?.state === 'closed_for_the_day';
-    const statusText = parsedData.current_state?.localized_state ?? '';
-
-    // Berechnen der Plätze (z. B. basierend auf 120 Gesamtsitzplätzen)
-    const totalSeats = 120;
-    const occupiedSeats = Math.round((loadPercentage / 100) * totalSeats);
-    const freeSeats = isClosed ? 0 : totalSeats - occupiedSeats;
-
-    // 5. Sauberes JSON an euer React-Frontend schicken
-    res.json({
-      loadPercentage,
-      freeSeats,
-      totalSeats,
-      isClosed,
-      statusText,
-    });
-  } catch (error) {
-    console.error('Fehler beim Abrufen der Bibliotheks-Auslastung:', error);
-
-    // Ausweichdaten (Fallback), falls die API nicht erreichbar ist
-    res.json({
-      loadPercentage: 65,
-      freeSeats: 42,
-      totalSeats: 120,
-      isFallback: true,
-    });
-  }
-});
-
-// Noten des Users abrufen
-app.get('/api/grades', requireAuth, async (req: AuthenticatedRequest, res) => {
-  try {
-    const grades = await prisma.grade.findMany({
-      where: { userId: req.authUser!.userId },
-    });
-    res.json(grades);
-  } catch (error) {
-    res.status(500).json({ error: 'Fehler beim Laden der Noten.' });
-  }
-});
-
-// Note für ein Fach speichern/aktualisieren
-app.post('/api/grades', requireAuth, async (req: AuthenticatedRequest, res) => {
-  const { subject, grade } = req.body;
-
-  if (!subject) {
-    res.status(400).json({ error: 'Fach ist erforderlich.' });
-    return;
-  }
-
-  try {
-    const updatedGrade = await prisma.grade.upsert({
-      where: {
-        userId_subject: {
-          userId: req.authUser!.userId,
-          subject: String(subject),
-        },
-      },
-      update: { grade: String(grade) },
-      create: {
-        subject: String(subject),
-        grade: String(grade),
-        userId: req.authUser!.userId,
-      },
-    });
-
-    res.json(updatedGrade);
-  } catch (error) {
-    res.status(500).json({ error: 'Fehler beim Speichern der Note.' });
-  }
-});
-</file>
-
-<file path="react/htwg-dashboard-react/src/api.ts">
-import type { Meal, User } from './types';
-import type { Course } from './types';
-import type { LibraryStatus } from './types';
-import type { Grade } from './types';
-
-const API_URL = import.meta.env.VITE_API_URL ?? '/api';
-
-interface TokenResponse {
-  token: string;
-}
-
-interface UserResponse {
-  user: User;
-}
-
-interface ErrorResponse {
-  error?: string;
-}
-
-const requestJson = async <T>(path: string, options?: RequestInit): Promise<T> => {
-  const response = await fetch(`${API_URL}${path}`, options);
-  const body = (await response.json().catch(() => ({}))) as T & ErrorResponse;
-
-  if (!response.ok) {
-    throw new Error(body.error ?? `Anfrage fehlgeschlagen (${response.status}).`);
-  }
-
-  return body;
-};
-
-export const loginRequest = (username: string, password: string) =>
-  requestJson<TokenResponse>('/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
-  });
-
-export const registerRequest = (username: string, email: string, password: string) =>
-  requestJson<TokenResponse>('/auth/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, email, password }),
-  });
-
-export const getCurrentUser = (token: string) =>
-  requestJson<UserResponse>('/auth/me', {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-export const getMeals = (signal?: AbortSignal) =>
-  requestJson<Meal[]>('/meals', { signal });
-
-export const uploadTimetable = (token: string, file: File) => {
-  const formData = new FormData();
-  formData.append('icsFile', file);
-
-  return fetch(`${API_URL}/timetable/upload`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: formData,
-  }).then(res => {
-    if (!res.ok) throw new Error('Upload fehlgeschlagen');
-    return res.json();
-  });
-};
-
-export const getCourses = (token: string, signal?: AbortSignal) =>
-  requestJson<Course[]>('/timetable', {
-    headers: { Authorization: `Bearer ${token}` },
-    signal,
-  });
-
-export const getLibraryStatus = (signal?: AbortSignal) =>
-  requestJson<LibraryStatus>('/library', { signal });
-
-export const getGrades = (token: string, signal?: AbortSignal) =>
-  requestJson<Grade[]>('/grades', {
-    headers: { Authorization: `Bearer ${token}` },
-    signal,
-  });
-
-export const saveGrade = (token: string, subject: string, grade: string) =>
-  requestJson<Grade>('/grades', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ subject, grade }),
-  });
 </file>
 
 <file path="react/htwg-dashboard-react/src/App.css">
@@ -2998,85 +2432,556 @@ input {
 }
 </file>
 
-<file path="react/htwg-dashboard-react/src/components/mensa/MensaPage.tsx">
-import { useState } from 'react';
-import type { Meal, MealCategory } from '../../types';
-import { MensaCard } from './MensaCard';
+<file path="backend/src/app.ts">
+import express, { type NextFunction, type Request, type Response } from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
+import jwt, { type JwtPayload } from 'jsonwebtoken';
+import prisma from './db';
+import rateLimit from 'express-rate-limit';
+import multer from 'multer';
+import ical from 'node-ical';
+import fs from'fs';
 
-interface Props {
-  meals: Meal[];
-  isLoading: boolean;
-  error: string | null;
-  onRetry: () => void;
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
+dotenv.config();
+
+export const app = express();
+const JWT_SECRET = process.env.JWT_SECRET ?? 'development-only-change-me';
+
+interface AuthTokenPayload extends JwtPayload {
+  userId: string;
+  username: string;
 }
 
-// Erlaubt echte Kategorien plus die Gesamtansicht.
-type MensaFilter = MealCategory | 'Alle';
+interface AuthenticatedRequest extends Request {
+  authUser?: AuthTokenPayload;
+}
 
-export const MensaPage = ({ meals, isLoading, error, onRetry }: Props) => {
-  // Merkt sich, welche Kategorie gerade ausgewählt ist.
-  const [activeCategory, setActiveCategory] = useState<MensaFilter>('Alle');
+app.use(cors({ origin: ['http://localhost:5173', 'http://127.0.0.1:5173'] }));
+app.use(express.json());
 
-  // Aus dieser Liste werden die Filter-Buttons erzeugt.
-  const categories: MensaFilter[] = [
-    'Alle',
-    'Seezeit-Teller',
-    'Hin und Weg',
-    'Kombinierbar',
-    'Beilagen',
-    'Dessert',
-    'Getraenke',
-  ];
+const createToken = (userId: string, username: string) =>
+  jwt.sign({ userId, username }, JWT_SECRET, { expiresIn: '2h' });
 
-  // Zeigt entweder alle Gerichte oder nur die passende Kategorie.
-  const filteredMeals = activeCategory === 'Alle'
-    ? meals
-    : meals.filter((meal) => meal.category === activeCategory);
+const requireAuth = (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction,
+) => {
+  const authorization = req.header('Authorization');
 
-  return (
-    <main className="content">
-      <h1>Mensa</h1>
-      <h3>Heutige Angebote</h3>
+  if (!authorization?.startsWith('Bearer ')) {
+    res.status(401).json({ error: 'Kein gueltiger Authorization-Header vorhanden.' });
+    return;
+  }
 
-      {isLoading && <p className="fetch-status">Mensa-Daten werden geladen...</p>}
+  try {
+    const token = authorization.slice('Bearer '.length);
+    const payload = jwt.verify(token, JWT_SECRET);
 
-      {error && (
-        <div className="fetch-error" role="alert">
-          <p>{error}</p>
-          <button type="button" onClick={onRetry}>Erneut versuchen</button>
-        </div>
-      )}
+    if (typeof payload === 'string' || !payload.userId || !payload.username) {
+      throw new Error('Token enthaelt keine Benutzerdaten.');
+    }
 
-      {!isLoading && !error && meals.length === 0 && (
-        <p className="fetch-status">Aktuell sind keine Mensa-Angebote vorhanden.</p>
-      )}
-
-      <div className="mensa-filter" aria-label="Mensa Kategorie Filter">
-        {categories.map((category) => (
-          <button
-            key={category}
-            type="button"
-            className={`mensa-filter-button ${activeCategory === category ? 'active' : ''}`}
-            // Klick aktualisiert den Filter-State.
-            onClick={() => setActiveCategory(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-      
-      {!isLoading && !error && <section className="mensa-page-grid">
-        {filteredMeals.map((meal) => (
-          <MensaCard 
-            key={meal.id}
-            meal={meal} 
-            variant="page"
-          />
-        ))}
-      </section>}
-    </main>
-  );
+    req.authUser = payload as AuthTokenPayload;
+    next();
+  } catch {
+    res.status(401).json({ error: 'Token ist ungueltig oder abgelaufen.' });
+  }
 };
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  message: { error: 'Zu viele Anmeldeversuche. Bitte in 15 Minuten erneut versuchen.' },
+  skip: () => process.env.NODE_ENV === 'test',
+});
+
+app.get('/api/health', (_req, res) => {
+  res.json({ status: 'ok' });
+});
+
+app.post('/api/auth/register', authLimiter ,async (req, res) => {
+  const username = String(req.body.username ?? '').trim();
+  const email = String(req.body.email ?? '').trim().toLowerCase();
+  const password = String(req.body.password ?? '');
+
+  if (username.length < 3 || !email.includes('@') || password.length < 8) {
+    res.status(400).json({
+      error: 'Username mindestens 3 Zeichen, gueltige E-Mail und Passwort mindestens 8 Zeichen.',
+    });
+    return;
+  }
+
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      OR: [{ username }, { email }],
+    },
+  });
+
+  if (existingUser) {
+    res.status(409).json({ error: 'Username oder E-Mail ist bereits vergeben.' });
+    return;
+  }
+
+  const passwordHash = await bcrypt.hash(password, 12);
+  const user = await prisma.user.create({
+    data: {
+      username,
+      email,
+      password: passwordHash,
+    },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+    },
+  });
+
+  res.status(201).json({ token: createToken(user.id, user.username) });
+});
+
+app.post('/api/auth/login', authLimiter, async (req, res) => {
+  const username = String(req.body.username ?? '').trim();
+  const password = String(req.body.password ?? '');
+  const user = await prisma.user.findUnique({ where: { username } });
+
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    res.status(401).json({ error: 'Username oder Passwort ist falsch.' });
+    return;
+  }
+
+  res.json({ token: createToken(user.id, user.username) });
+});
+
+app.get('/api/auth/me', requireAuth, async (req: AuthenticatedRequest, res) => {
+  const user = await prisma.user.findUnique({
+    where: { id: req.authUser!.userId },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+    },
+  });
+
+  if (!user) {
+    res.status(404).json({ error: 'Benutzer wurde nicht gefunden.' });
+    return;
+  }
+
+  res.json({ user });
+})
+
+app.get('/api/meals', async (_req, res) => {
+  try {
+    const isDemo = _req.query.demo === 'true';
+
+    if (!isDemo) {
+      res.json([]);
+      return;
+    }
+
+    const meals = await prisma.meal.findMany({
+      include: { items: true },
+      orderBy: { title: 'asc' },
+    });
+
+    const formattedMeals = meals.map(({ items, ...meal }) => ({
+      ...meal,
+      items: items.length > 0 ? items.map((item) => item.name) : undefined,
+    }));
+
+    res.json(formattedMeals)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Datenbankfehler beim Laden der Mensa-Daten.' });
+  }
+});
+
+app.post('/api/meals', requireAuth, async (req, res) => {
+  const { category, title, description, price, items } = req.body;
+
+  if (!category || !title) {
+    res.status(400).json({ error: 'Kategorie und Titel sind Pflichtfelder.' });
+    return;
+  }
+
+  try {
+    const newMeal = await prisma.meal.create({
+      data: {
+        category,
+        title,
+        description,
+        price,
+        items: Array.isArray(items)
+          ? {
+              create: items.map((itemName: string) => ({ name: itemName })),
+            }
+          : undefined,
+      },
+      include: { items: true },
+    });
+
+    res.status(201).json({
+      ...newMeal,
+      items: newMeal.items.map((item) => item.name),
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Fehler beim Speichern in der SQL-Datenbank.' });
+  }
+});
+
+export const seedDatabase = async () => {
+  const passwordHash = await bcrypt.hash('test1234', 12);
+
+  await prisma.user.upsert({
+    where: { username: 'testuser' },
+    update: {
+      email: 'testuser@htwg.local',
+      password: passwordHash,
+    },
+    create: {
+      username: 'testuser',
+      email: 'testuser@htwg.local',
+      password: passwordHash,
+    },
+  });
+
+  if ((await prisma.meal.count()) === 0) {
+    await prisma.meal.createMany({
+      data: [
+        {
+          category: 'Seezeit-Teller',
+          title: 'Seezeit-Teller',
+          description: 'Schwaebisches Linsengericht mit Spaetzle und kleinem Blattsalat.',
+          price: '3,80 EUR',
+        },
+        {
+          category: 'Hin und Weg',
+          title: 'Hin und Weg',
+          description: 'Kichererbsen-Curry mit Bulgur und frischen Kraeutern.',
+          price: '4,20 EUR',
+        },
+        {
+          category: 'Kombinierbar',
+          title: 'Kombinierbar',
+          description: 'Gefluegel-Masala mit wuerziger Sauce.',
+          price: '4,90 EUR',
+        },
+        {
+          category: 'Dessert',
+          title: 'Dessert',
+          description: 'Joghurt mit Fruechten oder Schokopudding.',
+          price: '1,50 EUR',
+        },
+      ],
+    });
+
+    const sideDish = await prisma.meal.create({
+      data: {
+        category: 'Beilagen',
+        title: 'Beilagen',
+        items: {
+          create: ['MIE-Nudeln', 'Kartoffeln', 'Asiatisches Gemuese'].map((name) => ({
+            name,
+          })),
+        },
+      },
+    });
+
+    await prisma.meal.create({
+      data: {
+        category: 'Getraenke',
+        title: 'Getraenke',
+        items: {
+          create: ['Wasser', 'Apfelschorle', 'Kaffee', 'Tee'].map((name) => ({ name })),
+        },
+      },
+    });
+
+    console.log(`Seed-Daten angelegt, inklusive Beilagen-ID ${sideDish.id}.`);
+  }
+};
+
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/api/timetable/upload', requireAuth, upload.single('icsFile'), async (req: AuthenticatedRequest, res) => {
+  if (!req.file) {
+    res.status(400).json({ error: 'Keine Datei hochgeladen.' });
+    return;
+  }
+
+  try {
+    const events = await ical.async.parseFile(req.file.path);
+    const coursesToSave = [];
+
+    for (const ev of Object.values(events)) {
+      if (!ev) continue;
+
+      if (ev.type === 'VEVENT') {
+        const event = ev as any;
+
+        const getVal = (field: any) => typeof field === 'object' && field !== null ? field.val : field;
+
+        const summary = getVal(event.summary) || 'Unbekannt';
+        const location = getVal(event.location) || 'Unbekannt';
+        const start = event.start as Date;
+        const end = event.end as Date;
+
+        if (!start || !end) continue;
+
+        let dayString = new Intl.DateTimeFormat('de-DE', { weekday: 'long' }).format(start);
+
+        if (event.rrule) {
+          const ruleStr = event.rrule.toString();
+          if (ruleStr.includes('BYDAY=MO')) dayString = 'Montag';
+          if (ruleStr.includes('BYDAY=TU')) dayString = 'Dienstag';
+          if (ruleStr.includes('BYDAY=WE')) dayString = 'Mittwoch';
+          if (ruleStr.includes('BYDAY=TH')) dayString = 'Donnerstag';
+          if (ruleStr.includes('BYDAY=FR')) dayString = 'Freitag';
+        }
+        
+        const timeString = `${start.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}`;
+
+        coursesToSave.push({
+          subject: String(summary),
+          room: String(location),
+          day: dayString,
+          time: timeString,
+          userId: req.authUser!.userId,
+        });
+      }
+    }
+
+    await prisma.course.deleteMany({ where: { userId: req.authUser!.userId } });
+    
+    if (coursesToSave.length > 0) {
+      await prisma.course.createMany({ data: coursesToSave });
+    }
+
+    fs.unlinkSync(req.file.path);
+
+    res.status(200).json({ message: 'Stundenplan erfolgreich importiert!', count: coursesToSave.length });
+  } catch (error) {
+    console.error('Fehler beim Kalender-Upload:', error);
+    res.status(500).json({ error: 'Fehler beim Verarbeiten der Kalenderdatei.' });
+  }
+});
+
+app.get('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const userCourses = await prisma.course.findMany({
+      where: { userId: req.authUser!.userId },
+      orderBy: [
+        { day: 'asc' }, 
+        { time: 'asc' }
+      ]
+    });
+    res.json(userCourses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Fehler beim Laden des Stundenplans.' });
+  }
+});
+
+app.get('/api/library', async (_req: Request, res: Response) => {
+  try {
+    // 1. Die echte Affluences JSONP-URL abfragen
+    // (Füge hier deine genaue URL ein, die du im Network-Tab kopiert hast!)
+    const response = await axios.get('https://webapi.affluences.com/api/fillRate?token=6r3Kuo6JjNhH9e&callback=callback_0', {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+      },
+      timeout: 5000,
+    });
+
+    const rawData = response.data; // Der String mit "callback_0({...})"
+
+    // 2. Den JSON-Teil aus dem callback_0(...) herausschneiden
+    const jsonMatch = typeof rawData === 'string' ? rawData.match(/callback_\d+\((.*)\);?/s) : null;
+    
+    if (!jsonMatch || !jsonMatch[1]) {
+      throw new Error('JSONP-Format konnte nicht geparst werden.');
+    }
+
+    // 3. Den extrahierten Text in ein echtes JavaScript-Objekt umwandeln
+    const parsedData = JSON.parse(jsonMatch[1]);
+
+    // 4. Werte herausholen
+    const loadPercentage = typeof parsedData.progress === 'number' ? parsedData.progress : 0;
+    const isClosed = parsedData.current_state?.state === 'closed_for_the_day';
+    const statusText = parsedData.current_state?.localized_state ?? '';
+
+    // Berechnen der Plätze (z. B. basierend auf 120 Gesamtsitzplätzen)
+    const totalSeats = 120;
+    const occupiedSeats = Math.round((loadPercentage / 100) * totalSeats);
+    const freeSeats = isClosed ? 0 : totalSeats - occupiedSeats;
+
+    // 5. Sauberes JSON an euer React-Frontend schicken
+    res.json({
+      loadPercentage,
+      freeSeats,
+      totalSeats,
+      isClosed,
+      statusText,
+    });
+  } catch (error) {
+    console.error('Fehler beim Abrufen der Bibliotheks-Auslastung:', error);
+
+    // Ausweichdaten (Fallback), falls die API nicht erreichbar ist
+    res.json({
+      loadPercentage: 65,
+      freeSeats: 42,
+      totalSeats: 120,
+      isFallback: true,
+    });
+  }
+});
+
+// Noten des Users abrufen
+app.get('/api/grades', requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const grades = await prisma.grade.findMany({
+      where: { userId: req.authUser!.userId },
+    });
+    res.json(grades);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Laden der Noten.' });
+  }
+});
+
+// Note für ein Fach speichern/aktualisieren
+app.post('/api/grades', requireAuth, async (req: AuthenticatedRequest, res) => {
+  const { subject, grade } = req.body;
+
+  if (!subject) {
+    res.status(400).json({ error: 'Fach ist erforderlich.' });
+    return;
+  }
+
+  try {
+    const updatedGrade = await prisma.grade.upsert({
+      where: {
+        userId_subject: {
+          userId: req.authUser!.userId,
+          subject: String(subject),
+        },
+      },
+      update: { grade: String(grade) },
+      create: {
+        subject: String(subject),
+        grade: String(grade),
+        userId: req.authUser!.userId,
+      },
+    });
+
+    res.json(updatedGrade);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Speichern der Note.' });
+  }
+});
+</file>
+
+<file path="react/htwg-dashboard-react/src/api.ts">
+import type { Meal, User } from './types';
+import type { Course } from './types';
+import type { LibraryStatus } from './types';
+import type { Grade } from './types';
+
+const API_URL = import.meta.env.VITE_API_URL ?? '/api';
+
+interface TokenResponse {
+  token: string;
+}
+
+interface UserResponse {
+  user: User;
+}
+
+interface ErrorResponse {
+  error?: string;
+}
+
+const requestJson = async <T>(path: string, options?: RequestInit): Promise<T> => {
+  const response = await fetch(`${API_URL}${path}`, options);
+  const body = (await response.json().catch(() => ({}))) as T & ErrorResponse;
+
+  if (!response.ok) {
+    throw new Error(body.error ?? `Anfrage fehlgeschlagen (${response.status}).`);
+  }
+
+  return body;
+};
+
+export const loginRequest = (username: string, password: string) =>
+  requestJson<TokenResponse>('/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password }),
+  });
+
+export const registerRequest = (username: string, email: string, password: string) =>
+  requestJson<TokenResponse>('/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, email, password }),
+  });
+
+export const getCurrentUser = (token: string) =>
+  requestJson<UserResponse>('/auth/me', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const getMeals = (isDemo = false, signal?: AbortSignal) =>
+  requestJson<Meal[]>(`/meals${isDemo ? '?demo=true' : ''}`, { signal });
+
+export const uploadTimetable = (token: string, file: File) => {
+  const formData = new FormData();
+  formData.append('icsFile', file);
+
+  return fetch(`${API_URL}/timetable/upload`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  }).then(res => {
+    if (!res.ok) throw new Error('Upload fehlgeschlagen');
+    return res.json();
+  });
+};
+
+export const getCourses = (token: string, signal?: AbortSignal) =>
+  requestJson<Course[]>('/timetable', {
+    headers: { Authorization: `Bearer ${token}` },
+    signal,
+  });
+
+export const getLibraryStatus = (signal?: AbortSignal) =>
+  requestJson<LibraryStatus>('/library', { signal });
+
+export const getGrades = (token: string, signal?: AbortSignal) =>
+  requestJson<Grade[]>('/grades', {
+    headers: { Authorization: `Bearer ${token}` },
+    signal,
+  });
+
+export const saveGrade = (token: string, subject: string, grade: string) =>
+  requestJson<Grade>('/grades', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ subject, grade }),
+  });
 </file>
 
 <file path="react/htwg-dashboard-react/src/components/Sidebar.tsx">
@@ -3129,6 +3034,128 @@ export const Sidebar = () => {
         </li>
       </ul>
     </aside>
+  );
+};
+</file>
+
+<file path="react/htwg-dashboard-react/src/components/mensa/MensaPage.tsx">
+import { useState } from 'react';
+import type { Meal, MealCategory } from '../../types';
+import { MensaCard } from './MensaCard';
+
+interface Props {
+  meals: Meal[];
+  isLoading: boolean;
+  error: string | null;
+  onRetry: () => void;
+  isDemoMode: boolean;
+  onToggleDemo: () => void;
+}
+
+type MensaFilter = MealCategory | 'Alle';
+
+export const MensaPage = ({
+  meals,
+  isLoading,
+  error,
+  onRetry,
+  isDemoMode,
+  onToggleDemo,
+}: Props) => {
+  const [activeCategory, setActiveCategory] = useState<MensaFilter>('Alle');
+
+  const categories: MensaFilter[] = [
+    'Alle',
+    'Seezeit-Teller',
+    'Hin und Weg',
+    'Kombinierbar',
+    'Beilagen',
+    'Dessert',
+    'Getraenke',
+  ];
+
+  const filteredMeals =
+    activeCategory === 'Alle'
+      ? meals
+      : meals.filter((meal) => meal.category === activeCategory);
+
+  return (
+    <main className="content">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1>Mensa</h1>
+          <h3>Heutige Angebote</h3>
+        </div>
+
+        {/* Demo-Toggle Button für die Präsentation */}
+        <button
+          type="button"
+          className="mensa-filter-button active"
+          onClick={onToggleDemo}
+          style={{ height: 'fit-content', padding: '8px 16px', fontWeight: 'bold', position: 'relative', cursor: 'pointer', zIndex: 999, pointerEvents: 'auto' }}
+        >
+          {isDemoMode ? '🔴 Live-Status anzeigen (Geschlossen)' : '🟢 Demo-Speiseplan laden'}
+        </button>
+      </div>
+
+      {isLoading && <p className="fetch-status">Mensa-Daten werden geladen...</p>}
+
+      {error && (
+        <div className="fetch-error" role="alert">
+          <p>{error}</p>
+          <button type="button" onClick={onRetry}>
+            Erneut versuchen
+          </button>
+        </div>
+      )}
+
+      {/* Ansprechendes UI-Element, wenn die Mensa geschlossen ist */}
+      {!isLoading && !error && meals.length === 0 && (
+        <div
+          className="mensa-page-card"
+          style={{
+            textAlign: 'center',
+            padding: '40px 20px',
+            marginTop: '20px',
+            backgroundColor: '#fff',
+          }}
+        >
+          <h2>Mensa aktuell geschlossen</h2>
+          <p className="mensa-page-description" style={{ maxWidth: '500px', margin: '15px auto' }}>
+            Die Mensa an der HTWG Konstanz befindet sich aktuell in den Semesterferien /
+            Betriebsferien. Es stehen derzeit keine aktuellen Tagesangebote zur Verfügung.
+          </p>
+          <p style={{ fontSize: '0.9rem', color: '#666' }}>
+            Aktivieren Sie oben rechts den <strong>Demo-Speiseplan</strong>, um die Ansicht für reguläre Vorlesungstage zu simulieren.
+          </p>
+        </div>
+      )}
+
+      {!isLoading && !error && meals.length > 0 && (
+        <>
+          <div className="mensa-filter" aria-label="Mensa Kategorie Filter">
+            {categories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                className={`mensa-filter-button ${
+                  activeCategory === category ? 'active' : ''
+                }`}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          <section className="mensa-page-grid">
+            {filteredMeals.map((meal) => (
+              <MensaCard key={meal.id} meal={meal} variant="page" />
+            ))}
+          </section>
+        </>
+      )}
+    </main>
   );
 };
 </file>
@@ -3316,6 +3343,7 @@ const AuthenticatedApp = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [meals, setMeals] = useState<Meal[]>([]);
   const [mealsLoading, setMealsLoading] = useState(true);
+  const [isDemoMode, setIsDemoMode] = useState(true);
   const [mealsError, setMealsError] = useState<string | null>(null);
   const [mealsRequestVersion, setMealsRequestVersion] = useState(0);
 
@@ -3329,7 +3357,7 @@ const AuthenticatedApp = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    getMeals(controller.signal)
+    getMeals(isDemoMode, controller.signal)
       .then(setMeals)
       .catch((error: unknown) => {
         if (!controller.signal.aborted) {
@@ -3345,7 +3373,7 @@ const AuthenticatedApp = () => {
       });
 
     return () => controller.abort();
-  }, [mealsRequestVersion]);
+  }, [mealsRequestVersion, isDemoMode]);
 
   useEffect(() => {
     if (!token) return;
@@ -3443,6 +3471,8 @@ const AuthenticatedApp = () => {
                 isLoading={mealsLoading}
                 error={mealsError}
                 onRetry={retryMeals}
+                isDemoMode={isDemoMode}
+                onToggleDemo={() => setIsDemoMode((prev) => !prev)}
               />
             }
           />

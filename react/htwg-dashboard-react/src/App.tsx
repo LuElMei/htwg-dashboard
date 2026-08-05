@@ -17,7 +17,7 @@ import { MensaPage } from './components/mensa/MensaPage';
 import { LibPage } from './components/library/LibPage';
 import { GradesPage } from './components/grades/GradesPage';
 import type { Course, LibraryStatus, Meal, Grade } from './types';
-import { getCourses, getGrades } from './api';
+import { getCourses, getGrades, addCourse, deleteCourse } from './api';
 
 import { getLibraryStatus } from './api';
 
@@ -84,6 +84,26 @@ const AuthenticatedApp = () => {
     freeSeats: 0,
     totalSeats: 200,
   });
+
+  const handleDeleteCourse = async (courseId: string) => {
+    if (!token) return;
+    try {
+      await deleteCourse(token, courseId);
+      setCourses(prev => prev.filter(c => c.id !== courseId));
+    } catch (error) {
+      console.error("Fehler beim Löschen:", error);
+    }
+  };
+
+  const handleAddCourse = async (courseData: Partial<Course>) => {
+  if (!token) return;
+    try {
+      const newCourse = await addCourse(token, courseData);
+      setCourses(prev => [...prev, newCourse]);
+    } catch (error) {
+      console.error("Fehler beim Hinzufügen:", error);
+    }
+  };  
 
 
   const retryMeals = () => {
@@ -152,7 +172,7 @@ const AuthenticatedApp = () => {
               />
             }
           />
-          <Route path="timetable" element={<TimetablePage courses={courses} />} />
+          <Route path="timetable" element={<TimetablePage courses={courses} onAddCourse={handleAddCourse} onDeleteCourse={handleDeleteCourse}/>} />
           <Route
             path="mensa"
             element={

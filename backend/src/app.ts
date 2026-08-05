@@ -356,6 +356,47 @@ app.get('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) =>
   }
 });
 
+app.post('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) => {
+  const { subject, room, day, time } = req.body;
+
+  if (!subject || !day || !time) {
+    res.status(400).json({ error: 'Fach, Tag und Zeit sind Pflichtfelder.' });
+    return;
+  }
+
+  try {
+    const newCourse = await prisma.course.create({
+      data: {
+        subject: String(subject),
+        room: String(room || ''),
+        day: String(day),
+        time: String(time),
+        userId: req.authUser!.userId,
+      },
+    });
+    res.status(201).json(newCourse);
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Erstellen des Kurses.' });
+  }
+});
+
+app.delete('/api/timetable/:id', requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const courseId = String(req.params.id);
+
+    await prisma.course.deleteMany({
+      where: {
+        id: courseId,
+        userId: req.authUser!.userId 
+      }
+    });
+    
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ error: 'Fehler beim Löschen des Kurses.' });
+  }
+});
+
 app.get('/api/library', async (_req: Request, res: Response) => {
   try {
     // 1. Die echte Affluences JSONP-URL abfragen

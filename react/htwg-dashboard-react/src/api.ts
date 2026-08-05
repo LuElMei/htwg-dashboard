@@ -90,3 +90,19 @@ export const saveGrade = (token: string, subject: string, grade: string) =>
     },
     body: JSON.stringify({ subject, grade }),
   });
+
+export const addCourse = (token: string, courseData: Partial<Course>) =>
+  requestJson<Course>('/timetable', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(courseData),
+  });
+
+export const deleteCourse = (token: string, id: string) =>
+  requestJson<{ success: boolean }>(`/timetable/${id}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  });
