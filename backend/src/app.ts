@@ -358,8 +358,7 @@ app.get('/api/timetable', requireAuth, async (req: AuthenticatedRequest, res) =>
 
 app.get('/api/library', async (_req: Request, res: Response) => {
   try {
-    // 1. Die echte Affluences JSONP-URL abfragen
-    // (Füge hier deine genaue URL ein, die du im Network-Tab kopiert hast!)
+
     const response = await axios.get('https://webapi.affluences.com/api/fillRate?token=6r3Kuo6JjNhH9e&callback=callback_0', {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
