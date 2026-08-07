@@ -2,6 +2,7 @@ import type { Course, Meal, LibraryStatus, Grade } from './../types';
 import { TimetableWidget } from './timetable/TimetableWidget';
 import { MensaCard } from './mensa/MensaCard';
 import { LibCard } from './library/LibCard';
+import { getCurrentDateInfo } from '../utils';
 
 interface DashboardPageProps {
     username: string;
@@ -25,13 +26,15 @@ export const DashboardPage = ({
 }: DashboardPageProps) => {
     const widgetMeals = meals.slice(0, 4);
 
+    const { formattedDate, kw } = getCurrentDateInfo();
+
     const recentGrades = grades.filter((g) => g.grade && String(g.grade).trim() !== 'hidden')
         .slice(0, 3);
 
     return (
         <main className="content">
-            <h1>Guten Morgen, {username}</h1>
-            <h3>4. April 2026, KW 20</h3>
+            <h1>Guten Tag, {username}</h1>
+            <h3>{formattedDate}, KW {kw}</h3>
 
             <section className="bento-box-grid">
                 

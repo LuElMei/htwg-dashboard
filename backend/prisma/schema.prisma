@@ -43,7 +43,7 @@ model Course {
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model Grade {      // <-- NEU
+model Grade {
   id        String   @id @default(uuid())
   subject   String
   grade     String

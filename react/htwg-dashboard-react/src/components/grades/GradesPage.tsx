@@ -11,7 +11,7 @@ export const GradesPage = ({ courses }: GradesPageProps) => {
   const { token } = useAuth();
   const [gradesMap, setGradesMap] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(true);
-  const [newSubject, setNewSubject] = useState(''); // <-- Neuer State für die Eingabe
+  const [newSubject, setNewSubject] = useState('');
 
   useEffect(() => {
     if (!token) return;

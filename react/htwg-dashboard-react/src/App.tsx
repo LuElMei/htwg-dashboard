@@ -24,7 +24,7 @@ import { getLibraryStatus } from './api';
 const libraryStatus: LibraryStatus = {
   loadPercentage: 65,
   freeSeats: 42,
-  totalSeats: 120,
+  totalSeats: 200,
 };
 
 const AuthenticatedApp = () => {
@@ -114,7 +114,7 @@ const AuthenticatedApp = () => {
 
   const pageTitle: Record<string, string> = {
     '/dashboard': 'Dashboard',
-    '/stundenplan': 'Stundenplan',
+    '/timetable': 'Stundenplan',
     '/mensa': 'Mensa Speiseplan',
     '/bibliothek': 'Bibliothek',
     '/noten': 'Notenübersicht'
@@ -198,7 +198,6 @@ const AuthenticatedApp = () => {
 const AppRoutes = () => {
   const { isAuthenticated, isRestoring } = useAuth();
 
-  // Solange der Token geprueft wird, darf noch nicht auf /login umgeleitet werden.
   if (isRestoring) {
     return <p className="fetch-status">Sitzung wird wiederhergestellt...</p>;
   }

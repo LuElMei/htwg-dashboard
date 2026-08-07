@@ -3,6 +3,7 @@ import { TimetableEntry } from './TimetableEntry';
 import { useState } from 'react';
 import { useAuth } from '../../context/useAuth';
 import { uploadTimetable } from '../../api';
+import { getCurrentDateInfo } from '../../utils';
 
 interface TimetablePageProps {
     courses: Course[];
@@ -19,6 +20,7 @@ export const TimetablePage = ({ courses, onAddCourse, onDeleteCourse }: Timetabl
     const [newRoom, setNewRoom] = useState('');
     const [newDay, setNewDay] = useState('Montag');
     const [newTime, setNewTime] = useState('08:00 - 09:30');
+    const { formattedDate, kw } = getCurrentDateInfo();
 
     const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -40,7 +42,7 @@ export const TimetablePage = ({ courses, onAddCourse, onDeleteCourse }: Timetabl
     return (
     <main className="content">
       <h1>Stundenplan</h1>
-      <h3>KW 20, 4. April 2026</h3>
+      <h3>KW {kw}, {formattedDate}</h3>
       <div className="timetable-wrapper">
         <table className="timetable-table">
           <thead>
@@ -54,7 +56,6 @@ export const TimetablePage = ({ courses, onAddCourse, onDeleteCourse }: Timetabl
               <tr key={startTime}>
                 <td className="time-column">{startTime}</td>
                 {days.map(day => {
-                  // filter() liefert uns ein Array ALLER Kurse zu dieser Startzeit
                   const matchingCourses = courses.filter(
                     c => c.day === day && c.time.startsWith(startTime)
                   );
@@ -67,7 +68,6 @@ export const TimetablePage = ({ courses, onAddCourse, onDeleteCourse }: Timetabl
                       {matchingCourses.map((course, index) => (
                         <div key={course.id || index} className="timetable-cell-entry">
                           <TimetableEntry course={course} onDelete={() => course.id ? onDeleteCourse(course.id) : undefined} />
-                          {/* Trennlinie einfügen, wenn mehr als ein Kurs in der Zelle ist */}
                           {index < matchingCourses.length - 1 && (
                             <div className="course-cell-divider" />
                           )}
