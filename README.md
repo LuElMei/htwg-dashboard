@@ -92,3 +92,12 @@ Prisma ORM -> SQLite-Datenbank
 
 SSR oder SSG ist fuer dieses Dashboard nicht erforderlich, weil die Anwendung nach dem Login
 interaktiv und benutzerspezifisch ist und ihre aktuellen Daten direkt von der REST-API bezieht.
+
+## Bekannte Einschränkungen & Offene Punkte
+
+Im Rahmen der Entwicklung und des aktuellen Betriebs gibt es noch folgende Einschränkungen:
+
+* **Mensa-API (Seezeit):** Für den Abruf des echten, tagesaktuellen Speiseplans haben wir beim Studierendenwerk Seezeit einen offiziellen API-Zugang angefragt. Da wir hierauf leider noch keine Antwort erhalten haben (und die Mensa in den Semesterferien teilweise geschlossen ist), haben wir einen Schalter für einen "Demo-Modus" integriert. Dieser lädt authentische Beispieldaten aus der Datenbank, um die volle Funktionalität der Komponente für die Bewertung zu demonstrieren.
+* **Bibliotheks-Auslastung:** Die Live-Auslastung wird über die JSONP-Schnittstelle von Affluences abgefragt. Sollte sich die API-URL ändern oder die Schnittstelle (z.B. durch Rate-Limiting) ausfallen, greift das Backend automatisch auf statische Fallback-Werte zurück, damit das Dashboard stabil bleibt.
+* **Stundenplan-Import (.ics):** Das serverseitige Parsen und Speichern der Kalenderdateien funktioniert einwandfrei. Aus Zeitgründen wird das Frontend nach erfolgreichem Upload aktuell über einen kurzen, harten Page-Reload (`window.location.reload()`) synchronisiert, statt den React-State weich zu aktualisieren (kleiner UX-Kompromiss).
+* **E-Mail-Verifizierung:** Die Nutzerregistrierung (inkl. Passwort-Hashing und JWT-Generierung) ist voll funktionsfähig. Ein Double-Opt-In Verfahren (Bestätigung per E-Mail-Link) wurde konzeptionell vorbereitet, aber zugunsten der Kernfeatures vorerst nicht final umgesetzt.
