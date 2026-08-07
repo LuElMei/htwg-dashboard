@@ -11,6 +11,7 @@
 **Setup (einmalig):**
 Vorraussetzung: Node 20 oder neuer
 ```bash
+cd htwg-dashboard
 npm install
 cp backend/.env.example backend/.env
 npm run setup
